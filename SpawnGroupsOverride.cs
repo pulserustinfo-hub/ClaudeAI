@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 
 namespace Oxide.Plugins
 {
-    [Info("Spawn Groups Override", "Khan", "1.2.0")]
+    [Info("Spawn Groups Override", "Khan", "1.2.1")]
     [Description("Overrides Vanilla Spawn Times")]
     public class SpawnGroupsOverride : RustPlugin
     {
@@ -244,6 +244,8 @@ namespace Oxide.Plugins
         };
 
         private static Hash<SpawnGroup, bool> _groups = new Hash<SpawnGroup, bool>();
+        // Delayed respawns scheduled by the ObjectRetired patch, kept so Unload can cancel them.
+        private static readonly Dictionary<SpawnGroup, Action> _pendingRespawns = new Dictionary<SpawnGroup, Action>();
         private HashSet<Data> _restore = new HashSet<Data>();
         private class Data
         {
@@ -329,6 +331,9 @@ namespace Oxide.Plugins
             [JsonProperty("Drop Loot")]
             public bool DropLoot = false;
 
+            [JsonProperty("Remove Dive Sites")]
+            public bool RemoveDiveSites = true;
+
             [JsonProperty("Toggle Timed Spawn Groups true/false to override them & set a custom respawn time")]
             public Dictionary<string, OverRide> SpawnGroups = new Dictionary<string, OverRide>();
 
@@ -383,12 +388,18 @@ namespace Oxide.Plugins
         private static SpawnHandler spawnHandler = null;
         private void BuildConfig()
         {
+            // PostSpawnProcess (called by RunSpawn below) needs this, so it has to be set before the loop, not after it.
+            spawnHandler = SingletonComponent<SpawnHandler>.Instance;
             SpawnGroup[] groups = UnityEngine.Object.FindObjectsOfType<SpawnGroup>();
             int modified = 0;
             foreach (var group in groups)
             {
                 //spawnGroup?.Fill();
                 if (group == null || !group.isSpawnerActive || group.prefabs == null || group.prefabs.Count == 0) continue;
+                // Skip groups that belong to an entity killed this frame (e.g. a dive site removed in OnServerInitialized);
+                // Unity only destroys its GameObject at the end of the frame, so FindObjectsOfType still returns its groups.
+                BaseEntity owner = group.GetComponentInParent<BaseEntity>();
+                if (owner != null && owner.IsDestroyed) continue;
                 if (_config.SpawnGroups.TryGetValue(group.name, out var value))
                 {
                     if (value.SpawnTime == 0)
@@ -423,43 +434,20 @@ namespace Oxide.Plugins
 
             SaveConfig();
             Puts($"Modified {modified}x spawn groups");
-            spawnHandler = SingletonComponent<SpawnHandler>.Instance;
         }
 
         private const string DiveSiteName = "divesite";
-        private const string DiveSitesName = "divesites";
+
+        private void Init()
+        {
+            // Oxide runs Init before it applies the [AutoPatch] classes, so the Validate patch knows this from the first spawn.
+            _removeDiveSites = _config != null && _config.RemoveDiveSites;
+        }
 
         private void OnServerInitialized()
         {
-            List<SpawnPopulationBase> new_spawns = new List<SpawnPopulationBase>();
-            foreach (SpawnPopulationBase spawner in SpawnHandler.Instance.AllSpawnPopulations)
-            {
-                if (spawner.Prefabs == null) continue;
-                foreach (Prefab<Spawnable> prefab in spawner.Prefabs) 
-                    if (prefab.Name.Contains(DiveSiteName))
-                    {
-                        spawner.DeleteEntities();
-                        spawner.Prefabs = null;
-                        Puts("removing dive sites");
-                    }else new_spawns.Add(spawner);
-            }
-
-            SpawnHandler.Instance.AllSpawnPopulations = new_spawns.ToArray();
-
-            var handler = SingletonComponent<SpawnHandler>.Instance;
-            if (handler == null) return;
-            var populations = handler.AllSpawnPopulations;
-            if (populations == null) return;
-            for (int i = 0; i < populations.Length; i++)
-            {
-                var pop = populations[i];
-                if (pop == null) continue;
-                //Puts($"? {pop.name}");
-                if (string.IsNullOrEmpty(pop.name) || (pop.name.IndexOf(DiveSiteName, StringComparison.OrdinalIgnoreCase) < 0 && pop.name.IndexOf(DiveSitesName, StringComparison.OrdinalIgnoreCase) < 0)) continue;
-                Puts("error removing dive site");
-                pop.DeleteEntities();
-                pop.Prefabs = null;
-            }
+            // Never rebuild or reassign SpawnHandler.AllSpawnPopulations here - see the "Dive Sites" region.
+            if (_removeDiveSites) RemoveExistingDiveSites();
 
             Unsubscribe(nameof(OnLootEntityEnd));
 
@@ -470,14 +458,86 @@ namespace Oxide.Plugins
 
         private void Unload()
         {
+            foreach (var pending in _pendingRespawns)
+                if (pending.Key != null) pending.Key.CancelInvoke(pending.Value);
+            _pendingRespawns.Clear();
+
             foreach (var spawn in _restore) spawn.RestoreVanilla();
 
             Puts($"Restored {_restore.Count} spawn groups");
-            _config.RespawnGroups.Clear();
+            _config?.RespawnGroups.Clear();
             _restore.Clear();
             _groups.Clear();
+            _removeDiveSites = false;
+            _diveSitePrefabs.Clear();
             spawnHandler = null;
             _config = null;
+        }
+
+        #endregion
+
+        #region Dive Sites
+
+        // SpawnHandler.AllSpawnPopulations and SpawnHandler.SpawnDistributions are parallel arrays: entry i of one belongs to
+        // entry i of the other, and the 60s population tick that respawns animals, ores, collectibles and vehicles walks both
+        // with the same index. A plugin must never reassign, filter or reorder them (1.2.0 did, which emptied the array after
+        // every restart and stopped all of those from respawning). Dive sites are blocked in SpawnHandler.Validate instead,
+        // which every population spawn passes through, and existing ones are removed once on startup. Oxide removes the patch
+        // when the plugin unloads, so unloading the plugin restores vanilla dive sites.
+
+        private static bool _removeDiveSites;
+        private static readonly Dictionary<uint, bool> _diveSitePrefabs = new Dictionary<uint, bool>();
+
+        private static bool IsDiveSitePrefab(Prefab prefab)
+        {
+            if (prefab == null) return false;
+            bool isDiveSite;
+            if (_diveSitePrefabs.TryGetValue(prefab.ID, out isDiveSite)) return isDiveSite;
+            GameObject go = prefab.Object;
+            isDiveSite = (go != null && (go.GetComponent<DiveSite>() != null || go.GetComponent<DiveSiteBuoy>() != null))
+                         || (prefab.Name != null && prefab.Name.IndexOf(DiveSiteName, StringComparison.OrdinalIgnoreCase) >= 0);
+            _diveSitePrefabs[prefab.ID] = isDiveSite;
+            return isDiveSite;
+        }
+
+        [AutoPatch]
+        [HarmonyPatch(typeof(SpawnHandler), nameof(SpawnHandler.Validate), new[] { typeof(SpawnPopulationBase), typeof(Prefab<Spawnable>), typeof(Vector3), typeof(Quaternion) })]
+        private static class SpawnHandler_Validate_Patch
+        {
+            private static bool Prefix(Prefab<Spawnable> prefab, ref bool __result)
+            {
+                if (!_removeDiveSites || !IsDiveSitePrefab(prefab)) return true;
+                __result = false;
+                return false;
+            }
+        }
+
+        private void RemoveExistingDiveSites()
+        {
+            int removed = 0;
+            foreach (DiveSite diveSite in UnityEngine.Object.FindObjectsByType<DiveSite>(FindObjectsSortMode.None))
+            {
+                if (diveSite == null || diveSite.IsDestroyed) continue;
+                // Same order vanilla uses in JunkPile.KillIfOnSleepingBag: clear the site's own crate/NPC spawn groups
+                // first, otherwise their entities are left behind on the sea floor.
+                if (diveSite.spawngroups != null)
+                {
+                    foreach (SpawnGroup group in diveSite.spawngroups)
+                        if (group != null) group.Clear();
+                }
+                if (diveSite.NPCSpawn != null) diveSite.NPCSpawn.Clear();
+                diveSite.Kill();
+                removed++;
+            }
+
+            foreach (DiveSiteBuoy buoy in UnityEngine.Object.FindObjectsByType<DiveSiteBuoy>(FindObjectsSortMode.None))
+            {
+                if (buoy == null || buoy.IsDestroyed) continue;
+                buoy.Kill();
+                removed++;
+            }
+
+            if (removed > 0) Puts($"Removed {removed} existing dive site entities");
         }
 
         #endregion
@@ -494,7 +554,10 @@ namespace Oxide.Plugins
                 if (!_groups.TryGetValue(__instance, out bool value)) return;
                 if (value) return;
                 _groups[__instance] = true;
-                __instance.Invoke(() => RunSpawn(__instance), UnityEngine.Random.Range(_config.RespawnGroups[__instance.name] - 30, _config.RespawnGroups[__instance.name] + 1));
+                int respawnTime = _config.RespawnGroups[__instance.name];
+                Action respawn = () => RunSpawn(__instance);
+                _pendingRespawns[__instance] = respawn;
+                __instance.Invoke(respawn, UnityEngine.Random.Range(respawnTime - 30, respawnTime + 1));
             }
         }
 
@@ -509,6 +572,7 @@ namespace Oxide.Plugins
         private static void RunSpawn(SpawnGroup group)
         {
             if (group == null) return;
+            _pendingRespawns.Remove(group);
             //group.maxPopulation = 10;
             int safety = 0;
             while (group.currentPopulation < MaxPopulation)
@@ -527,14 +591,18 @@ namespace Oxide.Plugins
                 BaseEntity entity = GameManager.server.CreateEntity(prefab.resourcePath, pos, rot, false);
                 if (entity == null) continue;
                 if (entity.enableSaving && group.shouldBlockSpawnedEntitySaving && !(spawnPoint is SpaceCheckingSpawnPoint)) entity.enableSaving = false;
-                entity.gameObject.AwakeFromInstantiate();
-                entity.Spawn();
-                PostSpawnProcess(entity, spawnPoint);
+                // Same order as vanilla SpawnGroup.Spawn: attach the SpawnPointInstance BEFORE the entity is activated, and
+                // flag it so Spawnable.Add() does not register it with the SpawnHandler as a permanent individual respawn
+                // (that happens for entities activated while the server is still loading, which includes OnServerInitialized).
                 SpawnPointInstance instance = entity.gameObject.AddComponent<SpawnPointInstance>();
                 instance.parentSpawnPointUser = group;
                 instance.parentSpawnPoint = spawnPoint;
+                instance.blockSpawnHandlerRespawns = true;
                 SpawnPointInstanceEntity?.SetValue(instance, entity);
                 //typeof(SpawnPointInstance).GetField("Entity", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?.SetValue(instance, entity);
+                entity.gameObject.AwakeFromInstantiate();
+                entity.Spawn();
+                PostSpawnProcess(entity, spawnPoint);
                 instance.Notify();
             }
 
