@@ -5,46 +5,47 @@
 **Type:** .NET assembly (PE32, Mono/.NET), **.NET Framework 4.8**, Oxide/uMod **extension** for a Rust game server
 **Assembly version:** `1.1.0.0`
 **Author (from metadata):** `Whispers88` — `Copyright (C) Whispers88 2026 - All Rights Reserved.` — contact `rustafarian.server@gmail.com`
-**This item corresponds to the commissioned work "Vanilla Patching of Construction" ($400).**
+**Corresponds to the commissioned "Vanilla Patching of Construction" ($400).**
 
-> **Purpose of this document.** You commissioned and paid for this extension, the author stopped responding, declined to hand over the `.cs` source (every other plugin in the order was delivered as source), and the compiled DLL no longer works against current Rust updates. This report recovers what the extension does and gives your new developer a clean starting point to rebuild/update it. It is a **functional reconstruction from static analysis**, not a byte-exact decompile — see *Confidence & caveats* at the end.
+> This report was produced by **two independent static-analysis passes** (an initial reconstruction + a skeptical line-by-line verification that re-derived everything from the IL). Several first-pass claims were wrong and have been corrected here; corrections are marked **[corrected]**. The DLL was **never executed** — everything was recovered statically. See §8 for provenance.
 
 ---
 
-## 1. TL;DR — what this extension is
+## 1. TL;DR
 
-It is a **server-performance extension** that uses **Harmony** to replace four of Rust's building-system methods with optimized versions. Rust recomputes building "splits" and "merges" and decay attachment **synchronously every time a building block changes** (placing/destroying walls) — which is a major CPU hotspot during raids. Whispers88 **intercepts those four methods and defers/coalesces the work** into batched queues drained by a timer, instead of recomputing on every single change. That raises server FPS (the Grafana frame-rate graph you were shown).
+It is a **server-performance extension** that uses **Harmony** to intercept four of Rust's building-system methods and run cheaper reimplementations, concentrated on **coalescing the expensive navmesh-carve** and **spreading building-split work across frames**. It cuts raid-time CPU (the Grafana FPS graph you were shown).
 
-It registers console commands `whispers88.load` / `whispers88.unload` / `whispers88.status` to toggle and inspect the patches at runtime.
+**Two things your developer must know up front:**
 
-**Why it is broken now:** on load it resolves its four target methods by name via Harmony's `AccessTools`. If Rust has renamed/changed any of them in an update, resolution fails and it logs:
+1. **It contains a hard-coded time-bomb.** On every timer tick it checks `DateTime.UtcNow <= 2026-11-26`. **After 26 November 2026 it auto-unpatches itself and the `whispers88.load` command replies `[Whispers88] Build failed please update.`** — a deliberate expiry/kill-switch. *(Today is before that date, so this is not what broke it in Jul–Aug 2026 — that was a Rust update — but it will disable the plugin on 26 Nov 2026 regardless of any compatibility fix, unless the gate is removed.)*
+2. **It has an anti-analysis `Environment.FailFast`** that hard-kills the process if a debugger/profiler is attached (`Debugger.IsAttached` or `COR_ENABLE_PROFILING`/`CORECLR_PROFILER`/`COR_PROFILER`). Your dev should not run the *original* DLL under a profiler/debugger.
 
-```
-target resolve failed: Check={0} Merge={1} Split={2} Attach={3}
-[Whispers88] Build failed please update.
-```
-
-That is exactly the state your server is in. **Fixing it = re-pointing/adjusting those four patch targets to the current Rust API and recompiling.**
+**Why it stopped working in Jul–Aug 2026:** on load it resolves its four target methods by name via Harmony's `AccessTools`. When Rust changed them in an update, resolution failed and it logged `target resolve failed: Check/Merge/Split/Attach` → `[Whispers88] Build failed please update.` (the `ProtoBuf`/`ClientRPC` errors in your Discord logs are the same Rust-version drift.) **Fix = re-point the four targets to the current Rust API, remove the time-gate, and recompile.**
 
 ---
 
 ## 2. How it was protected, and how it was recovered (safely)
 
-The DLL is protected with the **full ConfuserEx suite**:
+Full **ConfuserEx** suite:
 
 | Protection | What it does | Status |
 |---|---|---|
-| **Symbol renaming** | All type/method/field names replaced with invisible Unicode (zero-width / bidi control characters) | Recovered via sequential re-mapping |
-| **Control-flow flattening** | Method logic turned into a `switch`-driven state machine with junk arithmetic | Linearized by hand for the key methods |
-| **Ref-proxy** | Direct calls replaced by delegate "stub" methods | Harmony/BCL calls still resolve; helper stubs identified by behaviour |
-| **Constant/string encryption** | All string literals RC4-encrypted into an embedded resource | **Fully decrypted statically (49/49 strings)** |
-| **Anti-profiling** | Checks `COR_PROFILER`/`COR_ENABLE_PROFILING` env vars | Noted; irrelevant to static analysis |
+| Symbol renaming | Names → invisible Unicode (zero-width/bidi) | Re-mapped |
+| Control-flow flattening | Logic → `switch` state machine + junk math | Linearized |
+| Ref-proxy | Direct calls → delegate stub methods | Resolved to concrete targets |
+| Constant/string encryption | Literals RC4-encrypted in an embedded resource | **Fully decrypted** |
+| Constant **numeric** encryption | Dates/intervals RC4-encrypted in a 2nd resource | **Fully decrypted [corrected — now recovered]** |
+| Anti-profiling | `Environment.FailFast` on debugger/profiler | Identified |
 
-**Important:** method bodies are **not** encrypted (no anti-tamper body encryption), so everything was recovered **statically — the DLL was never executed.** (Running it was deliberately avoided; it would execute the author's/obfuscator's code on the analysis machine.)
+Method bodies are **not** encrypted (no anti-tamper body encryption), so recovery was fully static — **the DLL was never run** (running it would execute the author's/obfuscator's code, including the `FailFast`). Both string and numeric constant pools turned out to be plain **RC4** (two different embedded 32-byte keys over two embedded resources); re-implemented in ~15 lines of Python, recovering **all 49 strings** and the numeric constants below.
 
-The string encryption turned out to be textbook **RC4**: a static 32-byte key (embedded in the string-decryptor method) applied to the 1,040-byte embedded resource, producing a buffer of length-prefixed UTF-8 strings. This was re-implemented in ~15 lines of Python and recovered all 49 strings. See `decrypted_strings.txt`.
+**Decrypted numeric constants** (from the 2nd RC4 pool):
+- Expiry date = `DateTime(2026, 11, 26)` → gate is `UtcNow <= 2026-11-26`
+- Tick interval = `Mathf.Max(0.1f, 0.5f)` = **0.5 s**
+- Per-tick split-drain batch size = **3** (plaintext literal)
+- Final-drain count (on shutdown) = `int.MaxValue` (drain everything)
 
-Tooling used: pure-Python `dnfile` + `dncil` (metadata + IL disassembly). The full resolved IL is in `Oxide.Ext.Whispers88.full_IL.txt`.
+Tooling: pure-Python `dnfile` + `dncil` (metadata + IL). Full resolved IL: `Oxide.Ext.Whispers88.full_IL.txt`. All 49 strings: `decrypted_strings.txt`.
 
 ---
 
@@ -52,85 +53,76 @@ Tooling used: pure-Python `dnfile` + `dncil` (metadata + IL disassembly). The fu
 
 | Class | Base | Role |
 |---|---|---|
-| `Whispers88Extension` | `Oxide.Core.Extensions.Extension` | Extension entry point & lifecycle. `Name`/`Author` = "Whispers88", `Version` = 1.1.0, `SupportsReloading` = true |
-| `CoreLogic` | — | The real logic: apply/remove patches, the four optimized override bodies, command handlers, logging |
-| `H` | — | Holds the four Harmony patch methods `M1`–`M4` (thin wrappers that cast args and call into `CoreLogic`) |
-| `CoalesceTickComponent` | `UnityEngine.MonoBehaviour` | The timer that drains the deferred work queues each tick; `StartTicking`/`StopTicking`/`Tick` |
-| `<Module>` + 11 helper/proxy classes | — | ConfuserEx constant-decryptor and ref-proxy delegate infrastructure (not application logic) |
+| `Whispers88Extension` | `Oxide.Core.Extensions.Extension` | Entry point/lifecycle. Name/Author "Whispers88", Version 1.1.0, SupportsReloading true |
+| `CoreLogic` | — | Patch apply/remove, the time-gate, the four override bodies, the drain, command handlers, logging |
+| `H` | — | The four Harmony patch methods `M1`–`M4` (cast args → call `CoreLogic`) |
+| `CoalesceTickComponent` | `UnityEngine.MonoBehaviour` | Timer; `Tick` re-checks the gate then drains a batch of 3 split jobs |
+| `<Module>` + 11 helper/proxy classes | — | Constant decryptors, anti-profiling, ref-proxy delegate infrastructure |
 
 ---
 
-## 4. The four Harmony patches (fully resolved)
+## 4. The four Harmony patches (verified)
 
-On load, `CoreLogic.ApplyPatches()` resolves two types and four methods via `HarmonyLib.AccessTools`, creates `new Harmony("com.Whispers88.whispers88")`, and applies **four prefix patches**:
+`CoreLogic.ApplyPatches()` resolves two types + four methods via `AccessTools`, creates `new Harmony("com.Whispers88.whispers88")`, and applies **four prefix patches** (all `postfix`/`transpiler`/`finalizer` null — confirmed):
 
-| # | Vanilla Rust target (prefix-patched) | Harmony method | Optimized body | Override log |
+| # | Vanilla Rust target (prefix-patched) | Harmony method | Body | Behaviour **[corrected]** |
 |---|---|---|---|---|
-| 1 | `ServerBuildingManager.CheckSplit(DecayEntity)` | `H.M1` | `CoreLogic.obfM_019` | — |
-| 2 | `ServerBuildingManager.CheckMerge(DecayEntity)` | `H.M4` | `CoreLogic.obfM_020` | `Running vanilla merge override` |
-| 3 | `ServerBuildingManager.Split(BuildingManager+Building)` | `H.M2` | `CoreLogic.obfM_021` | `Running vanilla override` |
-| 4 | `DecayEntity.AttachToBuilding(uint buildingID)` | `H.M3` | `CoreLogic.obfM_022` | — |
+| 1 | `ServerBuildingManager.CheckSplit(DecayEntity)` | `H.M1` | `obfM_019` | **Defers**: `obfF_010.Add(buildingID); return false` (the only coalesced one) |
+| 2 | `ServerBuildingManager.CheckMerge(DecayEntity)` | `H.M4` | `obfM_020` | **Synchronous**: runs optimized merge `obfM_033(entity)`, `return false` |
+| 3 | `ServerBuildingManager.Split(BuildingManager.Building)` | `H.M2` | `obfM_021` | **Synchronous**: runs optimized split `obfM_032(mgr, building)`, `return false` |
+| 4 | `DecayEntity.AttachToBuilding(uint buildingID)` | `H.M3` | `obfM_022` | **Short-circuit only**: `return false` **iff** `buildingID == entity.buildingID`; otherwise `return true` (run vanilla) |
 
-All four are **`prefix`** patches (the `postfix`/`transpiler`/`finalizer` arguments are null). A prefix that returns `false` **skips the original method**, so these replace vanilla behaviour with the optimized version.
+> **[corrected] Important:** my first pass claimed *all four* defer work into queues — that was wrong. Only **CheckSplit** defers (into `obfF_010`, a `HashSet<uint>`). Merge and Split run their optimized bodies **synchronously**; AttachToBuilding only skips a **redundant re-attach**. The strings `"Running vanilla override "` / `"Running vanilla merge override "` are **catch-only error prefixes** (logged with the exception message if the optimized body throws), *not* normal-path logs.
 
-**Recovered behaviour of patch #1 (`CheckSplit` prefix, representative of the pattern):**
-
-```csharp
-// CoreLogic.obfM_019  — Harmony prefix for ServerBuildingManager.CheckSplit(DecayEntity)
-static bool M1_Prefix(DecayEntity entity) {
-    if (!patchesEnabled || !ready) return true;   // fall through to vanilla
-    if (entity == null)           return true;
-    if (entity.buildingID > 0)
-        pendingSplit.Add(entity.buildingID);       // DEFER / COALESCE the work
-    return false;                                   // skip vanilla; processed later on tick
-}
-```
-
-The static fields (created in the `.cctor`) are the coalescing queues:
-- `pendingSplit`  (`HashSet<uint>` of building IDs) — filled by CheckSplit/CheckMerge prefixes
-- `pendingMerge`  (second `HashSet<uint>`)
-- `patchesEnabled` flag — set true after patching, toggled by the console commands
-- the `Harmony` instance, and the decrypted-constants buffer
-
-The `CoalesceTickComponent` timer periodically drains these queues and performs the actual split/merge once per batch (and once more on shutdown — the `Final drain error` log guards that path). `obfM_020`/`021`/`022` follow the same defer-then-batch pattern for merge / split / decay-attach.
+Each patch body is gated by `obfF_009` (patches enabled) **and** `obfF_007` (the time-gate). If the gate is closed, the prefix returns `true` and the original (vanilla) method runs.
 
 ---
 
-## 5. Lifecycle & console commands
+## 5. The optimization itself (`obfM_032` split / `obfM_033` merge) — recoverable
 
-- **`Load()` / `OnModLoad()`** → `ApplyPatches()` + `StartTimer()` (creates `CoalesceTickComponent`) + `RegisterConsoleCommands()` + registers the `whispers88` permission.
-- **`OnShutdown()` / `Unload()`** → drains the queues, `harmony.UnpatchAll("com.Whispers88.whispers88")`, unregisters commands, stops the timer.
-- **Console commands** (perm `whispers88`, admin):
-  - `whispers88.load` — "Load patches" → `[Whispers88] Patches loaded` (or `Build failed please update.`)
-  - `whispers88.unload` — "Unload patches" → `[Whispers88] Patches removed`
-  - `whispers88.status` — "Show patch status" → `[Whispers88] Patches: ON` / `OFF`
-- Related Rust convar referenced: `nav_carve_use_building_optimization` (navmesh-carve/building optimization toggle).
+- **`obfM_032` (optimized Split):** connected-components flood-fill over `building.buildingBlocks` via `BaseEntity.EntityLinkBroadcast<BuildingBlock>(visitor)` into pooled groups (`Facepunch.Pool`); keep the largest group's id; for every *other* group call `ServerBuildingManager.NewBuildingID()` and `DecayEntity.AttachToBuilding(newId)` on its blocks; reattach loose (non-block) decay entities by parent/nearby `BuildingBlock` (`ContainerCorpse` → original building id); then — **only if `ConVar.AI.nav_carve_use_building_optimization`** — set `building.isNavMeshCarvingDirty = true` and call `ServerBuildingManager.UpdateNavMeshCarver(building, …)` **once**.
+- **`obfM_033` (optimized Merge):** pooled `List<Building>` of linked buildings (via `EntityLinkMessage` + visitor); pick the building with the most `decayEntities` as target; reassign the others' entities into it (`AttachToBuilding(target.ID)`); fix up the pending-split ids in `obfF_010`; then one dirty + `UpdateNavMeshCarver`.
+
+**The core win:** collapse the expensive **navmesh-carve** into a single call per operation, and **spread split work across frames** (batch of 3 per 0.5 s tick) instead of doing it all synchronously on every block change.
 
 ---
 
-## 6. What your developer needs to do to fix it
+## 6. Lifecycle, timer, commands **[corrected]**
 
-1. **Start from `Whispers88Extension.reconstructed.cs`** (in this folder) — a clean, commented C# skeleton with correct lifecycle, the four patch targets, and the coalescing design.
-2. **Verify the four target methods against the current Rust build.** Open the current `Assembly-CSharp.dll` and confirm these still exist with these signatures (Rust renames/refactors these periodically — this is why it broke):
+- **`Load` / `OnModLoad`** → `ApplyPatches()` → `StartTimer()` (creates `CoalesceTickComponent`, interval 0.5 s) → `RegisterConsoleCommands()`.
+- **Tick** (`obfM_023`, every 0.5 s): re-evaluate the time-gate (`obfM_011`); **if expired → `UnpatchAll` and stop**; else drain up to **3** building ids from `obfF_010`, running optimized split per building (scratch list `obfF_011` = `List<uint>`, ids `Remove`d, bypass flag `obfF_012` set during processing).
+- **`OnShutdown` / `Unload`** → `UnregisterCommands()` → drain remaining + destroy the timer `GameObject` + `UnpatchAll("com.Whispers88.whispers88")` + clear `obfF_010`/`obfF_011`.
+- **Console commands** (`whispers88.load` / `unload` / `status`): **[corrected] there is NO Oxide permission.** `"whispers88"` is the `ConsoleSystem.Command.Parent`; access is `arg.Connection == null || arg.Connection.authLevel >= 2` (server console or owner). `status` → `[Whispers88] Patches: ON/OFF`; `load` → `Patches loaded` or, if the gate is closed, `Build failed please update.`
+- **[corrected] Logging** is via `UnityEngine.Debug.Log/LogWarning/LogError` (prefix `[Whispers88] `), not the Oxide log.
+
+---
+
+## 7. What your developer must do
+
+1. **Start from `Whispers88Extension.reconstructed.cs`** (now corrected to match the IL, with the dangerous unconditional `AttachToBuilding` skip fixed).
+2. **Remove/neutralize the time-gate.** Delete `obfM_011`/`obfF_007` logic (the `UtcNow <= 2026-11-26` check) or it will self-disable on 26 Nov 2026.
+3. **Re-point the four targets to the current Rust build.** Confirm against the current `Assembly-CSharp.dll` that these still exist and fix names/signatures as needed:
    - `ServerBuildingManager.CheckSplit(DecayEntity)`
    - `ServerBuildingManager.CheckMerge(DecayEntity)`
    - `ServerBuildingManager.Split(BuildingManager.Building)`
    - `DecayEntity.AttachToBuilding(uint)`
-   Update the `AccessTools.Method(...)` targets to whatever the current names/signatures are.
-3. **Re-implement / validate the four optimized bodies.** The defer-and-batch logic is documented above and in the `.cs`; your dev should confirm it still matches the current vanilla logic (the whole point is to be *behaviourally equivalent but cheaper*, so it must track any vanilla changes).
-4. **Build** against the server's current `Assembly-CSharp.dll`, `Facepunch.*`, `UnityEngine.*`, `Oxide.Core.dll`, and `0Harmony.dll` (2.3.x). Target .NET Framework 4.8. Drop the resulting DLL in `RustDedicated_Data/Managed/` (extensions load from there), or build it as a normal Oxide plugin if you prefer `.cs` distribution.
-5. Keep the console commands and permission (`whispers88`) so you can toggle at runtime, exactly as before.
+4. **Validate the optimized bodies** (§5) against current vanilla logic — the whole point is to stay behaviourally equivalent but cheaper; if vanilla changed, these must track it.
+5. **Build** against current `Assembly-CSharp.dll`, `Facepunch.*`, `UnityEngine.*`, `Oxide.Core.dll`, `0Harmony.dll` (2.3.x), target .NET Framework 4.8, output to `RustDedicated_Data/Managed/`.
+6. Keep the `whispers88.load/unload/status` console controls.
 
 ---
 
-## 7. Confidence & caveats
+## 8. Provenance & confidence
 
-- **High confidence (proven from IL):** identity/metadata; the four Harmony patch targets and that they are prefixes; the Harmony id; all 49 decrypted strings; the console commands/permission; the lifecycle; the defer-and-coalesce design and the `CheckSplit` body.
-- **Medium confidence (reconstructed through obfuscation):** the exact statements inside `obfM_020/021/022` (merge/split/attach bodies) and the precise timer-drain algorithm — the control-flow flattening and ref-proxy stubs mean these are reconstructed by behaviour + field usage, not copied line-for-line. They are documented as the defer/batch pattern; your dev should treat the optimized bodies as *to be re-derived/validated* against current vanilla logic.
-- This is a **clean-room-style functional reconstruction** intended as a maintenance starting point. It is not a byte-exact decompilation, and (given the obfuscation) it does not need to be — the practical path forward is to re-point the four patches to the current Rust API and rebuild.
+- **Pass 1** produced the structure, the four patch targets, the decrypted strings, and a first behavioural model.
+- **Pass 2** (independent, skeptical re-derivation from the IL + re-run of the RC4) confirmed the identity/strings/targets/mapping/commands/lifecycle-skeleton and **corrected** the behavioural model (only Split defers; no merge queue; the `M3` short-circuit; no Oxide permission; Unity logging) and **found the time-gate** that pass 1 missed. Its full report is in `opus_verification.md`.
+- The expiry date and tick constants were then recovered by decrypting the numeric constant pool (resolving pass 2's one open item).
+- **High confidence:** identity, SHA-256, all 49 strings + numeric constants, the four prefix targets and M1/M4/M2/M3↔body↔target mapping, the Harmony id, the time-gate and anti-profiling routines, the command set, and the split/merge algorithm shape.
+- **Reconstruction, not byte-exact decompile:** exact statement order inside `obfM_032/033` is reconstructed through the obfuscation; treat those bodies as to-be-validated against current vanilla. The practical proof is your dev compiling against the current Rust assemblies and watching the four targets resolve.
 
-### Files in this folder
+### Files
 - `README_ANALYSIS.md` — this report
-- `Whispers88Extension.reconstructed.cs` — commented C# skeleton to build from
-- `decrypted_strings.txt` — all 49 recovered string constants (with their ids)
-- `Oxide.Ext.Whispers88.full_IL.txt` — full resolved IL disassembly (reference)
+- `Whispers88Extension.reconstructed.cs` — corrected C# skeleton
+- `decrypted_strings.txt` — all 49 recovered strings
+- `opus_verification.md` — the independent verification pass (what it confirmed/corrected)
+- `Oxide.Ext.Whispers88.full_IL.txt` — full resolved IL disassembly
