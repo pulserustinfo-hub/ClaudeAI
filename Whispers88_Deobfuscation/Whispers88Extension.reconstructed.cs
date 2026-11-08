@@ -23,6 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using HarmonyLib;
+using Oxide.Core;            // VersionNumber
 using Oxide.Core.Extensions;
 using UnityEngine;
 

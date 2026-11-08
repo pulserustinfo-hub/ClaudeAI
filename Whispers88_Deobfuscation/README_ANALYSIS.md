@@ -100,7 +100,7 @@ Each patch body is gated by `obfF_009` (patches enabled) **and** `obfF_007` (the
 ## 7. What your developer must do
 
 1. **Start from `Whispers88Extension.reconstructed.cs`** (now corrected to match the IL, with the dangerous unconditional `AttachToBuilding` skip fixed).
-2. **Remove/neutralize the time-gate.** Delete `obfM_011`/`obfF_007` logic (the `UtcNow <= 2026-11-26` check) or it will self-disable on 26 Nov 2026.
+2. **Remove/neutralize the time-gate.** Delete `obfM_011`/`obfF_007` logic (the `UtcNow <= 2026-11-26` check) or it will self-disable on 26 Nov 2026. *(This must be done in source and recompiled — you cannot hex-edit the original DLL; it has a self-integrity check that bricks itself if modified. See §9.)*
 3. **Re-point the four targets to the current Rust build.** Confirm against the current `Assembly-CSharp.dll` that these still exist and fix names/signatures as needed:
    - `ServerBuildingManager.CheckSplit(DecayEntity)`
    - `ServerBuildingManager.CheckMerge(DecayEntity)`
@@ -120,9 +120,32 @@ Each patch body is gated by `obfF_009` (patches enabled) **and** `obfF_007` (the
 - **High confidence:** identity, SHA-256, all 49 strings + numeric constants, the four prefix targets and M1/M4/M2/M3↔body↔target mapping, the Harmony id, the time-gate and anti-profiling routines, the command set, and the split/merge algorithm shape.
 - **Reconstruction, not byte-exact decompile:** exact statement order inside `obfM_032/033` is reconstructed through the obfuscation; treat those bodies as to-be-validated against current vanilla. The practical proof is your dev compiling against the current Rust assemblies and watching the four targets resolve.
 
+---
+
+## 9. Security assessment (independent static review)
+
+A separate static security pass enumerated the assembly's **complete external API surface** (`AssemblyRef`/`TypeRef`/157 `MemberRef`s/`TypeSpec`s/`ModuleRef`/`ImplMap`/`#US`). That metadata bounds everything the code can possibly do — **absence of a reference is proof a capability is impossible, not merely unobserved**, regardless of the obfuscation.
+
+**Verdict: safe to rebuild from source and run, once the time-gate is removed.** The only concerning code is the ConfuserEx self-protection wrapper; there is **no malicious host-facing behavior**.
+
+Proven **absent** (no such reference exists):
+- **No network of any kind** — no `System.Net`, sockets, `HttpClient`/`WebClient`/`WebRequest`, `UnityWebRequest`, or DNS; **no URL/IP/host/email literal anywhere** (checked all 49 strings + the `#US` stream). → **no phone-home, no remote kill-switch, no license callback is even possible.** (`Facepunch.Network` is referenced for exactly one member: `Connection.authLevel`, the console-admin check — not sockets.)
+- **No process/shell** (`Process.Start`), **no dynamic code loading** (`Assembly.Load*`, `AppDomain`, `Reflection.Emit`, `Activator`), **no P/Invoke** (`ModuleRef`=0, `ImplMap`=0), **no registry**, **no filesystem writes**, **no hardware/GUID/MAC fingerprint**, **no second time-check**, **no player PII/credential access** (only building/decay game state + `authLevel`).
+
+Benign/self-referential: `File.ReadAllBytes` has one call site — on the assembly's **own** file (the integrity check below); `GetManifestResourceStream` reads only its **own** two resources; `Environment.GetEnvironmentVariable` is the three profiler vars only.
+
+Self-protection mechanisms (they guard the obfuscation; they do not attack the host):
+1. **Time-bomb** — the `2026-11-26` gate (§1).
+2. **Anti-profiler `Environment.FailFast`** — hard-kills the process early during load if a debugger/profiler is attached. Don't run the **original** under one.
+3. **Anti-tamper (self-integrity)** — FNV-1a-64 over its own file vs an 8-byte trailer; on any modification it silently **zeroes the numeric constants**, which closes the gate (→ "Build failed please update."). **Consequence: you cannot hex-edit the original DLL to strip the time-bomb — you must recompile from the reconstructed source.**
+4. **`res_2`** (3rd embedded resource, 36 bytes) is **inert** — never read by any code; a decoy/leftover with zero runtime effect.
+
+*(The accuracy re-check in this pass also confirmed all §4–§6 corrections hold and caught one compile fix — a missing `using Oxide.Core;` for `VersionNumber` — now applied to the `.cs`. Full report: `opus_security_review.md`.)*
+
 ### Files
 - `README_ANALYSIS.md` — this report
 - `Whispers88Extension.reconstructed.cs` — corrected C# skeleton
 - `decrypted_strings.txt` — all 49 recovered strings
-- `opus_verification.md` — the independent verification pass (what it confirmed/corrected)
+- `opus_verification.md` — independent verification pass (reconstruction accuracy)
+- `opus_security_review.md` — independent security review (API-surface sweep + verdict)
 - `Oxide.Ext.Whispers88.full_IL.txt` — full resolved IL disassembly
