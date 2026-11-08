@@ -1,0 +1,4522 @@
+
+==============================================================================
+TYPE <Module> : ⁯⁮‫‪⁮‌⁪⁯‭‍
+==============================================================================
+
+==============================================================================
+TYPE Oxide.Ext.Whispers88.CoreLogic : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_03 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_04 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_05 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE Oxide.Ext.Whispers88.H : System.Object
+==============================================================================
+
+==============================================================================
+TYPE Oxide.Ext.Whispers88.Whispers88Extension : Oxide.Core.Extensions.Extension
+==============================================================================
+
+==============================================================================
+TYPE Oxide.Ext.Whispers88.CoalesceTickComponent : UnityEngine.MonoBehaviour
+==============================================================================
+
+==============================================================================
+TYPE ObfType_09 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_10 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_11 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_12 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_13 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_14 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_15 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_16 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_17 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_18 : System.Object
+==============================================================================
+
+==============================================================================
+TYPE ObfType_19 : System.Object
+==============================================================================
+  field obfF_001
+  field obfF_002
+  field obfF_003
+  field obfF_004
+  field obfF_005
+  field obfF_006
+  field obfF_007
+  field obfF_008
+  field obfF_009
+  field obfF_010
+  field obfF_011
+  field obfF_012
+  field obfF_013
+  field obfF_014
+  field obfF_015
+  field obfF_016
+  field obfF_017
+  field obfF_018
+  field obfF_019
+  field obfF_020
+  field TickCallback
+
+  --- method obfM_001  (rva=0x2050) ---
+    IL_025c: call           ObfType_19::obfM_059
+    IL_0261: call           ObfType_19::obfM_060
+    IL_0266: stloc.s        local(0x0006)
+    IL_0268: ldloc.s        local(0x0006)
+    IL_026a: call           ObfType_19::obfM_061
+    IL_026f: brtrue         816
+    IL_0274: ldloc.s        local(0x0006)
+    IL_0276: call           ObfType_19::obfM_062
+    IL_027b: stloc.0        
+    IL_027c: ldloc.0        
+    IL_027d: ldlen          
+    IL_027e: conv.i4        
+    IL_027f: stloc.1        
+    IL_0280: ldloc.1        
+    IL_0281: ldc.i4.8       
+    IL_0282: ble            816
+    IL_0287: ldloc.1        
+    IL_0288: ldc.i4.8       
+    IL_0289: sub            
+    IL_028a: stloc.2        
+    IL_028b: ldc.i8         -3750763034362895579
+    IL_0294: stloc.3        
+    IL_0295: ldc.i4.0       
+    IL_0296: stloc.s        local(0x0004)
+    IL_0298: br.s           691
+    IL_029a: nop            
+    IL_029b: ldloc.3        
+    IL_029c: ldloc.0        
+    IL_029d: ldloc.s        local(0x0004)
+    IL_029f: ldelem.u1      
+    IL_02a0: conv.i8        
+    IL_02a1: xor            
+    IL_02a2: ldc.i8         1099511628211
+    IL_02ab: mul            
+    IL_02ac: stloc.3        
+    IL_02ad: ldloc.s        local(0x0004)
+    IL_02af: ldc.i4.1       
+    IL_02b0: add            
+    IL_02b1: stloc.s        local(0x0004)
+    IL_02b3: nop            
+    IL_02b4: ldloc.s        local(0x0004)
+    IL_02b6: ldloc.2        
+    IL_02b7: blt.s          666
+    IL_02b9: ldc.i4.0       
+    IL_02ba: conv.i8        
+    IL_02bb: stloc.s        local(0x0005)
+    IL_02bd: ldloc.s        local(0x0005)
+    IL_02bf: ldloc.0        
+    IL_02c0: ldloc.2        
+    IL_02c1: ldelem.u1      
+    IL_02c2: conv.i8        
+    IL_02c3: or             
+    IL_02c4: stloc.s        local(0x0005)
+    IL_02c6: ldloc.s        local(0x0005)
+    IL_02c8: ldloc.0        
+    IL_02c9: ldloc.2        
+    IL_02ca: ldc.i4.1       
+    IL_02cb: add            
+    IL_02cc: ldelem.u1      
+    IL_02cd: conv.i8        
+    IL_02ce: ldc.i4.8       
+    IL_02cf: shl            
+    IL_02d0: or             
+    IL_02d1: stloc.s        local(0x0005)
+    IL_02d3: ldloc.s        local(0x0005)
+    IL_02d5: ldloc.0        
+    IL_02d6: ldloc.2        
+    IL_02d7: ldc.i4.2       
+    IL_02d8: add            
+    IL_02d9: ldelem.u1      
+    IL_02da: conv.i8        
+    IL_02db: ldc.i4.s       16
+    IL_02dd: shl            
+    IL_02de: or             
+    IL_02df: stloc.s        local(0x0005)
+    IL_02e1: ldloc.s        local(0x0005)
+    IL_02e3: ldloc.0        
+    IL_02e4: ldloc.2        
+    IL_02e5: ldc.i4.3       
+    IL_02e6: add            
+    IL_02e7: ldelem.u1      
+    IL_02e8: conv.i8        
+    IL_02e9: ldc.i4.s       24
+    IL_02eb: shl            
+    IL_02ec: or             
+    IL_02ed: stloc.s        local(0x0005)
+    IL_02ef: ldloc.s        local(0x0005)
+    IL_02f1: ldloc.0        
+    IL_02f2: ldloc.2        
+    IL_02f3: ldc.i4.4       
+    IL_02f4: add            
+    IL_02f5: ldelem.u1      
+    IL_02f6: conv.i8        
+    IL_02f7: ldc.i4.s       32
+    IL_02f9: shl            
+    IL_02fa: or             
+    IL_02fb: stloc.s        local(0x0005)
+    IL_02fd: ldloc.s        local(0x0005)
+    IL_02ff: ldloc.0        
+    IL_0300: ldloc.2        
+    IL_0301: ldc.i4.5       
+    IL_0302: add            
+    IL_0303: ldelem.u1      
+    IL_0304: conv.i8        
+    IL_0305: ldc.i4.s       40
+    IL_0307: shl            
+    IL_0308: or             
+    IL_0309: stloc.s        local(0x0005)
+    IL_030b: ldloc.s        local(0x0005)
+    IL_030d: ldloc.0        
+    IL_030e: ldloc.2        
+    IL_030f: ldc.i4.6       
+    IL_0310: add            
+    IL_0311: ldelem.u1      
+    IL_0312: conv.i8        
+    IL_0313: ldc.i4.s       48
+    IL_0315: shl            
+    IL_0316: or             
+    IL_0317: stloc.s        local(0x0005)
+    IL_0319: ldloc.s        local(0x0005)
+    IL_031b: ldloc.0        
+    IL_031c: ldloc.2        
+    IL_031d: ldc.i4.7       
+    IL_031e: add            
+    IL_031f: ldelem.u1      
+    IL_0320: conv.i8        
+    IL_0321: ldc.i4.s       56
+    IL_0323: shl            
+    IL_0324: or             
+    IL_0325: stloc.s        local(0x0005)
+    IL_0327: ldloc.3        
+    IL_0328: ldloc.s        local(0x0005)
+    IL_032a: ceq            
+    IL_032c: ldc.i4.0       
+    IL_032d: ceq            
+    IL_032f: ret            
+    IL_0330: ldc.i4.0       
+    IL_0331: ret            
+
+  --- method obfM_002  (rva=0x2134) ---
+    IL_0340: ldc.i4         256
+    IL_0345: newarr         System.Byte
+    IL_034a: stloc.0        
+    IL_034b: ldc.i4.0       
+    IL_034c: stloc.1        
+    IL_034d: br.s           857
+    IL_034f: nop            
+    IL_0350: ldloc.0        
+    IL_0351: ldloc.1        
+    IL_0352: ldloc.1        
+    IL_0353: conv.u1        
+    IL_0354: stelem.i1      
+    IL_0355: ldloc.1        
+    IL_0356: ldc.i4.1       
+    IL_0357: add            
+    IL_0358: stloc.1        
+    IL_0359: nop            
+    IL_035a: ldloc.1        
+    IL_035b: ldc.i4         256
+    IL_0360: blt.s          847
+    IL_0362: ldc.i4.0       
+    IL_0363: stloc.2        
+    IL_0364: ldc.i4.0       
+    IL_0365: stloc.1        
+    IL_0366: br.s           911
+    IL_0368: nop            
+    IL_0369: ldloc.2        
+    IL_036a: ldloc.0        
+    IL_036b: ldloc.1        
+    IL_036c: ldelem.u1      
+    IL_036d: add            
+    IL_036e: ldarg.1        
+    IL_036f: ldloc.1        
+    IL_0370: ldarg.1        
+    IL_0371: ldlen          
+    IL_0372: conv.i4        
+    IL_0373: rem            
+    IL_0374: ldelem.u1      
+    IL_0375: add            
+    IL_0376: ldc.i4         255
+    IL_037b: and            
+    IL_037c: stloc.2        
+    IL_037d: ldloc.0        
+    IL_037e: ldloc.1        
+    IL_037f: ldelem.u1      
+    IL_0380: stloc.3        
+    IL_0381: ldloc.0        
+    IL_0382: ldloc.1        
+    IL_0383: ldloc.0        
+    IL_0384: ldloc.2        
+    IL_0385: ldelem.u1      
+    IL_0386: stelem.i1      
+    IL_0387: ldloc.0        
+    IL_0388: ldloc.2        
+    IL_0389: ldloc.3        
+    IL_038a: stelem.i1      
+    IL_038b: ldloc.1        
+    IL_038c: ldc.i4.1       
+    IL_038d: add            
+    IL_038e: stloc.1        
+    IL_038f: nop            
+    IL_0390: ldloc.1        
+    IL_0391: ldc.i4         256
+    IL_0396: blt.s          872
+    IL_0398: ldarg.0        
+    IL_0399: ldlen          
+    IL_039a: conv.i4        
+    IL_039b: newarr         System.Byte
+    IL_03a0: stloc.s        local(0x0004)
+    IL_03a2: ldc.i4.0       
+    IL_03a3: stloc.s        local(0x0006)
+    IL_03a5: ldc.i4.0       
+    IL_03a6: stloc.s        local(0x0007)
+    IL_03a8: ldc.i4.0       
+    IL_03a9: stloc.s        local(0x0005)
+    IL_03ab: br.s           1021
+    IL_03ad: nop            
+    IL_03ae: ldloc.s        local(0x0006)
+    IL_03b0: ldc.i4.1       
+    IL_03b1: add            
+    IL_03b2: ldc.i4         255
+    IL_03b7: and            
+    IL_03b8: stloc.s        local(0x0006)
+    IL_03ba: ldloc.s        local(0x0007)
+    IL_03bc: ldloc.0        
+    IL_03bd: ldloc.s        local(0x0006)
+    IL_03bf: ldelem.u1      
+    IL_03c0: add            
+    IL_03c1: ldc.i4         255
+    IL_03c6: and            
+    IL_03c7: stloc.s        local(0x0007)
+    IL_03c9: ldloc.0        
+    IL_03ca: ldloc.s        local(0x0006)
+    IL_03cc: ldelem.u1      
+    IL_03cd: stloc.3        
+    IL_03ce: ldloc.0        
+    IL_03cf: ldloc.s        local(0x0006)
+    IL_03d1: ldloc.0        
+    IL_03d2: ldloc.s        local(0x0007)
+    IL_03d4: ldelem.u1      
+    IL_03d5: stelem.i1      
+    IL_03d6: ldloc.0        
+    IL_03d7: ldloc.s        local(0x0007)
+    IL_03d9: ldloc.3        
+    IL_03da: stelem.i1      
+    IL_03db: ldloc.s        local(0x0004)
+    IL_03dd: ldloc.s        local(0x0005)
+    IL_03df: ldarg.0        
+    IL_03e0: ldloc.s        local(0x0005)
+    IL_03e2: ldelem.u1      
+    IL_03e3: ldloc.0        
+    IL_03e4: ldloc.0        
+    IL_03e5: ldloc.s        local(0x0006)
+    IL_03e7: ldelem.u1      
+    IL_03e8: ldloc.0        
+    IL_03e9: ldloc.s        local(0x0007)
+    IL_03eb: ldelem.u1      
+    IL_03ec: add            
+    IL_03ed: ldc.i4         255
+    IL_03f2: and            
+    IL_03f3: ldelem.u1      
+    IL_03f4: xor            
+    IL_03f5: conv.u1        
+    IL_03f6: stelem.i1      
+    IL_03f7: ldloc.s        local(0x0005)
+    IL_03f9: ldc.i4.1       
+    IL_03fa: add            
+    IL_03fb: stloc.s        local(0x0005)
+    IL_03fd: nop            
+    IL_03fe: ldloc.s        local(0x0005)
+    IL_0400: ldarg.0        
+    IL_0401: ldlen          
+    IL_0402: conv.i4        
+    IL_0403: blt.s          941
+    IL_0405: ldloc.s        local(0x0004)
+    IL_0407: ret            
+
+  --- method obfM_003  (rva=0x2208) ---
+    IL_0414: ldarg.0        
+    IL_0415: call           ObfType_19::obfM_063
+    IL_041a: conv.i4        
+    IL_041b: stloc.0        
+    IL_041c: ldloc.0        
+    IL_041d: newarr         System.Byte
+    IL_0422: stloc.1        
+    IL_0423: ldc.i4.0       
+    IL_0424: stloc.2        
+    IL_0425: br.s           1084
+    IL_0427: nop            
+    IL_0428: ldarg.0        
+    IL_0429: ldloc.1        
+    IL_042a: ldloc.2        
+    IL_042b: ldloc.0        
+    IL_042c: ldloc.2        
+    IL_042d: sub            
+    IL_042e: call           ObfType_19::obfM_064
+    IL_0433: stloc.3        
+    IL_0434: ldloc.3        
+    IL_0435: ldc.i4.0       
+    IL_0436: ble.s          1089
+    IL_0438: ldloc.2        
+    IL_0439: ldloc.3        
+    IL_043a: add            
+    IL_043b: stloc.2        
+    IL_043c: nop            
+    IL_043d: ldloc.2        
+    IL_043e: ldloc.0        
+    IL_043f: blt.s          1063
+    IL_0441: nop            
+    IL_0442: ldloc.1        
+    IL_0443: ret            
+
+  --- method obfM_004  (rva=0x2244) ---
+    IL_0450: call           ObfType_19::obfM_010
+    IL_0455: ldsfld         fld:obfF_001
+    IL_045a: brtrue         1405
+    IL_045f: call           ObfType_19::obfM_059
+    IL_0464: ldstr          "‪​‍⁯⁯‮‮⁬"
+    IL_0469: call           ObfType_19::obfM_065
+    IL_046e: stloc.1        
+    IL_046f: ldloc.1        
+    IL_0470: call           ObfType_19::obfM_003
+    IL_0475: stloc.0        
+    IL_0476: ldloc.1        
+    IL_0477: call           ObfType_19::obfM_066
+    IL_047c: ldloc.0        
+    IL_047d: ldc.i4.s       32
+    IL_047f: newarr         System.Byte
+    IL_0484: dup            
+    IL_0485: ldc.i4.0       
+    IL_0486: ldc.i4.s       125
+    IL_0488: stelem.i1      
+    IL_0489: dup            
+    IL_048a: ldc.i4.1       
+    IL_048b: ldc.i4         238
+    IL_0490: stelem.i1      
+    IL_0491: dup            
+    IL_0492: ldc.i4.2       
+    IL_0493: ldc.i4         152
+    IL_0498: stelem.i1      
+    IL_0499: dup            
+    IL_049a: ldc.i4.3       
+    IL_049b: ldc.i4         237
+    IL_04a0: stelem.i1      
+    IL_04a1: dup            
+    IL_04a2: ldc.i4.4       
+    IL_04a3: ldc.i4.s       36
+    IL_04a5: stelem.i1      
+    IL_04a6: dup            
+    IL_04a7: ldc.i4.5       
+    IL_04a8: ldc.i4         252
+    IL_04ad: stelem.i1      
+    IL_04ae: dup            
+    IL_04af: ldc.i4.6       
+    IL_04b0: ldc.i4         249
+    IL_04b5: stelem.i1      
+    IL_04b6: dup            
+    IL_04b7: ldc.i4.7       
+    IL_04b8: ldc.i4.5       
+    IL_04b9: stelem.i1      
+    IL_04ba: dup            
+    IL_04bb: ldc.i4.8       
+    IL_04bc: ldc.i4         160
+    IL_04c1: stelem.i1      
+    IL_04c2: dup            
+    IL_04c3: ldc.i4.s       9
+    IL_04c5: ldc.i4         183
+    IL_04ca: stelem.i1      
+    IL_04cb: dup            
+    IL_04cc: ldc.i4.s       10
+    IL_04ce: ldc.i4         155
+    IL_04d3: stelem.i1      
+    IL_04d4: dup            
+    IL_04d5: ldc.i4.s       11
+    IL_04d7: ldc.i4.s       99
+    IL_04d9: stelem.i1      
+    IL_04da: dup            
+    IL_04db: ldc.i4.s       12
+    IL_04dd: ldc.i4         218
+    IL_04e2: stelem.i1      
+    IL_04e3: dup            
+    IL_04e4: ldc.i4.s       13
+    IL_04e6: ldc.i4         239
+    IL_04eb: stelem.i1      
+    IL_04ec: dup            
+    IL_04ed: ldc.i4.s       14
+    IL_04ef: ldc.i4         199
+    IL_04f4: stelem.i1      
+    IL_04f5: dup            
+    IL_04f6: ldc.i4.s       15
+    IL_04f8: ldc.i4.s       86
+    IL_04fa: stelem.i1      
+    IL_04fb: dup            
+    IL_04fc: ldc.i4.s       16
+    IL_04fe: ldc.i4.s       57
+    IL_0500: stelem.i1      
+    IL_0501: dup            
+    IL_0502: ldc.i4.s       17
+    IL_0504: ldc.i4.s       62
+    IL_0506: stelem.i1      
+    IL_0507: dup            
+    IL_0508: ldc.i4.s       18
+    IL_050a: ldc.i4         240
+    IL_050f: stelem.i1      
+    IL_0510: dup            
+    IL_0511: ldc.i4.s       19
+    IL_0513: ldc.i4         212
+    IL_0518: stelem.i1      
+    IL_0519: dup            
+    IL_051a: ldc.i4.s       20
+    IL_051c: ldc.i4.s       61
+    IL_051e: stelem.i1      
+    IL_051f: dup            
+    IL_0520: ldc.i4.s       21
+    IL_0522: ldc.i4.s       101
+    IL_0524: stelem.i1      
+    IL_0525: dup            
+    IL_0526: ldc.i4.s       22
+    IL_0528: ldc.i4         196
+    IL_052d: stelem.i1      
+    IL_052e: dup            
+    IL_052f: ldc.i4.s       23
+    IL_0531: ldc.i4.s       78
+    IL_0533: stelem.i1      
+    IL_0534: dup            
+    IL_0535: ldc.i4.s       24
+    IL_0537: ldc.i4         130
+    IL_053c: stelem.i1      
+    IL_053d: dup            
+    IL_053e: ldc.i4.s       25
+    IL_0540: ldc.i4.s       102
+    IL_0542: stelem.i1      
+    IL_0543: dup            
+    IL_0544: ldc.i4.s       26
+    IL_0546: ldc.i4         228
+    IL_054b: stelem.i1      
+    IL_054c: dup            
+    IL_054d: ldc.i4.s       27
+    IL_054f: ldc.i4.s       46
+    IL_0551: stelem.i1      
+    IL_0552: dup            
+    IL_0553: ldc.i4.s       28
+    IL_0555: ldc.i4         177
+    IL_055a: stelem.i1      
+    IL_055b: dup            
+    IL_055c: ldc.i4.s       29
+    IL_055e: ldc.i4.s       64
+    IL_0560: stelem.i1      
+    IL_0561: dup            
+    IL_0562: ldc.i4.s       30
+    IL_0564: ldc.i4         216
+    IL_0569: stelem.i1      
+    IL_056a: dup            
+    IL_056b: ldc.i4.s       31
+    IL_056d: ldc.i4         151
+    IL_0572: stelem.i1      
+    IL_0573: call           ObfType_19::obfM_002
+    IL_0578: stsfld         fld:obfF_001
+    IL_057d: nop            
+    IL_057e: ldsfld         fld:obfF_001
+    IL_0583: stloc.3        
+    IL_0584: ldloc.3        
+    IL_0585: ldarg.0        
+    IL_0586: ldelem.u1      
+    IL_0587: ldloc.3        
+    IL_0588: ldarg.0        
+    IL_0589: ldc.i4.1       
+    IL_058a: add            
+    IL_058b: ldelem.u1      
+    IL_058c: ldc.i4.8       
+    IL_058d: shl            
+    IL_058e: or             
+    IL_058f: ldloc.3        
+    IL_0590: ldarg.0        
+    IL_0591: ldc.i4.2       
+    IL_0592: add            
+    IL_0593: ldelem.u1      
+    IL_0594: ldc.i4.s       16
+    IL_0596: shl            
+    IL_0597: or             
+    IL_0598: ldloc.3        
+    IL_0599: ldarg.0        
+    IL_059a: ldc.i4.3       
+    IL_059b: add            
+    IL_059c: ldelem.u1      
+    IL_059d: ldc.i4.s       24
+    IL_059f: shl            
+    IL_05a0: or             
+    IL_05a1: stloc.2        
+    IL_05a2: call           ObfType_19::obfM_067
+    IL_05a7: ldloc.3        
+    IL_05a8: ldarg.0        
+    IL_05a9: ldc.i4.4       
+    IL_05aa: add            
+    IL_05ab: ldloc.2        
+    IL_05ac: call           ObfType_19::obfM_068
+    IL_05b1: ret            
+
+  --- method obfM_005  (rva=0x23b4) ---
+    IL_05c0: ldsfld         fld:obfF_002
+    IL_05c5: brtrue         1783
+    IL_05ca: call           ObfType_19::obfM_059
+    IL_05cf: ldstr          "‪‍‎⁪⁭⁮‫‭"
+    IL_05d4: call           ObfType_19::obfM_065
+    IL_05d9: stloc.0        
+    IL_05da: ldloc.0        
+    IL_05db: call           ObfType_19::obfM_003
+    IL_05e0: ldc.i4.s       32
+    IL_05e2: newarr         System.Byte
+    IL_05e7: dup            
+    IL_05e8: ldc.i4.0       
+    IL_05e9: ldc.i4         226
+    IL_05ee: stelem.i1      
+    IL_05ef: dup            
+    IL_05f0: ldc.i4.1       
+    IL_05f1: ldc.i4.s       94
+    IL_05f3: stelem.i1      
+    IL_05f4: dup            
+    IL_05f5: ldc.i4.2       
+    IL_05f6: ldc.i4.s       71
+    IL_05f8: stelem.i1      
+    IL_05f9: dup            
+    IL_05fa: ldc.i4.3       
+    IL_05fb: ldc.i4.s       16
+    IL_05fd: stelem.i1      
+    IL_05fe: dup            
+    IL_05ff: ldc.i4.4       
+    IL_0600: ldc.i4.s       55
+    IL_0602: stelem.i1      
+    IL_0603: dup            
+    IL_0604: ldc.i4.5       
+    IL_0605: ldc.i4.s       125
+    IL_0607: stelem.i1      
+    IL_0608: dup            
+    IL_0609: ldc.i4.6       
+    IL_060a: ldc.i4         171
+    IL_060f: stelem.i1      
+    IL_0610: dup            
+    IL_0611: ldc.i4.7       
+    IL_0612: ldc.i4.s       58
+    IL_0614: stelem.i1      
+    IL_0615: dup            
+    IL_0616: ldc.i4.8       
+    IL_0617: ldc.i4.s       104
+    IL_0619: stelem.i1      
+    IL_061a: dup            
+    IL_061b: ldc.i4.s       9
+    IL_061d: ldc.i4         147
+    IL_0622: stelem.i1      
+    IL_0623: dup            
+    IL_0624: ldc.i4.s       10
+    IL_0626: ldc.i4         248
+    IL_062b: stelem.i1      
+    IL_062c: dup            
+    IL_062d: ldc.i4.s       11
+    IL_062f: ldc.i4.s       103
+    IL_0631: stelem.i1      
+    IL_0632: dup            
+    IL_0633: ldc.i4.s       12
+    IL_0635: ldc.i4         169
+    IL_063a: stelem.i1      
+    IL_063b: dup            
+    IL_063c: ldc.i4.s       13
+    IL_063e: ldc.i4.s       85
+    IL_0640: stelem.i1      
+    IL_0641: dup            
+    IL_0642: ldc.i4.s       14
+    IL_0644: ldc.i4         255
+    IL_0649: stelem.i1      
+    IL_064a: dup            
+    IL_064b: ldc.i4.s       15
+    IL_064d: ldc.i4.s       100
+    IL_064f: stelem.i1      
+    IL_0650: dup            
+    IL_0651: ldc.i4.s       16
+    IL_0653: ldc.i4.s       20
+    IL_0655: stelem.i1      
+    IL_0656: dup            
+    IL_0657: ldc.i4.s       17
+    IL_0659: ldc.i4         183
+    IL_065e: stelem.i1      
+    IL_065f: dup            
+    IL_0660: ldc.i4.s       18
+    IL_0662: ldc.i4.s       79
+    IL_0664: stelem.i1      
+    IL_0665: dup            
+    IL_0666: ldc.i4.s       19
+    IL_0668: ldc.i4         204
+    IL_066d: stelem.i1      
+    IL_066e: dup            
+    IL_066f: ldc.i4.s       20
+    IL_0671: ldc.i4         183
+    IL_0676: stelem.i1      
+    IL_0677: dup            
+    IL_0678: ldc.i4.s       21
+    IL_067a: ldc.i4         157
+    IL_067f: stelem.i1      
+    IL_0680: dup            
+    IL_0681: ldc.i4.s       22
+    IL_0683: ldc.i4.s       122
+    IL_0685: stelem.i1      
+    IL_0686: dup            
+    IL_0687: ldc.i4.s       23
+    IL_0689: ldc.i4         194
+    IL_068e: stelem.i1      
+    IL_068f: dup            
+    IL_0690: ldc.i4.s       24
+    IL_0692: ldc.i4         216
+    IL_0697: stelem.i1      
+    IL_0698: dup            
+    IL_0699: ldc.i4.s       25
+    IL_069b: ldc.i4         206
+    IL_06a0: stelem.i1      
+    IL_06a1: dup            
+    IL_06a2: ldc.i4.s       26
+    IL_06a4: ldc.i4.s       104
+    IL_06a6: stelem.i1      
+    IL_06a7: dup            
+    IL_06a8: ldc.i4.s       27
+    IL_06aa: ldc.i4         158
+    IL_06af: stelem.i1      
+    IL_06b0: dup            
+    IL_06b1: ldc.i4.s       28
+    IL_06b3: ldc.i4         188
+    IL_06b8: stelem.i1      
+    IL_06b9: dup            
+    IL_06ba: ldc.i4.s       29
+    IL_06bc: ldc.i4.s       106
+    IL_06be: stelem.i1      
+    IL_06bf: dup            
+    IL_06c0: ldc.i4.s       30
+    IL_06c2: ldc.i4.s       49
+    IL_06c4: stelem.i1      
+    IL_06c5: dup            
+    IL_06c6: ldc.i4.s       31
+    IL_06c8: ldc.i4         232
+    IL_06cd: stelem.i1      
+    IL_06ce: call           ObfType_19::obfM_002
+    IL_06d3: stsfld         fld:obfF_002
+    IL_06d8: ldloc.0        
+    IL_06d9: call           ObfType_19::obfM_066
+    IL_06de: call           ObfType_19::obfM_001
+    IL_06e3: brfalse.s      1782
+    IL_06e5: ldsfld         fld:obfF_002
+    IL_06ea: ldlen          
+    IL_06eb: conv.i4        
+    IL_06ec: newarr         System.Byte
+    IL_06f1: stsfld         fld:obfF_002
+    IL_06f6: nop            
+    IL_06f7: nop            
+    IL_06f8: ldsfld         fld:obfF_002
+    IL_06fd: ret            
+
+  --- method obfM_006  (rva=0x2500) ---
+    IL_070c: call           ObfType_19::obfM_005
+    IL_0711: ldarg.0        
+    IL_0712: call           ObfType_19::obfM_069
+    IL_0717: ret            
+
+  --- method obfM_007  (rva=0x2518) ---
+    IL_0724: call           ObfType_19::obfM_005
+    IL_0729: ldarg.0        
+    IL_072a: call           ObfType_19::obfM_070
+    IL_072f: ret            
+
+  --- method obfM_008  (rva=0x2530) ---
+    IL_073c: call           ObfType_19::obfM_005
+    IL_0741: ldarg.0        
+    IL_0742: call           ObfType_19::obfM_071
+    IL_0747: ret            
+
+  --- method obfM_009  (rva=0x2548) ---
+    IL_0754: call           ObfType_19::obfM_005
+    IL_0759: ldarg.0        
+    IL_075a: call           ObfType_19::obfM_072
+    IL_075f: ret            
+
+  --- method obfM_010  (rva=0x2560) ---
+    IL_076c: call           ObfType_19::obfM_073
+    IL_0771: brtrue.s       1945
+    IL_0773: ldstr          "COR_ENABLE_PROFILING"
+    IL_0778: call           ObfType_19::obfM_074
+    IL_077d: brtrue.s       1945
+    IL_077f: ldstr          "CORECLR_PROFILER"
+    IL_0784: call           ObfType_19::obfM_074
+    IL_0789: brtrue.s       1945
+    IL_078b: ldstr          "COR_PROFILER"
+    IL_0790: call           ObfType_19::obfM_074
+    IL_0795: brtrue.s       1945
+    IL_0797: br.s           1956
+    IL_0799: nop            
+    IL_079a: ldstr          ""
+    IL_079f: call           ObfType_19::obfM_075
+    IL_07a4: ret            
+
+  --- method obfM_011  (rva=0x25a8) ---
+    IL_07b4: nop            
+    IL_07b5: nop            
+    IL_07b6: call           ObfType_19::obfM_076
+    IL_07bb: stloc.0        
+    IL_07bc: ldloca.s       local(0x0000)
+    IL_07be: call           System.DateTime::get_Ticks
+    IL_07c3: ldc.i4.0       
+    IL_07c4: call           ObfType_19::obfM_006
+    IL_07c9: ldc.i4.4       
+    IL_07ca: call           ObfType_19::obfM_006
+    IL_07cf: ldc.i4.8       
+    IL_07d0: call           ObfType_19::obfM_006
+    IL_07d5: ldc.i4.0       
+    IL_07d6: ldc.i4.0       
+    IL_07d7: ldc.i4.0       
+    IL_07d8: ldc.i4.1       
+    IL_07d9: newobj         System.DateTime::.ctor
+    IL_07de: stloc.0        
+    IL_07df: ldloca.s       local(0x0000)
+    IL_07e1: call           System.DateTime::get_Ticks
+    IL_07e6: cgt            
+    IL_07e8: ldc.i4.0       
+    IL_07e9: ceq            
+    IL_07eb: stsfld         fld:obfF_007
+    IL_07f0: nop            
+    IL_07f1: leave.s        2046
+    IL_07f3: pop            
+    IL_07f4: nop            
+    IL_07f5: ldc.i4.0       
+    IL_07f6: stsfld         fld:obfF_007
+    IL_07fb: nop            
+    IL_07fc: leave.s        2046
+    IL_07fe: ret            
+
+  --- method obfM_012  (rva=0x2610) ---
+    IL_081c: nop            
+    IL_081d: ldsfld         fld:obfF_009
+    IL_0822: stloc.0        
+    IL_0823: ldloc.0        
+    IL_0824: brtrue.s       2088
+    IL_0826: br.s           2094
+    IL_0828: nop            
+    IL_0829: br             2921
+    IL_082e: call           ObfType_19::obfM_011
+    IL_0833: nop            
+    IL_0834: ldsfld         fld:obfF_007
+    IL_0839: ldc.i4.0       
+    IL_083a: ceq            
+    IL_083c: stloc.1        
+    IL_083d: ldloc.1        
+    IL_083e: brfalse.s      2117
+    IL_0840: br             2921
+    IL_0845: nop            
+    IL_0846: nop            
+    IL_0847: ldc.i4.0       
+    IL_0848: call           ObfType_19::obfM_004
+    IL_084d: call           HarmonyLib.AccessTools::TypeByName
+    IL_0852: stloc.2        
+    IL_0853: ldc.i4.s       25
+    IL_0855: call           ObfType_19::obfM_004
+    IL_085a: call           HarmonyLib.AccessTools::TypeByName
+    IL_085f: stloc.3        
+    IL_0860: ldloc.2        
+    IL_0861: ldnull         
+    IL_0862: call           ObfType_19::obfM_077
+    IL_0867: brtrue.s       2156
+    IL_0869: ldnull         
+    IL_086a: br.s           2171
+    IL_086c: ldloc.2        
+    IL_086d: ldc.i4.s       40
+    IL_086f: call           ObfType_19::obfM_004
+    IL_0874: ldnull         
+    IL_0875: ldnull         
+    IL_0876: call           HarmonyLib.AccessTools::Method
+    IL_087b: stloc.s        local(0x0004)
+    IL_087d: ldloc.2        
+    IL_087e: ldnull         
+    IL_087f: call           ObfType_19::obfM_077
+    IL_0884: brfalse.s      2184
+    IL_0886: br.s           2188
+    IL_0888: nop            
+    IL_0889: ldnull         
+    IL_088a: br.s           2203
+    IL_088c: ldloc.2        
+    IL_088d: ldc.i4.s       54
+    IL_088f: call           ObfType_19::obfM_004
+    IL_0894: ldnull         
+    IL_0895: ldnull         
+    IL_0896: call           HarmonyLib.AccessTools::Method
+    IL_089b: stloc.s        local(0x0005)
+    IL_089d: ldloc.2        
+    IL_089e: ldc.i4.s       68
+    IL_08a0: call           ObfType_19::obfM_004
+    IL_08a5: ldc.i4.s       77
+    IL_08a7: call           ObfType_19::obfM_004
+    IL_08ac: call           ObfType_19::obfM_013
+    IL_08b1: stloc.s        local(0x0006)
+    IL_08b3: ldloc.3        
+    IL_08b4: ldc.i4.s       105
+    IL_08b6: call           ObfType_19::obfM_004
+    IL_08bb: ldc.i4.s       125
+    IL_08bd: call           ObfType_19::obfM_004
+    IL_08c2: call           ObfType_19::obfM_013
+    IL_08c7: stloc.s        local(0x0007)
+    IL_08c9: ldloc.s        local(0x0004)
+    IL_08cb: ldnull         
+    IL_08cc: call           ObfType_19::obfM_078
+    IL_08d1: brtrue.s       2292
+    IL_08d3: ldloc.s        local(0x0005)
+    IL_08d5: ldnull         
+    IL_08d6: call           ObfType_19::obfM_078
+    IL_08db: brfalse.s      2271
+    IL_08dd: br.s           2292
+    IL_08df: nop            
+    IL_08e0: ldloc.s        local(0x0006)
+    IL_08e2: ldnull         
+    IL_08e3: call           ObfType_19::obfM_078
+    IL_08e8: brtrue.s       2292
+    IL_08ea: ldloc.s        local(0x0007)
+    IL_08ec: ldnull         
+    IL_08ed: call           ObfType_19::obfM_078
+    IL_08f2: br.s           2293
+    IL_08f4: ldc.i4.1       
+    IL_08f5: stloc.s        local(0x000A)
+    IL_08f7: ldloc.s        local(0x000A)
+    IL_08f9: brtrue.s       2301
+    IL_08fb: br.s           2399
+    IL_08fd: nop            
+    IL_08fe: nop            
+    IL_08ff: ldc.i4         142
+    IL_0904: call           ObfType_19::obfM_004
+    IL_0909: ldc.i4.4       
+    IL_090a: newarr         System.Object
+    IL_090f: dup            
+    IL_0910: ldc.i4.0       
+    IL_0911: ldloc.s        local(0x0004)
+    IL_0913: ldnull         
+    IL_0914: call           ObfType_19::obfM_079
+    IL_0919: box            System.Boolean
+    IL_091e: stelem.ref     
+    IL_091f: dup            
+    IL_0920: ldc.i4.1       
+    IL_0921: ldloc.s        local(0x0005)
+    IL_0923: ldnull         
+    IL_0924: call           ObfType_19::obfM_079
+    IL_0929: box            System.Boolean
+    IL_092e: stelem.ref     
+    IL_092f: dup            
+    IL_0930: ldc.i4.2       
+    IL_0931: ldloc.s        local(0x0006)
+    IL_0933: ldnull         
+    IL_0934: call           ObfType_19::obfM_079
+    IL_0939: box            System.Boolean
+    IL_093e: stelem.ref     
+    IL_093f: dup            
+    IL_0940: ldc.i4.3       
+    IL_0941: ldloc.s        local(0x0007)
+    IL_0943: ldnull         
+    IL_0944: call           ObfType_19::obfM_079
+    IL_0949: box            System.Boolean
+    IL_094e: stelem.ref     
+    IL_094f: call           ObfType_19::obfM_080
+    IL_0954: call           ObfType_19::obfM_018
+    IL_0959: nop            
+    IL_095a: leave          2921
+    IL_095f: ldtoken        Oxide.Ext.Whispers88.H
+    IL_0964: call           ObfType_19::obfM_081
+    IL_0969: stloc.s        local(0x0008)
+    IL_096b: ldc.i4         209
+    IL_0970: call           ObfType_19::obfM_004
+    IL_0975: newobj         HarmonyLib.Harmony::.ctor
+    IL_097a: stsfld         fld:obfF_008
+    IL_097f: ldsfld         fld:obfF_008
+    IL_0984: stloc.s        local(0x0009)
+    IL_0986: ldloc.s        local(0x0009)
+    IL_0988: ldloc.s        local(0x0004)
+    IL_098a: ldloc.s        local(0x0008)
+    IL_098c: ldc.i4         238
+    IL_0991: call           ObfType_19::obfM_004
+    IL_0996: ldnull         
+    IL_0997: ldnull         
+    IL_0998: call           HarmonyLib.AccessTools::Method
+    IL_099d: newobj         HarmonyLib.HarmonyMethod::.ctor
+    IL_09a2: ldnull         
+    IL_09a3: ldnull         
+    IL_09a4: ldnull         
+    IL_09a5: callvirt       HarmonyLib.Harmony::Patch
+    IL_09aa: pop            
+    IL_09ab: ldloc.s        local(0x0009)
+    IL_09ad: ldloc.s        local(0x0005)
+    IL_09af: ldloc.s        local(0x0008)
+    IL_09b1: ldc.i4         244
+    IL_09b6: call           ObfType_19::obfM_004
+    IL_09bb: ldnull         
+    IL_09bc: ldnull         
+    IL_09bd: call           HarmonyLib.AccessTools::Method
+    IL_09c2: newobj         HarmonyLib.HarmonyMethod::.ctor
+    IL_09c7: ldnull         
+    IL_09c8: ldnull         
+    IL_09c9: ldnull         
+    IL_09ca: callvirt       HarmonyLib.Harmony::Patch
+    IL_09cf: pop            
+    IL_09d0: ldloc.s        local(0x0009)
+    IL_09d2: ldloc.s        local(0x0006)
+    IL_09d4: ldloc.s        local(0x0008)
+    IL_09d6: ldc.i4         250
+    IL_09db: call           ObfType_19::obfM_004
+    IL_09e0: ldnull         
+    IL_09e1: ldnull         
+    IL_09e2: call           HarmonyLib.AccessTools::Method
+    IL_09e7: newobj         HarmonyLib.HarmonyMethod::.ctor
+    IL_09ec: ldnull         
+    IL_09ed: ldnull         
+    IL_09ee: ldnull         
+    IL_09ef: callvirt       HarmonyLib.Harmony::Patch
+    IL_09f4: pop            
+    IL_09f5: ldloc.s        local(0x0009)
+    IL_09f7: ldloc.s        local(0x0007)
+    IL_09f9: ldloc.s        local(0x0008)
+    IL_09fb: ldc.i4         256
+    IL_0a00: call           ObfType_19::obfM_004
+    IL_0a05: ldnull         
+    IL_0a06: ldnull         
+    IL_0a07: call           HarmonyLib.AccessTools::Method
+    IL_0a0c: newobj         HarmonyLib.HarmonyMethod::.ctor
+    IL_0a11: ldnull         
+    IL_0a12: ldnull         
+    IL_0a13: ldnull         
+    IL_0a14: callvirt       HarmonyLib.Harmony::Patch
+    IL_0a19: pop            
+    IL_0a1a: ldc.i4.1       
+    IL_0a1b: stsfld         fld:obfF_009
+    IL_0a20: ldc.i4         262
+    IL_0a25: call           ObfType_19::obfM_004
+    IL_0a2a: call           ObfType_19::obfM_016
+    IL_0a2f: nop            
+    IL_0a30: nop            
+    IL_0a31: leave          2921
+    IL_0a36: stloc.s        local(0x000B)
+    IL_0a38: nop            
+    IL_0a39: ldc.i4         281
+    IL_0a3e: call           ObfType_19::obfM_004
+    IL_0a43: ldloc.s        local(0x000B)
+    IL_0a45: call           ObfType_19::obfM_082
+    IL_0a4a: call           ObfType_19::obfM_083
+    IL_0a4f: ldc.i4         299
+    IL_0a54: call           ObfType_19::obfM_004
+    IL_0a59: ldloc.s        local(0x000B)
+    IL_0a5b: call           ObfType_19::obfM_084
+    IL_0a60: call           ObfType_19::obfM_085
+    IL_0a65: call           ObfType_19::obfM_018
+    IL_0a6a: nop            
+    IL_0a6b: ldloc.s        local(0x000B)
+    IL_0a6d: call           ObfType_19::obfM_086
+    IL_0a72: stloc.s        local(0x000C)
+    IL_0a74: ldc.i4.0       
+    IL_0a75: stloc.s        local(0x000D)
+    IL_0a77: br             2886
+    IL_0a7c: nop            
+    IL_0a7d: ldc.i4         305
+    IL_0a82: call           ObfType_19::obfM_004
+    IL_0a87: ldloc.s        local(0x000D)
+    IL_0a89: box            System.Int32
+    IL_0a8e: ldloc.s        local(0x000C)
+    IL_0a90: call           ObfType_19::obfM_082
+    IL_0a95: call           ObfType_19::obfM_083
+    IL_0a9a: ldloc.s        local(0x000C)
+    IL_0a9c: call           ObfType_19::obfM_084
+    IL_0aa1: call           ObfType_19::obfM_087
+    IL_0aa6: call           ObfType_19::obfM_018
+    IL_0aab: nop            
+    IL_0aac: ldloc.s        local(0x000C)
+    IL_0aae: isinst         System.Reflection.ReflectionTypeLoadException
+    IL_0ab3: stloc.s        local(0x000E)
+    IL_0ab5: ldloc.s        local(0x000E)
+    IL_0ab7: brtrue.s       2747
+    IL_0ab9: br.s           2760
+    IL_0abb: nop            
+    IL_0abc: ldloc.s        local(0x000E)
+    IL_0abe: call           ObfType_19::obfM_088
+    IL_0ac3: ldnull         
+    IL_0ac4: cgt.un         
+    IL_0ac6: br.s           2761
+    IL_0ac8: ldc.i4.0       
+    IL_0ac9: stloc.s        local(0x000F)
+    IL_0acb: ldloc.s        local(0x000F)
+    IL_0acd: brtrue.s       2769
+    IL_0acf: br.s           2876
+    IL_0ad1: nop            
+    IL_0ad2: nop            
+    IL_0ad3: ldloc.s        local(0x000E)
+    IL_0ad5: call           ObfType_19::obfM_088
+    IL_0ada: stloc.s        local(0x0010)
+    IL_0adc: ldc.i4.0       
+    IL_0add: stloc.s        local(0x0011)
+    IL_0adf: br.s           2868
+    IL_0ae1: ldloc.s        local(0x0010)
+    IL_0ae3: ldloc.s        local(0x0011)
+    IL_0ae5: ldelem.ref     
+    IL_0ae6: stloc.s        local(0x0012)
+    IL_0ae8: ldc.i4         330
+    IL_0aed: call           ObfType_19::obfM_004
+    IL_0af2: ldloc.s        local(0x0012)
+    IL_0af4: brfalse.s      2808
+    IL_0af6: br.s           2812
+    IL_0af8: nop            
+    IL_0af9: ldnull         
+    IL_0afa: br.s           2824
+    IL_0afc: ldloc.s        local(0x0012)
+    IL_0afe: call           ObfType_19::obfM_089
+    IL_0b03: call           ObfType_19::obfM_083
+    IL_0b08: ldc.i4         299
+    IL_0b0d: call           ObfType_19::obfM_004
+    IL_0b12: ldloc.s        local(0x0012)
+    IL_0b14: brfalse.s      2840
+    IL_0b16: br.s           2844
+    IL_0b18: nop            
+    IL_0b19: ldnull         
+    IL_0b1a: br.s           2851
+    IL_0b1c: ldloc.s        local(0x0012)
+    IL_0b1e: call           ObfType_19::obfM_084
+    IL_0b23: call           ObfType_19::obfM_085
+    IL_0b28: call           ObfType_19::obfM_018
+    IL_0b2d: nop            
+    IL_0b2e: ldloc.s        local(0x0011)
+    IL_0b30: ldc.i4.1       
+    IL_0b31: add            
+    IL_0b32: stloc.s        local(0x0011)
+    IL_0b34: ldloc.s        local(0x0011)
+    IL_0b36: ldloc.s        local(0x0010)
+    IL_0b38: ldlen          
+    IL_0b39: conv.i4        
+    IL_0b3a: blt.s          2785
+    IL_0b3c: ldloc.s        local(0x000C)
+    IL_0b3e: call           ObfType_19::obfM_086
+    IL_0b43: stloc.s        local(0x000C)
+    IL_0b45: nop            
+    IL_0b46: ldloc.s        local(0x000C)
+    IL_0b48: brtrue.s       2892
+    IL_0b4a: br.s           2905
+    IL_0b4c: nop            
+    IL_0b4d: ldloc.s        local(0x000D)
+    IL_0b4f: dup            
+    IL_0b50: ldc.i4.1       
+    IL_0b51: add            
+    IL_0b52: stloc.s        local(0x000D)
+    IL_0b54: ldc.i4.6       
+    IL_0b55: clt            
+    IL_0b57: br.s           2906
+    IL_0b59: ldc.i4.0       
+    IL_0b5a: stloc.s        local(0x0013)
+    IL_0b5c: ldloc.s        local(0x0013)
+    IL_0b5e: brfalse.s      2917
+    IL_0b60: br             2684
+    IL_0b65: nop            
+    IL_0b66: nop            
+    IL_0b67: leave.s        2921
+    IL_0b69: ret            
+
+  --- method obfM_013  (rva=0x2988) ---
+    IL_0b94: nop            
+    IL_0b95: ldarg.0        
+    IL_0b96: ldnull         
+    IL_0b97: call           ObfType_19::obfM_090
+    IL_0b9c: stloc.0        
+    IL_0b9d: ldloc.0        
+    IL_0b9e: brtrue.s       2978
+    IL_0ba0: br.s           2983
+    IL_0ba2: nop            
+    IL_0ba3: ldnull         
+    IL_0ba4: stloc.1        
+    IL_0ba5: br.s           3100
+    IL_0ba7: nop            
+    IL_0ba8: ldarg.0        
+    IL_0ba9: ldc.i4.s       12
+    IL_0bab: call           ObfType_19::obfM_006
+    IL_0bb0: call           ObfType_19::obfM_091
+    IL_0bb5: stloc.2        
+    IL_0bb6: ldc.i4.0       
+    IL_0bb7: stloc.3        
+    IL_0bb8: br.s           3090
+    IL_0bba: ldloc.2        
+    IL_0bbb: ldloc.3        
+    IL_0bbc: ldelem.ref     
+    IL_0bbd: stloc.s        local(0x0004)
+    IL_0bbf: nop            
+    IL_0bc0: ldloc.s        local(0x0004)
+    IL_0bc2: call           ObfType_19::obfM_092
+    IL_0bc7: ldarg.1        
+    IL_0bc8: call           ObfType_19::obfM_093
+    IL_0bcd: stloc.s        local(0x0006)
+    IL_0bcf: ldloc.s        local(0x0006)
+    IL_0bd1: brtrue.s       3029
+    IL_0bd3: br.s           3032
+    IL_0bd5: nop            
+    IL_0bd6: br.s           3086
+    IL_0bd8: ldloc.s        local(0x0004)
+    IL_0bda: call           ObfType_19::obfM_094
+    IL_0bdf: stloc.s        local(0x0005)
+    IL_0be1: ldloc.s        local(0x0005)
+    IL_0be3: ldlen          
+    IL_0be4: conv.i4        
+    IL_0be5: ldc.i4.1       
+    IL_0be6: bne.un.s       3070
+    IL_0be8: ldloc.s        local(0x0005)
+    IL_0bea: ldc.i4.0       
+    IL_0beb: ldelem.ref     
+    IL_0bec: call           ObfType_19::obfM_095
+    IL_0bf1: call           ObfType_19::obfM_083
+    IL_0bf6: ldarg.2        
+    IL_0bf7: call           ObfType_19::obfM_096
+    IL_0bfc: br.s           3071
+    IL_0bfe: ldc.i4.0       
+    IL_0bff: stloc.s        local(0x0007)
+    IL_0c01: ldloc.s        local(0x0007)
+    IL_0c03: brtrue.s       3079
+    IL_0c05: br.s           3085
+    IL_0c07: nop            
+    IL_0c08: ldloc.s        local(0x0004)
+    IL_0c0a: stloc.1        
+    IL_0c0b: br.s           3100
+    IL_0c0d: nop            
+    IL_0c0e: ldloc.3        
+    IL_0c0f: ldc.i4.1       
+    IL_0c10: add            
+    IL_0c11: stloc.3        
+    IL_0c12: ldloc.3        
+    IL_0c13: ldloc.2        
+    IL_0c14: ldlen          
+    IL_0c15: conv.i4        
+    IL_0c16: blt.s          3002
+    IL_0c18: ldnull         
+    IL_0c19: stloc.1        
+    IL_0c1a: br.s           3100
+    IL_0c1c: ldloc.1        
+    IL_0c1d: ret            
+
+  --- method obfM_014  (rva=0x2a20) ---
+    IL_0c2c: nop            
+    IL_0c2d: ldsfld         fld:obfF_009
+    IL_0c32: brtrue.s       3126
+    IL_0c34: br.s           3140
+    IL_0c36: nop            
+    IL_0c37: ldsfld         fld:obfF_013
+    IL_0c3c: ldnull         
+    IL_0c3d: call           ObfType_19::obfM_097
+    IL_0c42: br.s           3141
+    IL_0c44: ldc.i4.1       
+    IL_0c45: stloc.0        
+    IL_0c46: ldloc.0        
+    IL_0c47: brtrue.s       3147
+    IL_0c49: br.s           3153
+    IL_0c4b: nop            
+    IL_0c4c: br             3288
+    IL_0c51: nop            
+    IL_0c52: nop            
+    IL_0c53: ldc.i4         346
+    IL_0c58: call           ObfType_19::obfM_004
+    IL_0c5d: newobj         UnityEngine.GameObject::.ctor
+    IL_0c62: stsfld         fld:obfF_013
+    IL_0c67: ldsfld         fld:obfF_013
+    IL_0c6c: call           ObfType_19::obfM_098
+    IL_0c71: nop            
+    IL_0c72: ldsfld         fld:obfF_013
+    IL_0c77: callvirt       spec:AddComponent<..>
+    IL_0c7c: stsfld         fld:obfF_014
+    IL_0c81: ldsfld         fld:obfF_014
+    IL_0c86: ldnull         
+    IL_0c87: ldftn          ObfType_19::obfM_023
+    IL_0c8d: newobj         System.Action::.ctor
+    IL_0c92: stfld          fld:TickCallback
+    IL_0c97: ldsfld         fld:obfF_014
+    IL_0c9c: ldc.i4.s       16
+    IL_0c9e: call           ObfType_19::obfM_008
+    IL_0ca3: ldc.i4.s       20
+    IL_0ca5: call           ObfType_19::obfM_008
+    IL_0caa: call           ObfType_19::obfM_099
+    IL_0caf: callvirt       ObfType_19::StartTicking
+    IL_0cb4: nop            
+    IL_0cb5: nop            
+    IL_0cb6: leave.s        3288
+    IL_0cb8: stloc.1        
+    IL_0cb9: nop            
+    IL_0cba: ldc.i4         366
+    IL_0cbf: call           ObfType_19::obfM_004
+    IL_0cc4: ldloc.1        
+    IL_0cc5: call           ObfType_19::obfM_084
+    IL_0cca: call           ObfType_19::obfM_100
+    IL_0ccf: call           ObfType_19::obfM_018
+    IL_0cd4: nop            
+    IL_0cd5: nop            
+    IL_0cd6: leave.s        3288
+    IL_0cd8: ret            
+
+  --- method obfM_015  (rva=0x2aec) ---
+    IL_0cf8: nop            
+    IL_0cf9: ldsfld         fld:obfF_009
+    IL_0cfe: stloc.0        
+    IL_0cff: ldloc.0        
+    IL_0d00: brtrue.s       3332
+    IL_0d02: br.s           3384
+    IL_0d04: nop            
+    IL_0d05: nop            
+    IL_0d06: nop            
+    IL_0d07: ldc.i4.s       24
+    IL_0d09: call           ObfType_19::obfM_006
+    IL_0d0e: call           ObfType_19::obfM_024
+    IL_0d13: nop            
+    IL_0d14: nop            
+    IL_0d15: leave.s        3383
+    IL_0d17: stloc.1        
+    IL_0d18: nop            
+    IL_0d19: ldc.i4         389
+    IL_0d1e: call           ObfType_19::obfM_004
+    IL_0d23: ldloc.1        
+    IL_0d24: call           ObfType_19::obfM_084
+    IL_0d29: call           ObfType_19::obfM_100
+    IL_0d2e: call           ObfType_19::obfM_017
+    IL_0d33: nop            
+    IL_0d34: nop            
+    IL_0d35: leave.s        3383
+    IL_0d37: nop            
+    IL_0d38: ldsfld         fld:obfF_013
+    IL_0d3d: ldnull         
+    IL_0d3e: call           ObfType_19::obfM_097
+    IL_0d43: stloc.2        
+    IL_0d44: ldloc.2        
+    IL_0d45: brfalse.s      3433
+    IL_0d47: nop            
+    IL_0d48: nop            
+    IL_0d49: ldsfld         fld:obfF_013
+    IL_0d4e: call           ObfType_19::obfM_101
+    IL_0d53: nop            
+    IL_0d54: nop            
+    IL_0d55: leave.s        3420
+    IL_0d57: pop            
+    IL_0d58: nop            
+    IL_0d59: nop            
+    IL_0d5a: leave.s        3420
+    IL_0d5c: ldnull         
+    IL_0d5d: stsfld         fld:obfF_013
+    IL_0d62: ldnull         
+    IL_0d63: stsfld         fld:obfF_014
+    IL_0d68: nop            
+    IL_0d69: nop            
+    IL_0d6a: nop            
+    IL_0d6b: ldsfld         fld:obfF_008
+    IL_0d70: dup            
+    IL_0d71: brtrue.s       3446
+    IL_0d73: pop            
+    IL_0d74: br.s           3462
+    IL_0d76: ldc.i4         209
+    IL_0d7b: call           ObfType_19::obfM_004
+    IL_0d80: call           HarmonyLib.Harmony::UnpatchAll
+    IL_0d85: nop            
+    IL_0d86: nop            
+    IL_0d87: leave.s        3497
+    IL_0d89: stloc.3        
+    IL_0d8a: nop            
+    IL_0d8b: ldc.i4         412
+    IL_0d90: call           ObfType_19::obfM_004
+    IL_0d95: ldloc.3        
+    IL_0d96: call           ObfType_19::obfM_084
+    IL_0d9b: call           ObfType_19::obfM_100
+    IL_0da0: call           ObfType_19::obfM_017
+    IL_0da5: nop            
+    IL_0da6: nop            
+    IL_0da7: leave.s        3497
+    IL_0da9: ldnull         
+    IL_0daa: stsfld         fld:obfF_008
+    IL_0daf: ldc.i4.0       
+    IL_0db0: stsfld         fld:obfF_009
+    IL_0db5: ldsfld         fld:obfF_010
+    IL_0dba: dup            
+    IL_0dbb: brtrue.s       3520
+    IL_0dbd: pop            
+    IL_0dbe: br.s           3526
+    IL_0dc0: call           TypeSpecRow::Clear
+    IL_0dc5: nop            
+    IL_0dc6: ldsfld         fld:obfF_011
+    IL_0dcb: dup            
+    IL_0dcc: brfalse.s      3536
+    IL_0dce: br.s           3540
+    IL_0dd0: nop            
+    IL_0dd1: pop            
+    IL_0dd2: br.s           3546
+    IL_0dd4: call           TypeSpecRow::Clear
+    IL_0dd9: nop            
+    IL_0dda: ret            
+
+  --- method obfM_016  (rva=0x2c04) ---
+    IL_0e10: ldc.i4         -1918808007
+    IL_0e15: stloc.1        
+    IL_0e16: nop            
+    IL_0e17: ldloc.1        
+    IL_0e18: ldc.i4.s       16
+    IL_0e1a: shr.un         
+    IL_0e1b: ldloc.1        
+    IL_0e1c: ldc.i4.s       16
+    IL_0e1e: shl            
+    IL_0e1f: or             
+    IL_0e20: ldc.i4         1345948299
+    IL_0e25: xor            
+    IL_0e26: dup            
+    IL_0e27: ldc.i4.0       
+    IL_0e28: bge.s          3644
+    IL_0e2a: ldc.i4         2058889040
+    IL_0e2f: ldc.i4         1893873063
+    IL_0e34: mul            
+    IL_0e35: ldc.i4         811170816
+    IL_0e3a: xor            
+    IL_0e3b: pop            
+    IL_0e3c: nop            
+    IL_0e3d: ldc.i4.7       
+    IL_0e3e: rem.un         
+    IL_0e3f: switch         switch[7]
+    IL_0e60: br             3832
+    IL_0e65: nop            
+    IL_0e66: nop            
+    IL_0e67: ldc.i4         -1978642375
+    IL_0e6c: stloc.1        
+    IL_0e6d: br.s           3606
+    IL_0e6f: nop            
+    IL_0e70: ldc.i4         431
+    IL_0e75: call           ObfType_19::obfM_004
+    IL_0e7a: ldarg.0        
+    IL_0e7b: call           ObfType_19::obfM_100
+    IL_0e80: stloc.0        
+    IL_0e81: ldc.i4         -1633529799
+    IL_0e86: stloc.1        
+    IL_0e87: br.s           3606
+    IL_0e89: nop            
+    IL_0e8a: ldloc.0        
+    IL_0e8b: call           ObfType_19::obfM_102
+    IL_0e90: ldc.i4         -2130816967
+    IL_0e95: stloc.1        
+    IL_0e96: br             3606
+    IL_0e9b: nop            
+    IL_0e9c: nop            
+    IL_0e9d: ret            
+    IL_0e9e: nop            
+    IL_0e9f: ldc.i4         1012404492
+    IL_0ea4: ldc.i4         2078333723
+    IL_0ea9: mul            
+    IL_0eaa: ldc.i4         240825704
+    IL_0eaf: xor            
+    IL_0eb0: pop            
+    IL_0eb1: ldc.i4         -1707585479
+    IL_0eb6: stloc.1        
+    IL_0eb7: br             3606
+    IL_0ebc: nop            
+    IL_0ebd: ldc.i4         1731747565
+    IL_0ec2: ldc.i4         149752009
+    IL_0ec7: mul            
+    IL_0ec8: ldc.i4         920863530
+    IL_0ecd: xor            
+    IL_0ece: pop            
+    IL_0ecf: ldc.i4         -1741795271
+    IL_0ed4: stloc.1        
+    IL_0ed5: br             3606
+    IL_0eda: nop            
+    IL_0edb: ldc.i4         112058650
+    IL_0ee0: ldc.i4         1157399109
+    IL_0ee5: mul            
+    IL_0ee6: ldc.i4         1709185458
+    IL_0eeb: xor            
+    IL_0eec: pop            
+    IL_0eed: ldc.i4         -1952362439
+    IL_0ef2: stloc.1        
+    IL_0ef3: br             3606
+    IL_0ef8: nop            
+    IL_0ef9: ldc.i4         -1918808007
+    IL_0efe: stloc.1        
+    IL_0eff: br             3606
+
+  --- method obfM_017  (rva=0x2d04) ---
+    IL_0f10: ldc.i4         1057013858
+    IL_0f15: stloc.1        
+    IL_0f16: nop            
+    IL_0f17: ldloc.1        
+    IL_0f18: ldc.i4         57219993
+    IL_0f1d: add            
+    IL_0f1e: ldc.i4         1114230642
+    IL_0f23: xor            
+    IL_0f24: dup            
+    IL_0f25: ldc.i4.0       
+    IL_0f26: bge.s          3898
+    IL_0f28: ldc.i4         832369023
+    IL_0f2d: ldc.i4         1102972943
+    IL_0f32: mul            
+    IL_0f33: ldc.i4         897182378
+    IL_0f38: xor            
+    IL_0f39: pop            
+    IL_0f3a: nop            
+    IL_0f3b: ldc.i4.7       
+    IL_0f3c: rem.un         
+    IL_0f3d: switch         switch[7]
+    IL_0f5e: br             4083
+    IL_0f63: nop            
+    IL_0f64: nop            
+    IL_0f65: ldc.i4         1057012573
+    IL_0f6a: stloc.1        
+    IL_0f6b: br.s           3862
+    IL_0f6d: nop            
+    IL_0f6e: ldc.i4         431
+    IL_0f73: call           ObfType_19::obfM_004
+    IL_0f78: ldarg.0        
+    IL_0f79: call           ObfType_19::obfM_100
+    IL_0f7e: stloc.0        
+    IL_0f7f: ldc.i4         1057007417
+    IL_0f84: stloc.1        
+    IL_0f85: br.s           3862
+    IL_0f87: nop            
+    IL_0f88: ldloc.0        
+    IL_0f89: call           ObfType_19::obfM_103
+    IL_0f8e: ldc.i4         1057008513
+    IL_0f93: stloc.1        
+    IL_0f94: br.s           3862
+    IL_0f96: nop            
+    IL_0f97: nop            
+    IL_0f98: ret            
+    IL_0f99: nop            
+    IL_0f9a: ldc.i4         476818503
+    IL_0f9f: ldc.i4         1052540049
+    IL_0fa4: mul            
+    IL_0fa5: ldc.i4         695409044
+    IL_0faa: xor            
+    IL_0fab: pop            
+    IL_0fac: ldc.i4         1057014806
+    IL_0fb1: stloc.1        
+    IL_0fb2: br             3862
+    IL_0fb7: nop            
+    IL_0fb8: ldc.i4         331322117
+    IL_0fbd: ldc.i4         619290513
+    IL_0fc2: mul            
+    IL_0fc3: ldc.i4         1445530250
+    IL_0fc8: xor            
+    IL_0fc9: pop            
+    IL_0fca: ldc.i4         1057008230
+    IL_0fcf: stloc.1        
+    IL_0fd0: br             3862
+    IL_0fd5: nop            
+    IL_0fd6: ldc.i4         724630083
+    IL_0fdb: ldc.i4         1377883099
+    IL_0fe0: mul            
+    IL_0fe1: ldc.i4         420205580
+    IL_0fe6: xor            
+    IL_0fe7: pop            
+    IL_0fe8: ldc.i4         1057010428
+    IL_0fed: stloc.1        
+    IL_0fee: br             3862
+    IL_0ff3: nop            
+    IL_0ff4: ldc.i4         1057013858
+    IL_0ff9: stloc.1        
+    IL_0ffa: br             3862
+
+  --- method obfM_018  (rva=0x2e00) ---
+    IL_100c: ldc.i4         936708126
+    IL_1011: stloc.1        
+    IL_1012: nop            
+    IL_1013: ldloc.1        
+    IL_1014: ldc.i4         488106155
+    IL_1019: sub            
+    IL_101a: ldc.i4         448595785
+    IL_101f: xor            
+    IL_1020: dup            
+    IL_1021: ldc.i4.0       
+    IL_1022: bge.s          4150
+    IL_1024: ldc.i4         1713023105
+    IL_1029: ldc.i4         223940499
+    IL_102e: mul            
+    IL_102f: ldc.i4         484502319
+    IL_1034: xor            
+    IL_1035: pop            
+    IL_1036: nop            
+    IL_1037: ldc.i4.7       
+    IL_1038: rem.un         
+    IL_1039: switch         switch[7]
+    IL_105a: br             4335
+    IL_105f: nop            
+    IL_1060: nop            
+    IL_1061: ldc.i4         936703981
+    IL_1066: stloc.1        
+    IL_1067: br.s           4114
+    IL_1069: nop            
+    IL_106a: ldc.i4         431
+    IL_106f: call           ObfType_19::obfM_004
+    IL_1074: ldarg.0        
+    IL_1075: call           ObfType_19::obfM_100
+    IL_107a: stloc.0        
+    IL_107b: ldc.i4         936704566
+    IL_1080: stloc.1        
+    IL_1081: br.s           4114
+    IL_1083: nop            
+    IL_1084: ldloc.0        
+    IL_1085: call           ObfType_19::obfM_104
+    IL_108a: ldc.i4         936704665
+    IL_108f: stloc.1        
+    IL_1090: br.s           4114
+    IL_1092: nop            
+    IL_1093: nop            
+    IL_1094: ret            
+    IL_1095: nop            
+    IL_1096: ldc.i4         849081859
+    IL_109b: ldc.i4         1594675543
+    IL_10a0: mul            
+    IL_10a1: ldc.i4         580254406
+    IL_10a6: xor            
+    IL_10a7: pop            
+    IL_10a8: ldc.i4         936701217
+    IL_10ad: stloc.1        
+    IL_10ae: br             4114
+    IL_10b3: nop            
+    IL_10b4: ldc.i4         1728233597
+    IL_10b9: ldc.i4         1899527623
+    IL_10be: mul            
+    IL_10bf: ldc.i4         1577883620
+    IL_10c4: xor            
+    IL_10c5: pop            
+    IL_10c6: ldc.i4         936700568
+    IL_10cb: stloc.1        
+    IL_10cc: br             4114
+    IL_10d1: nop            
+    IL_10d2: ldc.i4         1161470745
+    IL_10d7: ldc.i4         139465971
+    IL_10dc: mul            
+    IL_10dd: ldc.i4         1232618152
+    IL_10e2: xor            
+    IL_10e3: pop            
+    IL_10e4: ldc.i4         936700251
+    IL_10e9: stloc.1        
+    IL_10ea: br             4114
+    IL_10ef: nop            
+    IL_10f0: ldc.i4         936708126
+    IL_10f5: stloc.1        
+    IL_10f6: br             4114
+
+  --- method obfM_019  (rva=0x2efc) ---
+    IL_1108: ldc.i4         -1740391102
+    IL_110d: stloc.3        
+    IL_110e: nop            
+    IL_110f: ldloc.3        
+    IL_1110: ldc.i4         1855681520
+    IL_1115: add            
+    IL_1116: ldc.i4         115287650
+    IL_111b: xor            
+    IL_111c: dup            
+    IL_111d: ldc.i4.0       
+    IL_111e: bge.s          4402
+    IL_1120: ldc.i4         441174864
+    IL_1125: ldc.i4         1103887709
+    IL_112a: mul            
+    IL_112b: ldc.i4         626190023
+    IL_1130: xor            
+    IL_1131: pop            
+    IL_1132: nop            
+    IL_1133: ldc.i4.8       
+    IL_1134: rem.un         
+    IL_1135: switch         switch[8]
+    IL_115a: br             4673
+    IL_115f: nop            
+    IL_1160: nop            
+    IL_1161: ldsfld         fld:obfF_009
+    IL_1166: brfalse.s      4482
+    IL_1168: ldsfld         fld:obfF_007
+    IL_116d: brtrue.s       4465
+    IL_116f: br.s           4482
+    IL_1171: nop            
+    IL_1172: ldc.i4         -1740390109
+    IL_1177: stloc.3        
+    IL_1178: br.s           4366
+    IL_117a: nop            
+    IL_117b: ldsfld         fld:obfF_012
+    IL_1180: br.s           4483
+    IL_1182: ldc.i4.1       
+    IL_1183: stloc.0        
+    IL_1184: ldloc.0        
+    IL_1185: brtrue.s       4489
+    IL_1187: br.s           4506
+    IL_1189: nop            
+    IL_118a: ldc.i4         -1740393080
+    IL_118f: stloc.3        
+    IL_1190: br             4366
+    IL_1195: nop            
+    IL_1196: ldc.i4.1       
+    IL_1197: stloc.1        
+    IL_1198: br.s           4581
+    IL_119a: ldarg.0        
+    IL_119b: ldnull         
+    IL_119c: call           ObfType_19::obfM_097
+    IL_11a1: brfalse.s      4526
+    IL_11a3: ldarg.0        
+    IL_11a4: ldfld          DecayEntity::buildingID
+    IL_11a9: ldc.i4.0       
+    IL_11aa: cgt.un         
+    IL_11ac: br.s           4527
+    IL_11ae: ldc.i4.0       
+    IL_11af: stloc.2        
+    IL_11b0: ldc.i4         -1740388599
+    IL_11b5: stloc.3        
+    IL_11b6: br             4366
+    IL_11bb: nop            
+    IL_11bc: ldloc.2        
+    IL_11bd: brtrue.s       4545
+    IL_11bf: br.s           4577
+    IL_11c1: nop            
+    IL_11c2: nop            
+    IL_11c3: ldc.i4         -1740394978
+    IL_11c8: stloc.3        
+    IL_11c9: br             4366
+    IL_11ce: nop            
+    IL_11cf: ldsfld         fld:obfF_010
+    IL_11d4: ldarg.0        
+    IL_11d5: ldfld          DecayEntity::buildingID
+    IL_11da: callvirt       TypeSpecRow::Add
+    IL_11df: pop            
+    IL_11e0: nop            
+    IL_11e1: ldc.i4.0       
+    IL_11e2: stloc.1        
+    IL_11e3: br.s           4581
+    IL_11e5: ldloc.1        
+    IL_11e6: ret            
+    IL_11e7: nop            
+    IL_11e8: ldc.i4         1164670069
+    IL_11ed: ldc.i4         99981227
+    IL_11f2: mul            
+    IL_11f3: ldc.i4         437387450
+    IL_11f8: xor            
+    IL_11f9: pop            
+    IL_11fa: ldc.i4         -1740395452
+    IL_11ff: stloc.3        
+    IL_1200: br             4366
+    IL_1205: nop            
+    IL_1206: ldc.i4         1019639761
+    IL_120b: ldc.i4         517212601
+    IL_1210: mul            
+    IL_1211: ldc.i4         697298912
+    IL_1216: xor            
+    IL_1217: pop            
+    IL_1218: ldc.i4         -1740394803
+    IL_121d: stloc.3        
+    IL_121e: br             4366
+    IL_1223: nop            
+    IL_1224: ldc.i4         573439600
+    IL_1229: ldc.i4         312197245
+    IL_122e: mul            
+    IL_122f: ldc.i4         1537433485
+    IL_1234: xor            
+    IL_1235: pop            
+    IL_1236: ldc.i4         -1740391985
+    IL_123b: stloc.3        
+    IL_123c: br             4366
+    IL_1241: nop            
+    IL_1242: ldc.i4         -1740391102
+    IL_1247: stloc.3        
+    IL_1248: br             4366
+
+  --- method obfM_020  (rva=0x3050) ---
+    IL_125c: nop            
+    IL_125d: ldsfld         fld:obfF_009
+    IL_1262: brtrue.s       4710
+    IL_1264: br.s           4721
+    IL_1266: nop            
+    IL_1267: ldsfld         fld:obfF_007
+    IL_126c: ldc.i4.0       
+    IL_126d: ceq            
+    IL_126f: br.s           4722
+    IL_1271: ldc.i4.1       
+    IL_1272: stloc.0        
+    IL_1273: ldloc.0        
+    IL_1274: brfalse.s      4730
+    IL_1276: ldc.i4.1       
+    IL_1277: stloc.1        
+    IL_1278: br.s           4791
+    IL_127a: ldarg.0        
+    IL_127b: ldnull         
+    IL_127c: call           ObfType_19::obfM_105
+    IL_1281: stloc.2        
+    IL_1282: ldloc.2        
+    IL_1283: brfalse.s      4745
+    IL_1285: ldc.i4.0       
+    IL_1286: stloc.1        
+    IL_1287: br.s           4791
+    IL_1289: nop            
+    IL_128a: nop            
+    IL_128b: ldarg.0        
+    IL_128c: call           ObfType_19::obfM_033
+    IL_1291: nop            
+    IL_1292: ldc.i4.0       
+    IL_1293: stloc.1        
+    IL_1294: leave.s        4791
+    IL_1296: stloc.3        
+    IL_1297: nop            
+    IL_1298: ldc.i4         448
+    IL_129d: call           ObfType_19::obfM_004
+    IL_12a2: ldloc.3        
+    IL_12a3: call           ObfType_19::obfM_084
+    IL_12a8: call           ObfType_19::obfM_100
+    IL_12ad: call           ObfType_19::obfM_018
+    IL_12b2: nop            
+    IL_12b3: ldc.i4.1       
+    IL_12b4: stloc.1        
+    IL_12b5: leave.s        4791
+    IL_12b7: ldloc.1        
+    IL_12b8: ret            
+
+  --- method obfM_021  (rva=0x30cc) ---
+    IL_12d8: nop            
+    IL_12d9: ldsfld         fld:obfF_009
+    IL_12de: brtrue.s       4834
+    IL_12e0: br.s           4857
+    IL_12e2: nop            
+    IL_12e3: ldsfld         fld:obfF_007
+    IL_12e8: brtrue.s       4844
+    IL_12ea: br.s           4857
+    IL_12ec: nop            
+    IL_12ed: ldarg.0        
+    IL_12ee: brtrue.s       4850
+    IL_12f0: br.s           4857
+    IL_12f2: nop            
+    IL_12f3: ldarg.1        
+    IL_12f4: ldnull         
+    IL_12f5: ceq            
+    IL_12f7: br.s           4858
+    IL_12f9: ldc.i4.1       
+    IL_12fa: stloc.0        
+    IL_12fb: ldloc.0        
+    IL_12fc: brtrue.s       4864
+    IL_12fe: br.s           4869
+    IL_1300: nop            
+    IL_1301: ldc.i4.1       
+    IL_1302: stloc.1        
+    IL_1303: br.s           4916
+    IL_1305: nop            
+    IL_1306: nop            
+    IL_1307: ldarg.0        
+    IL_1308: ldarg.1        
+    IL_1309: call           ObfType_19::obfM_032
+    IL_130e: nop            
+    IL_130f: ldc.i4.0       
+    IL_1310: stloc.1        
+    IL_1311: leave.s        4916
+    IL_1313: stloc.2        
+    IL_1314: nop            
+    IL_1315: ldc.i4         483
+    IL_131a: call           ObfType_19::obfM_004
+    IL_131f: ldloc.2        
+    IL_1320: call           ObfType_19::obfM_084
+    IL_1325: call           ObfType_19::obfM_100
+    IL_132a: call           ObfType_19::obfM_018
+    IL_132f: nop            
+    IL_1330: ldc.i4.1       
+    IL_1331: stloc.1        
+    IL_1332: leave.s        4916
+    IL_1334: ldloc.1        
+    IL_1335: ret            
+
+  --- method obfM_022  (rva=0x3148) ---
+    IL_1354: ldc.i4         -1936338034
+    IL_1359: stloc.s        local(0x0004)
+    IL_135b: nop            
+    IL_135c: ldloc.s        local(0x0004)
+    IL_135e: ldc.i4         2139865367
+    IL_1363: add            
+    IL_1364: ldc.i4         203523725
+    IL_1369: xor            
+    IL_136a: dup            
+    IL_136b: ldc.i4.0       
+    IL_136c: bge.s          4992
+    IL_136e: ldc.i4         1574020226
+    IL_1373: ldc.i4         740397913
+    IL_1378: mul            
+    IL_1379: ldc.i4         1788269551
+    IL_137e: xor            
+    IL_137f: pop            
+    IL_1380: nop            
+    IL_1381: ldc.i4.8       
+    IL_1382: rem.un         
+    IL_1383: switch         switch[8]
+    IL_13a8: br             5260
+    IL_13ad: nop            
+    IL_13ae: nop            
+    IL_13af: ldsfld         fld:obfF_007
+    IL_13b4: ldc.i4.0       
+    IL_13b5: ceq            
+    IL_13b7: stloc.0        
+    IL_13b8: ldloc.0        
+    IL_13b9: brtrue.s       5053
+    IL_13bb: br.s           5068
+    IL_13bd: nop            
+    IL_13be: ldc.i4         -1936335851
+    IL_13c3: stloc.s        local(0x0004)
+    IL_13c5: br.s           4955
+    IL_13c7: nop            
+    IL_13c8: ldc.i4.1       
+    IL_13c9: stloc.1        
+    IL_13ca: br.s           5165
+    IL_13cc: ldsfld         fld:obfF_009
+    IL_13d1: ldc.i4.0       
+    IL_13d2: ceq            
+    IL_13d4: stloc.2        
+    IL_13d5: ldc.i4         -1936340840
+    IL_13da: stloc.s        local(0x0004)
+    IL_13dc: br             4955
+    IL_13e1: nop            
+    IL_13e2: ldloc.2        
+    IL_13e3: brtrue.s       5095
+    IL_13e5: br.s           5100
+    IL_13e7: nop            
+    IL_13e8: ldc.i4.1       
+    IL_13e9: stloc.1        
+    IL_13ea: br.s           5165
+    IL_13ec: ldarg.0        
+    IL_13ed: ldnull         
+    IL_13ee: call           ObfType_19::obfM_097
+    IL_13f3: brtrue.s       5111
+    IL_13f5: br.s           5136
+    IL_13f7: nop            
+    IL_13f8: ldc.i4         -1936335593
+    IL_13fd: stloc.s        local(0x0004)
+    IL_13ff: br             4955
+    IL_1404: nop            
+    IL_1405: ldarg.1        
+    IL_1406: ldarg.0        
+    IL_1407: ldfld          DecayEntity::buildingID
+    IL_140c: ceq            
+    IL_140e: br.s           5137
+    IL_1410: ldc.i4.0       
+    IL_1411: stloc.3        
+    IL_1412: ldloc.3        
+    IL_1413: brtrue.s       5143
+    IL_1415: br.s           5161
+    IL_1417: nop            
+    IL_1418: ldc.i4         -1936338118
+    IL_141d: stloc.s        local(0x0004)
+    IL_141f: br             4955
+    IL_1424: nop            
+    IL_1425: ldc.i4.0       
+    IL_1426: stloc.1        
+    IL_1427: br.s           5165
+    IL_1429: ldc.i4.1       
+    IL_142a: stloc.1        
+    IL_142b: br.s           5165
+    IL_142d: ldloc.1        
+    IL_142e: ret            
+    IL_142f: nop            
+    IL_1430: ldc.i4         1177240697
+    IL_1435: ldc.i4         451716307
+    IL_143a: mul            
+    IL_143b: ldc.i4         741599319
+    IL_1440: xor            
+    IL_1441: pop            
+    IL_1442: ldc.i4         -1936342660
+    IL_1447: stloc.s        local(0x0004)
+    IL_1449: br             4955
+    IL_144e: nop            
+    IL_144f: ldc.i4         806592921
+    IL_1454: ldc.i4         2098741919
+    IL_1459: mul            
+    IL_145a: ldc.i4         1853643379
+    IL_145f: xor            
+    IL_1460: pop            
+    IL_1461: ldc.i4         -1936336189
+    IL_1466: stloc.s        local(0x0004)
+    IL_1468: br             4955
+    IL_146d: nop            
+    IL_146e: ldc.i4         1280254079
+    IL_1473: ldc.i4         2040121787
+    IL_1478: mul            
+    IL_1479: ldc.i4         43327455
+    IL_147e: xor            
+    IL_147f: pop            
+    IL_1480: ldc.i4         -1936341879
+    IL_1485: stloc.s        local(0x0004)
+    IL_1487: br             4955
+    IL_148c: nop            
+    IL_148d: ldc.i4         -1936338034
+    IL_1492: stloc.s        local(0x0004)
+    IL_1494: br             4955
+
+  --- method obfM_023  (rva=0x329c) ---
+    IL_14a8: ldc.i4         -46188103
+    IL_14ad: stloc.1        
+    IL_14ae: nop            
+    IL_14af: ldloc.1        
+    IL_14b0: ldc.i4.s       16
+    IL_14b2: shr.un         
+    IL_14b3: ldloc.1        
+    IL_14b4: ldc.i4.s       16
+    IL_14b6: shl            
+    IL_14b7: or             
+    IL_14b8: ldc.i4         968485519
+    IL_14bd: xor            
+    IL_14be: dup            
+    IL_14bf: ldc.i4.0       
+    IL_14c0: bge.s          5332
+    IL_14c2: ldc.i4         1589463882
+    IL_14c7: ldc.i4         1609199035
+    IL_14cc: mul            
+    IL_14cd: ldc.i4         1132311114
+    IL_14d2: xor            
+    IL_14d3: pop            
+    IL_14d4: nop            
+    IL_14d5: ldc.i4.8       
+    IL_14d6: rem.un         
+    IL_14d7: switch         switch[8]
+    IL_14fc: br             5549
+    IL_1501: nop            
+    IL_1502: nop            
+    IL_1503: call           ObfType_19::obfM_011
+    IL_1508: ldc.i4         -3786311
+    IL_150d: stloc.1        
+    IL_150e: br.s           5294
+    IL_1510: nop            
+    IL_1511: nop            
+    IL_1512: ldsfld         fld:obfF_007
+    IL_1517: ldc.i4.0       
+    IL_1518: ceq            
+    IL_151a: stloc.0        
+    IL_151b: ldc.i4         -491963975
+    IL_1520: stloc.1        
+    IL_1521: br.s           5294
+    IL_1523: nop            
+    IL_1524: ldloc.0        
+    IL_1525: brtrue.s       5417
+    IL_1527: br.s           5451
+    IL_1529: nop            
+    IL_152a: nop            
+    IL_152b: ldc.i4         -471057991
+    IL_1530: stloc.1        
+    IL_1531: br             5294
+    IL_1536: nop            
+    IL_1537: call           ObfType_19::obfM_015
+    IL_153c: nop            
+    IL_153d: ldc.i4         -39110215
+    IL_1542: stloc.1        
+    IL_1543: br             5294
+    IL_1548: nop            
+    IL_1549: br.s           5458
+    IL_154b: ldc.i4.3       
+    IL_154c: call           ObfType_19::obfM_024
+    IL_1551: nop            
+    IL_1552: ret            
+    IL_1553: nop            
+    IL_1554: ldc.i4         1935605019
+    IL_1559: ldc.i4         67362181
+    IL_155e: mul            
+    IL_155f: ldc.i4         1410516101
+    IL_1564: xor            
+    IL_1565: pop            
+    IL_1566: ldc.i4         -530499143
+    IL_156b: stloc.1        
+    IL_156c: br             5294
+    IL_1571: nop            
+    IL_1572: ldc.i4         1268009420
+    IL_1577: ldc.i4         1286022563
+    IL_157c: mul            
+    IL_157d: ldc.i4         114890005
+    IL_1582: xor            
+    IL_1583: pop            
+    IL_1584: ldc.i4         -299877959
+    IL_1589: stloc.1        
+    IL_158a: br             5294
+    IL_158f: nop            
+    IL_1590: ldc.i4         160435254
+    IL_1595: ldc.i4         1235689929
+    IL_159a: mul            
+    IL_159b: ldc.i4         1199653444
+    IL_15a0: xor            
+    IL_15a1: pop            
+    IL_15a2: ldc.i4         -485344839
+    IL_15a7: stloc.1        
+    IL_15a8: br             5294
+    IL_15ad: nop            
+    IL_15ae: ldc.i4         -46188103
+    IL_15b3: stloc.1        
+    IL_15b4: br             5294
+
+  --- method obfM_024  (rva=0x33bc) ---
+    IL_15c8: nop            
+    IL_15c9: ldsfld         fld:obfF_010
+    IL_15ce: callvirt       TypeSpecRow::get_Count
+    IL_15d3: ldc.i4.0       
+    IL_15d4: ceq            
+    IL_15d6: stloc.1        
+    IL_15d7: ldloc.1        
+    IL_15d8: brtrue.s       5596
+    IL_15da: br.s           5602
+    IL_15dc: nop            
+    IL_15dd: br             5914
+    IL_15e2: ldsfld         BuildingManager::server
+    IL_15e7: stloc.0        
+    IL_15e8: ldloc.0        
+    IL_15e9: ldnull         
+    IL_15ea: ceq            
+    IL_15ec: stloc.2        
+    IL_15ed: ldloc.2        
+    IL_15ee: brtrue.s       5618
+    IL_15f0: br.s           5624
+    IL_15f2: nop            
+    IL_15f3: br             5914
+    IL_15f8: ldsfld         fld:obfF_011
+    IL_15fd: callvirt       TypeSpecRow::Clear
+    IL_1602: nop            
+    IL_1603: nop            
+    IL_1604: ldsfld         fld:obfF_010
+    IL_1609: callvirt       TypeSpecRow::GetEnumerator
+    IL_160e: stloc.3        
+    IL_160f: br.s           5700
+    IL_1611: ldloca.s       local(0x0003)
+    IL_1613: call           TypeSpecRow::get_Current
+    IL_1618: stloc.s        local(0x0004)
+    IL_161a: nop            
+    IL_161b: ldsfld         fld:obfF_011
+    IL_1620: ldloc.s        local(0x0004)
+    IL_1622: callvirt       TypeSpecRow::Add
+    IL_1627: nop            
+    IL_1628: ldsfld         fld:obfF_011
+    IL_162d: callvirt       TypeSpecRow::get_Count
+    IL_1632: ldarg.0        
+    IL_1633: clt            
+    IL_1635: ldc.i4.0       
+    IL_1636: ceq            
+    IL_1638: stloc.s        local(0x0005)
+    IL_163a: ldloc.s        local(0x0005)
+    IL_163c: brtrue.s       5696
+    IL_163e: br.s           5699
+    IL_1640: nop            
+    IL_1641: br.s           5709
+    IL_1643: nop            
+    IL_1644: ldloca.s       local(0x0003)
+    IL_1646: call           TypeSpecRow::MoveNext
+    IL_164b: brtrue.s       5649
+    IL_164d: leave.s        5726
+    IL_164f: ldloca.s       local(0x0003)
+    IL_1651: constrained.   typespec#3
+    IL_1657: callvirt       System.IDisposable::Dispose
+    IL_165c: nop            
+    IL_165d: endfinally     
+    IL_165e: ldc.i4.0       
+    IL_165f: stloc.s        local(0x0006)
+    IL_1661: br.s           5760
+    IL_1663: ldsfld         fld:obfF_010
+    IL_1668: ldsfld         fld:obfF_011
+    IL_166d: ldloc.s        local(0x0006)
+    IL_166f: callvirt       TypeSpecRow::get_Item
+    IL_1674: callvirt       TypeSpecRow::Remove
+    IL_1679: pop            
+    IL_167a: ldloc.s        local(0x0006)
+    IL_167c: ldc.i4.1       
+    IL_167d: add            
+    IL_167e: stloc.s        local(0x0006)
+    IL_1680: ldloc.s        local(0x0006)
+    IL_1682: ldsfld         fld:obfF_011
+    IL_1687: callvirt       TypeSpecRow::get_Count
+    IL_168c: clt            
+    IL_168e: stloc.s        local(0x0007)
+    IL_1690: ldloc.s        local(0x0007)
+    IL_1692: brfalse.s      5782
+    IL_1694: br.s           5731
+    IL_1696: nop            
+    IL_1697: ldc.i4.1       
+    IL_1698: stsfld         fld:obfF_012
+    IL_169d: nop            
+    IL_169e: ldc.i4.0       
+    IL_169f: stloc.s        local(0x0008)
+    IL_16a1: br.s           5868
+    IL_16a3: nop            
+    IL_16a4: ldloc.0        
+    IL_16a5: ldsfld         fld:obfF_011
+    IL_16aa: ldloc.s        local(0x0008)
+    IL_16ac: callvirt       TypeSpecRow::get_Item
+    IL_16b1: call           ObfType_19::obfM_106
+    IL_16b6: stloc.s        local(0x0009)
+    IL_16b8: ldloc.s        local(0x0009)
+    IL_16ba: brtrue.s       5822
+    IL_16bc: br.s           5840
+    IL_16be: nop            
+    IL_16bf: ldloc.s        local(0x0009)
+    IL_16c1: ldfld          Building::buildingBlocks
+    IL_16c6: callvirt       TypeSpecRow::get_Count
+    IL_16cb: ldc.i4.0       
+    IL_16cc: ceq            
+    IL_16ce: br.s           5841
+    IL_16d0: ldc.i4.1       
+    IL_16d1: stloc.s        local(0x000A)
+    IL_16d3: ldloc.s        local(0x000A)
+    IL_16d5: brtrue.s       5849
+    IL_16d7: br.s           5852
+    IL_16d9: nop            
+    IL_16da: br.s           5862
+    IL_16dc: ldloc.0        
+    IL_16dd: ldloc.s        local(0x0009)
+    IL_16df: call           ObfType_19::obfM_032
+    IL_16e4: nop            
+    IL_16e5: nop            
+    IL_16e6: ldloc.s        local(0x0008)
+    IL_16e8: ldc.i4.1       
+    IL_16e9: add            
+    IL_16ea: stloc.s        local(0x0008)
+    IL_16ec: ldloc.s        local(0x0008)
+    IL_16ee: ldsfld         fld:obfF_011
+    IL_16f3: callvirt       TypeSpecRow::get_Count
+    IL_16f8: clt            
+    IL_16fa: stloc.s        local(0x000B)
+    IL_16fc: ldloc.s        local(0x000B)
+    IL_16fe: brfalse.s      5890
+    IL_1700: br.s           5795
+    IL_1702: nop            
+    IL_1703: nop            
+    IL_1704: leave.s        5914
+    IL_1706: nop            
+    IL_1707: ldc.i4.0       
+    IL_1708: stsfld         fld:obfF_012
+    IL_170d: ldsfld         fld:obfF_011
+    IL_1712: callvirt       TypeSpecRow::Clear
+    IL_1717: nop            
+    IL_1718: nop            
+    IL_1719: endfinally     
+    IL_171a: ret            
+
+  --- method obfM_025  (rva=0x3538) ---
+    IL_1744: nop            
+    IL_1745: ldsfld         fld:obfF_015
+    IL_174a: stloc.0        
+    IL_174b: ldloc.0        
+    IL_174c: brtrue.s       5968
+    IL_174e: br.s           5974
+    IL_1750: nop            
+    IL_1751: br             6177
+    IL_1756: nop            
+    IL_1757: nop            
+    IL_1758: ldc.i4         512
+    IL_175d: call           ObfType_19::obfM_004
+    IL_1762: ldc.i4         531
+    IL_1767: call           ObfType_19::obfM_004
+    IL_176c: ldnull         
+    IL_176d: ldftn          ObfType_19::obfM_029
+    IL_1773: newobj         TypeSpecRow::.ctor
+    IL_1778: ldc.i4         539
+    IL_177d: call           ObfType_19::obfM_004
+    IL_1782: call           ObfType_19::obfM_027
+    IL_1787: nop            
+    IL_1788: ldc.i4         555
+    IL_178d: call           ObfType_19::obfM_004
+    IL_1792: ldc.i4         576
+    IL_1797: call           ObfType_19::obfM_004
+    IL_179c: ldnull         
+    IL_179d: ldftn          ObfType_19::obfM_030
+    IL_17a3: newobj         TypeSpecRow::.ctor
+    IL_17a8: ldc.i4         586
+    IL_17ad: call           ObfType_19::obfM_004
+    IL_17b2: call           ObfType_19::obfM_027
+    IL_17b7: nop            
+    IL_17b8: ldc.i4         604
+    IL_17bd: call           ObfType_19::obfM_004
+    IL_17c2: ldc.i4         625
+    IL_17c7: call           ObfType_19::obfM_004
+    IL_17cc: ldnull         
+    IL_17cd: ldftn          ObfType_19::obfM_031
+    IL_17d3: newobj         TypeSpecRow::.ctor
+    IL_17d8: ldc.i4         635
+    IL_17dd: call           ObfType_19::obfM_004
+    IL_17e2: call           ObfType_19::obfM_027
+    IL_17e7: nop            
+    IL_17e8: ldc.i4.1       
+    IL_17e9: stsfld         fld:obfF_015
+    IL_17ee: ldc.i4         656
+    IL_17f3: call           ObfType_19::obfM_004
+    IL_17f8: call           ObfType_19::obfM_016
+    IL_17fd: nop            
+    IL_17fe: nop            
+    IL_17ff: leave.s        6177
+    IL_1801: stloc.1        
+    IL_1802: nop            
+    IL_1803: ldc.i4         722
+    IL_1808: call           ObfType_19::obfM_004
+    IL_180d: ldloc.1        
+    IL_180e: call           ObfType_19::obfM_084
+    IL_1813: call           ObfType_19::obfM_100
+    IL_1818: call           ObfType_19::obfM_018
+    IL_181d: nop            
+    IL_181e: nop            
+    IL_181f: leave.s        6177
+    IL_1821: ret            
+
+  --- method obfM_026  (rva=0x3634) ---
+    IL_1840: nop            
+    IL_1841: ldsfld         fld:obfF_015
+    IL_1846: ldc.i4.0       
+    IL_1847: ceq            
+    IL_1849: stloc.0        
+    IL_184a: ldloc.0        
+    IL_184b: brfalse.s      6223
+    IL_184d: br.s           6344
+    IL_184f: nop            
+    IL_1850: nop            
+    IL_1851: ldsfld         Server::Dict
+    IL_1856: ldc.i4         512
+    IL_185b: call           ObfType_19::obfM_004
+    IL_1860: call           ObfType_19::obfM_107
+    IL_1865: callvirt       TypeSpecRow::Remove
+    IL_186a: pop            
+    IL_186b: ldsfld         Server::Dict
+    IL_1870: ldc.i4         555
+    IL_1875: call           ObfType_19::obfM_004
+    IL_187a: call           ObfType_19::obfM_107
+    IL_187f: callvirt       TypeSpecRow::Remove
+    IL_1884: pop            
+    IL_1885: ldsfld         Server::Dict
+    IL_188a: ldc.i4         604
+    IL_188f: call           ObfType_19::obfM_004
+    IL_1894: call           ObfType_19::obfM_107
+    IL_1899: callvirt       TypeSpecRow::Remove
+    IL_189e: pop            
+    IL_189f: nop            
+    IL_18a0: leave.s        6338
+    IL_18a2: stloc.1        
+    IL_18a3: nop            
+    IL_18a4: ldc.i4         763
+    IL_18a9: call           ObfType_19::obfM_004
+    IL_18ae: ldloc.1        
+    IL_18af: call           ObfType_19::obfM_084
+    IL_18b4: call           ObfType_19::obfM_100
+    IL_18b9: call           ObfType_19::obfM_017
+    IL_18be: nop            
+    IL_18bf: nop            
+    IL_18c0: leave.s        6338
+    IL_18c2: ldc.i4.0       
+    IL_18c3: stsfld         fld:obfF_015
+    IL_18c8: ret            
+
+  --- method obfM_027  (rva=0x36dc) ---
+    IL_18e8: ldc.i4         459261061
+    IL_18ed: stloc.1        
+    IL_18ee: nop            
+    IL_18ef: ldloc.1        
+    IL_18f0: ldc.i4         459260858
+    IL_18f5: xor            
+    IL_18f6: dup            
+    IL_18f7: ldc.i4.0       
+    IL_18f8: bge.s          6412
+    IL_18fa: ldc.i4         2096472376
+    IL_18ff: ldc.i4         458264039
+    IL_1904: mul            
+    IL_1905: ldc.i4         279731630
+    IL_190a: xor            
+    IL_190b: pop            
+    IL_190c: nop            
+    IL_190d: ldc.i4.7       
+    IL_190e: rem.un         
+    IL_190f: switch         switch[7]
+    IL_1930: br             6672
+    IL_1935: nop            
+    IL_1936: nop            
+    IL_1937: ldc.i4         459267008
+    IL_193c: stloc.1        
+    IL_193d: br.s           6382
+    IL_193f: nop            
+    IL_1940: newobj         Command::.ctor
+    IL_1945: dup            
+    IL_1946: ldarg.1        
+    IL_1947: stfld          Command::Name
+    IL_194c: dup            
+    IL_194d: ldc.i4         801
+    IL_1952: call           ObfType_19::obfM_004
+    IL_1957: stfld          Command::Parent
+    IL_195c: dup            
+    IL_195d: ldarg.0        
+    IL_195e: stfld          Command::FullName
+    IL_1963: dup            
+    IL_1964: ldc.i4.1       
+    IL_1965: stfld          Command::ServerAdmin
+    IL_196a: dup            
+    IL_196b: ldc.i4.0       
+    IL_196c: stfld          Command::Variable
+    IL_1971: dup            
+    IL_1972: ldarg.2        
+    IL_1973: stfld          Command::Call
+    IL_1978: dup            
+    IL_1979: ldarg.3        
+    IL_197a: stfld          Command::Description
+    IL_197f: dup            
+    IL_1980: ldsfld         System.String::Empty
+    IL_1985: stfld          Command::Arguments
+    IL_198a: stloc.0        
+    IL_198b: ldc.i4         459266639
+    IL_1990: stloc.1        
+    IL_1991: br             6382
+    IL_1996: nop            
+    IL_1997: ldsfld         Server::Dict
+    IL_199c: ldarg.0        
+    IL_199d: call           ObfType_19::obfM_107
+    IL_19a2: ldloc.0        
+    IL_19a3: callvirt       TypeSpecRow::set_Item
+    IL_19a8: ldc.i4         459261003
+    IL_19ad: stloc.1        
+    IL_19ae: br             6382
+    IL_19b3: nop            
+    IL_19b4: nop            
+    IL_19b5: ret            
+    IL_19b6: nop            
+    IL_19b7: ldc.i4         335483374
+    IL_19bc: ldc.i4         1557771839
+    IL_19c1: mul            
+    IL_19c2: ldc.i4         231346101
+    IL_19c7: xor            
+    IL_19c8: pop            
+    IL_19c9: ldc.i4         459260151
+    IL_19ce: stloc.1        
+    IL_19cf: br             6382
+    IL_19d4: nop            
+    IL_19d5: ldc.i4         735986251
+    IL_19da: ldc.i4         1719637857
+    IL_19df: mul            
+    IL_19e0: ldc.i4         838572552
+    IL_19e5: xor            
+    IL_19e6: pop            
+    IL_19e7: ldc.i4         459262528
+    IL_19ec: stloc.1        
+    IL_19ed: br             6382
+    IL_19f2: nop            
+    IL_19f3: ldc.i4         1356502875
+    IL_19f8: ldc.i4         824713431
+    IL_19fd: mul            
+    IL_19fe: ldc.i4         422149877
+    IL_1a03: xor            
+    IL_1a04: pop            
+    IL_1a05: ldc.i4         459260928
+    IL_1a0a: stloc.1        
+    IL_1a0b: br             6382
+    IL_1a10: nop            
+    IL_1a11: ldc.i4         459261061
+    IL_1a16: stloc.1        
+    IL_1a17: br             6382
+
+  --- method obfM_028  (rva=0x381c) ---
+    IL_1a28: ldc.i4         1715592721
+    IL_1a2d: stloc.0        
+    IL_1a2e: nop            
+    IL_1a2f: ldloc.0        
+    IL_1a30: ldc.i4         1715590845
+    IL_1a35: xor            
+    IL_1a36: dup            
+    IL_1a37: ldc.i4.0       
+    IL_1a38: bge.s          6732
+    IL_1a3a: ldc.i4         1925231782
+    IL_1a3f: ldc.i4         2030375849
+    IL_1a44: mul            
+    IL_1a45: ldc.i4         656987870
+    IL_1a4a: xor            
+    IL_1a4b: pop            
+    IL_1a4c: nop            
+    IL_1a4d: ldc.i4.5       
+    IL_1a4e: rem.un         
+    IL_1a4f: switch         switch[5]
+    IL_1a68: br             6897
+    IL_1a6d: nop            
+    IL_1a6e: ldarg.0        
+    IL_1a6f: call           ObfType_19::obfM_108
+    IL_1a74: brtrue.s       6776
+    IL_1a76: br.s           6805
+    IL_1a78: nop            
+    IL_1a79: ldc.i4         1715589124
+    IL_1a7e: stloc.0        
+    IL_1a7f: br.s           6702
+    IL_1a81: nop            
+    IL_1a82: ldarg.0        
+    IL_1a83: call           ObfType_19::obfM_108
+    IL_1a88: ldfld          Network.Connection::authLevel
+    IL_1a8d: ldc.i4.2       
+    IL_1a8e: clt.un         
+    IL_1a90: ldc.i4.0       
+    IL_1a91: ceq            
+    IL_1a93: br.s           6806
+    IL_1a95: ldc.i4.1       
+    IL_1a96: ret            
+    IL_1a97: nop            
+    IL_1a98: ldc.i4         1916315722
+    IL_1a9d: ldc.i4         1138795827
+    IL_1aa2: mul            
+    IL_1aa3: ldc.i4         1169057049
+    IL_1aa8: xor            
+    IL_1aa9: pop            
+    IL_1aaa: ldc.i4         1715590117
+    IL_1aaf: stloc.0        
+    IL_1ab0: br             6702
+    IL_1ab5: nop            
+    IL_1ab6: ldc.i4         54509773
+    IL_1abb: ldc.i4         2137804053
+    IL_1ac0: mul            
+    IL_1ac1: ldc.i4         868644862
+    IL_1ac6: xor            
+    IL_1ac7: pop            
+    IL_1ac8: ldc.i4         1715586496
+    IL_1acd: stloc.0        
+    IL_1ace: br             6702
+    IL_1ad3: nop            
+    IL_1ad4: ldc.i4         1698944714
+    IL_1ad9: ldc.i4         36997223
+    IL_1ade: mul            
+    IL_1adf: ldc.i4         143269284
+    IL_1ae4: xor            
+    IL_1ae5: pop            
+    IL_1ae6: ldc.i4         1715589370
+    IL_1aeb: stloc.0        
+    IL_1aec: br             6702
+    IL_1af1: nop            
+    IL_1af2: ldc.i4         1715592721
+    IL_1af7: stloc.0        
+    IL_1af8: br             6702
+
+  --- method obfM_029  (rva=0x3900) ---
+    IL_1b0c: ldc.i4         808923199
+    IL_1b11: stloc.2        
+    IL_1b12: nop            
+    IL_1b13: ldloc.2        
+    IL_1b14: ldc.i4         808925679
+    IL_1b19: xor            
+    IL_1b1a: dup            
+    IL_1b1b: ldc.i4.0       
+    IL_1b1c: bge.s          6960
+    IL_1b1e: ldc.i4         2026670700
+    IL_1b23: ldc.i4         374940015
+    IL_1b28: mul            
+    IL_1b29: ldc.i4         2122280
+    IL_1b2e: xor            
+    IL_1b2f: pop            
+    IL_1b30: nop            
+    IL_1b31: ldc.i4.8       
+    IL_1b32: rem.un         
+    IL_1b33: switch         switch[8]
+    IL_1b58: br             7249
+    IL_1b5d: nop            
+    IL_1b5e: nop            
+    IL_1b5f: ldarg.0        
+    IL_1b60: call           ObfType_19::obfM_028
+    IL_1b65: ldc.i4.0       
+    IL_1b66: ceq            
+    IL_1b68: stloc.0        
+    IL_1b69: ldloc.0        
+    IL_1b6a: brtrue.s       7022
+    IL_1b6c: br.s           7052
+    IL_1b6e: nop            
+    IL_1b6f: nop            
+    IL_1b70: ldc.i4         808919542
+    IL_1b75: stloc.2        
+    IL_1b76: br.s           6930
+    IL_1b78: nop            
+    IL_1b79: ldarg.0        
+    IL_1b7a: ldc.i4         815
+    IL_1b7f: call           ObfType_19::obfM_004
+    IL_1b84: call           ObfType_19::obfM_109
+    IL_1b89: nop            
+    IL_1b8a: br.s           7158
+    IL_1b8c: call           ObfType_19::obfM_011
+    IL_1b91: nop            
+    IL_1b92: ldc.i4         808919733
+    IL_1b97: stloc.2        
+    IL_1b98: br             6930
+    IL_1b9d: nop            
+    IL_1b9e: ldsfld         fld:obfF_007
+    IL_1ba3: ldc.i4.0       
+    IL_1ba4: ceq            
+    IL_1ba6: stloc.1        
+    IL_1ba7: ldloc.1        
+    IL_1ba8: brtrue.s       7084
+    IL_1baa: br.s           7117
+    IL_1bac: nop            
+    IL_1bad: nop            
+    IL_1bae: ldc.i4         808920308
+    IL_1bb3: stloc.2        
+    IL_1bb4: br             6930
+    IL_1bb9: nop            
+    IL_1bba: ldarg.0        
+    IL_1bbb: ldc.i4         846
+    IL_1bc0: call           ObfType_19::obfM_004
+    IL_1bc5: call           ObfType_19::obfM_109
+    IL_1bca: nop            
+    IL_1bcb: br.s           7158
+    IL_1bcd: call           ObfType_19::obfM_012
+    IL_1bd2: nop            
+    IL_1bd3: ldc.i4         808924915
+    IL_1bd8: stloc.2        
+    IL_1bd9: br             6930
+    IL_1bde: nop            
+    IL_1bdf: call           ObfType_19::obfM_014
+    IL_1be4: nop            
+    IL_1be5: ldarg.0        
+    IL_1be6: ldc.i4         890
+    IL_1beb: call           ObfType_19::obfM_004
+    IL_1bf0: call           ObfType_19::obfM_109
+    IL_1bf5: nop            
+    IL_1bf6: ret            
+    IL_1bf7: nop            
+    IL_1bf8: ldc.i4         260389653
+    IL_1bfd: ldc.i4         1839588739
+    IL_1c02: mul            
+    IL_1c03: ldc.i4         1248518261
+    IL_1c08: xor            
+    IL_1c09: pop            
+    IL_1c0a: ldc.i4         808926721
+    IL_1c0f: stloc.2        
+    IL_1c10: br             6930
+    IL_1c15: nop            
+    IL_1c16: ldc.i4         969618982
+    IL_1c1b: ldc.i4         1298958897
+    IL_1c20: mul            
+    IL_1c21: ldc.i4         2081439159
+    IL_1c26: xor            
+    IL_1c27: pop            
+    IL_1c28: ldc.i4         808922248
+    IL_1c2d: stloc.2        
+    IL_1c2e: br             6930
+    IL_1c33: nop            
+    IL_1c34: ldc.i4         20403553
+    IL_1c39: ldc.i4         262947891
+    IL_1c3e: mul            
+    IL_1c3f: ldc.i4         1002855604
+    IL_1c44: xor            
+    IL_1c45: pop            
+    IL_1c46: ldc.i4         808923626
+    IL_1c4b: stloc.2        
+    IL_1c4c: br             6930
+    IL_1c51: nop            
+    IL_1c52: ldc.i4         808923199
+    IL_1c57: stloc.2        
+    IL_1c58: br             6930
+
+  --- method obfM_030  (rva=0x3a60) ---
+    IL_1c6c: ldc.i4         1948755095
+    IL_1c71: stloc.1        
+    IL_1c72: nop            
+    IL_1c73: ldloc.1        
+    IL_1c74: ldc.i4         1948759815
+    IL_1c79: xor            
+    IL_1c7a: dup            
+    IL_1c7b: ldc.i4.0       
+    IL_1c7c: bge.s          7312
+    IL_1c7e: ldc.i4         361081248
+    IL_1c83: ldc.i4         1537429173
+    IL_1c88: mul            
+    IL_1c89: ldc.i4         55315003
+    IL_1c8e: xor            
+    IL_1c8f: pop            
+    IL_1c90: nop            
+    IL_1c91: ldc.i4.8       
+    IL_1c92: rem.un         
+    IL_1c93: switch         switch[8]
+    IL_1cb8: br             7548
+    IL_1cbd: nop            
+    IL_1cbe: nop            
+    IL_1cbf: ldarg.0        
+    IL_1cc0: call           ObfType_19::obfM_028
+    IL_1cc5: ldc.i4.0       
+    IL_1cc6: ceq            
+    IL_1cc8: stloc.0        
+    IL_1cc9: ldc.i4         1948758702
+    IL_1cce: stloc.1        
+    IL_1ccf: br.s           7282
+    IL_1cd1: nop            
+    IL_1cd2: ldloc.0        
+    IL_1cd3: brfalse.s      7422
+    IL_1cd5: nop            
+    IL_1cd6: ldc.i4         1948759453
+    IL_1cdb: stloc.1        
+    IL_1cdc: br.s           7282
+    IL_1cde: nop            
+    IL_1cdf: ldarg.0        
+    IL_1ce0: ldc.i4         815
+    IL_1ce5: call           ObfType_19::obfM_004
+    IL_1cea: call           ObfType_19::obfM_109
+    IL_1cef: nop            
+    IL_1cf0: ldc.i4         1948761564
+    IL_1cf5: stloc.1        
+    IL_1cf6: br             7282
+    IL_1cfb: nop            
+    IL_1cfc: br.s           7457
+    IL_1cfe: call           ObfType_19::obfM_015
+    IL_1d03: nop            
+    IL_1d04: ldc.i4         1948760931
+    IL_1d09: stloc.1        
+    IL_1d0a: br             7282
+    IL_1d0f: nop            
+    IL_1d10: ldarg.0        
+    IL_1d11: ldc.i4         921
+    IL_1d16: call           ObfType_19::obfM_004
+    IL_1d1b: call           ObfType_19::obfM_109
+    IL_1d20: nop            
+    IL_1d21: ret            
+    IL_1d22: nop            
+    IL_1d23: ldc.i4         792841764
+    IL_1d28: ldc.i4         1445088205
+    IL_1d2d: mul            
+    IL_1d2e: ldc.i4         1007351935
+    IL_1d33: xor            
+    IL_1d34: pop            
+    IL_1d35: ldc.i4         1948754993
+    IL_1d3a: stloc.1        
+    IL_1d3b: br             7282
+    IL_1d40: nop            
+    IL_1d41: ldc.i4         835481555
+    IL_1d46: ldc.i4         1696454287
+    IL_1d4b: mul            
+    IL_1d4c: ldc.i4         1591678851
+    IL_1d51: xor            
+    IL_1d52: pop            
+    IL_1d53: ldc.i4         1948761840
+    IL_1d58: stloc.1        
+    IL_1d59: br             7282
+    IL_1d5e: nop            
+    IL_1d5f: ldc.i4         1382495987
+    IL_1d64: ldc.i4         561029499
+    IL_1d69: mul            
+    IL_1d6a: ldc.i4         777800817
+    IL_1d6f: xor            
+    IL_1d70: pop            
+    IL_1d71: ldc.i4         1948755386
+    IL_1d76: stloc.1        
+    IL_1d77: br             7282
+    IL_1d7c: nop            
+    IL_1d7d: ldc.i4         1948755095
+    IL_1d82: stloc.1        
+    IL_1d83: br             7282
+
+  --- method obfM_031  (rva=0x3b88) ---
+    IL_1d94: ldc.i4         2045407831
+    IL_1d99: stloc.1        
+    IL_1d9a: nop            
+    IL_1d9b: ldloc.1        
+    IL_1d9c: ldc.i4         1136739083
+    IL_1da1: sub            
+    IL_1da2: ldc.i4         908667396
+    IL_1da7: xor            
+    IL_1da8: dup            
+    IL_1da9: ldc.i4.0       
+    IL_1daa: bge.s          7614
+    IL_1dac: ldc.i4         1594113778
+    IL_1db1: ldc.i4         872770909
+    IL_1db6: mul            
+    IL_1db7: ldc.i4         1144973834
+    IL_1dbc: xor            
+    IL_1dbd: pop            
+    IL_1dbe: nop            
+    IL_1dbf: ldc.i4.8       
+    IL_1dc0: rem.un         
+    IL_1dc1: switch         switch[8]
+    IL_1de6: br             7878
+    IL_1deb: nop            
+    IL_1dec: nop            
+    IL_1ded: ldarg.0        
+    IL_1dee: call           ObfType_19::obfM_028
+    IL_1df3: ldc.i4.0       
+    IL_1df4: ceq            
+    IL_1df6: stloc.0        
+    IL_1df7: ldc.i4         2045405696
+    IL_1dfc: stloc.1        
+    IL_1dfd: br.s           7578
+    IL_1dff: nop            
+    IL_1e00: ldloc.0        
+    IL_1e01: brfalse.s      7736
+    IL_1e03: ldc.i4         2045410009
+    IL_1e08: stloc.1        
+    IL_1e09: br.s           7578
+    IL_1e0b: nop            
+    IL_1e0c: nop            
+    IL_1e0d: ldarg.0        
+    IL_1e0e: ldc.i4         815
+    IL_1e13: call           ObfType_19::obfM_004
+    IL_1e18: call           ObfType_19::obfM_109
+    IL_1e1d: ldc.i4         2045407978
+    IL_1e22: stloc.1        
+    IL_1e23: br             7578
+    IL_1e28: nop            
+    IL_1e29: nop            
+    IL_1e2a: ldc.i4         2045406859
+    IL_1e2f: stloc.1        
+    IL_1e30: br             7578
+    IL_1e35: nop            
+    IL_1e36: br.s           7787
+    IL_1e38: ldarg.0        
+    IL_1e39: ldc.i4         953
+    IL_1e3e: call           ObfType_19::obfM_004
+    IL_1e43: ldsfld         fld:obfF_009
+    IL_1e48: brtrue.s       7766
+    IL_1e4a: ldc.i4         979
+    IL_1e4f: call           ObfType_19::obfM_004
+    IL_1e54: br.s           7776
+    IL_1e56: ldc.i4         986
+    IL_1e5b: call           ObfType_19::obfM_004
+    IL_1e60: call           ObfType_19::obfM_100
+    IL_1e65: call           ObfType_19::obfM_109
+    IL_1e6a: nop            
+    IL_1e6b: ret            
+    IL_1e6c: nop            
+    IL_1e6d: ldc.i4         535191259
+    IL_1e72: ldc.i4         1611513119
+    IL_1e77: mul            
+    IL_1e78: ldc.i4         859826991
+    IL_1e7d: xor            
+    IL_1e7e: pop            
+    IL_1e7f: ldc.i4         2045409629
+    IL_1e84: stloc.1        
+    IL_1e85: br             7578
+    IL_1e8a: nop            
+    IL_1e8b: ldc.i4         1951854113
+    IL_1e90: ldc.i4         1839226447
+    IL_1e95: mul            
+    IL_1e96: ldc.i4         182234864
+    IL_1e9b: xor            
+    IL_1e9c: pop            
+    IL_1e9d: ldc.i4         2045409654
+    IL_1ea2: stloc.1        
+    IL_1ea3: br             7578
+    IL_1ea8: nop            
+    IL_1ea9: ldc.i4         707165048
+    IL_1eae: ldc.i4         1840979515
+    IL_1eb3: mul            
+    IL_1eb4: ldc.i4         1788524679
+    IL_1eb9: xor            
+    IL_1eba: pop            
+    IL_1ebb: ldc.i4         2045406940
+    IL_1ec0: stloc.1        
+    IL_1ec1: br             7578
+    IL_1ec6: nop            
+    IL_1ec7: ldc.i4         2045407831
+    IL_1ecc: stloc.1        
+    IL_1ecd: br             7578
+
+  --- method obfM_032  (rva=0x3cd4) ---
+    IL_1ee0: newobj         ObfType_19::.ctor
+    IL_1ee5: stloc.0        
+    IL_1ee6: nop            
+    IL_1ee7: ldarg.1        
+    IL_1ee8: call           ObfType_19::obfM_110
+    IL_1eed: ldc.i4.0       
+    IL_1eee: ceq            
+    IL_1ef0: stloc.3        
+    IL_1ef1: ldloc.3        
+    IL_1ef2: brtrue.s       7926
+    IL_1ef4: br.s           7932
+    IL_1ef6: nop            
+    IL_1ef7: br             8769
+    IL_1efc: call           spec:Get<..>
+    IL_1f01: stloc.1        
+    IL_1f02: ldloc.0        
+    IL_1f03: call           spec:Get<..>
+    IL_1f08: stfld          fld:obfF_018
+    IL_1f0d: nop            
+    IL_1f0e: ldarg.1        
+    IL_1f0f: ldfld          Building::buildingBlocks
+    IL_1f14: stloc.s        local(0x0004)
+    IL_1f16: ldc.i4.0       
+    IL_1f17: stloc.s        local(0x0006)
+    IL_1f19: br             8129
+    IL_1f1e: newobj         ObfType_19::.ctor
+    IL_1f23: stloc.s        local(0x0007)
+    IL_1f25: ldloc.s        local(0x0007)
+    IL_1f27: ldloc.0        
+    IL_1f28: stfld          fld:obfF_020
+    IL_1f2d: nop            
+    IL_1f2e: ldloc.s        local(0x0004)
+    IL_1f30: ldloc.s        local(0x0006)
+    IL_1f32: callvirt       TypeSpecRow::get_Item
+    IL_1f37: stloc.s        local(0x0008)
+    IL_1f39: ldloc.s        local(0x0008)
+    IL_1f3b: ldnull         
+    IL_1f3c: call           ObfType_19::obfM_105
+    IL_1f41: brfalse.s      8005
+    IL_1f43: br.s           8027
+    IL_1f45: nop            
+    IL_1f46: ldloc.s        local(0x0007)
+    IL_1f48: ldfld          fld:obfF_020
+    IL_1f4d: ldfld          fld:obfF_018
+    IL_1f52: ldloc.s        local(0x0008)
+    IL_1f54: callvirt       TypeSpecRow::Contains
+    IL_1f59: br.s           8028
+    IL_1f5b: ldc.i4.1       
+    IL_1f5c: stloc.s        local(0x0009)
+    IL_1f5e: ldloc.s        local(0x0009)
+    IL_1f60: brtrue.s       8036
+    IL_1f62: br.s           8039
+    IL_1f64: nop            
+    IL_1f65: br.s           8123
+    IL_1f67: ldloc.s        local(0x0007)
+    IL_1f69: call           spec:Get<..>
+    IL_1f6e: stfld          fld:obfF_019
+    IL_1f73: ldloc.s        local(0x0008)
+    IL_1f75: ldloc.s        local(0x0007)
+    IL_1f77: ldftn          ObfType_19::obfM_041
+    IL_1f7d: newobj         TypeSpecRow::.ctor
+    IL_1f82: callvirt       spec:EntityLinkBroadcast<..>
+    IL_1f87: nop            
+    IL_1f88: ldloc.s        local(0x0007)
+    IL_1f8a: ldfld          fld:obfF_019
+    IL_1f8f: callvirt       TypeSpecRow::get_Count
+    IL_1f94: ldc.i4.0       
+    IL_1f95: cgt            
+    IL_1f97: stloc.s        local(0x000A)
+    IL_1f99: ldloc.s        local(0x000A)
+    IL_1f9b: brfalse.s      8109
+    IL_1f9d: ldloc.1        
+    IL_1f9e: ldloc.s        local(0x0007)
+    IL_1fa0: ldfld          fld:obfF_019
+    IL_1fa5: callvirt       TypeSpecRow::Add
+    IL_1faa: nop            
+    IL_1fab: br.s           8122
+    IL_1fad: ldloc.s        local(0x0007)
+    IL_1faf: ldflda         fld:obfF_019
+    IL_1fb4: call           spec:FreeUnmanaged<..>
+    IL_1fb9: nop            
+    IL_1fba: nop            
+    IL_1fbb: ldloc.s        local(0x0006)
+    IL_1fbd: ldc.i4.1       
+    IL_1fbe: add            
+    IL_1fbf: stloc.s        local(0x0006)
+    IL_1fc1: ldloc.s        local(0x0006)
+    IL_1fc3: ldloc.s        local(0x0004)
+    IL_1fc5: callvirt       TypeSpecRow::get_Count
+    IL_1fca: clt            
+    IL_1fcc: stloc.s        local(0x000B)
+    IL_1fce: ldloc.s        local(0x000B)
+    IL_1fd0: brfalse.s      8151
+    IL_1fd2: br             7966
+    IL_1fd7: nop            
+    IL_1fd8: ldloc.1        
+    IL_1fd9: callvirt       TypeSpecRow::get_Count
+    IL_1fde: ldc.i4.1       
+    IL_1fdf: cgt            
+    IL_1fe1: ldc.i4.0       
+    IL_1fe2: ceq            
+    IL_1fe4: stloc.s        local(0x000C)
+    IL_1fe6: ldloc.s        local(0x000C)
+    IL_1fe8: brtrue.s       8172
+    IL_1fea: br.s           8178
+    IL_1fec: nop            
+    IL_1fed: leave          8769
+    IL_1ff2: ldc.i4.0       
+    IL_1ff3: stloc.s        local(0x0005)
+    IL_1ff5: ldc.i4.1       
+    IL_1ff6: stloc.s        local(0x000D)
+    IL_1ff8: br.s           8232
+    IL_1ffa: nop            
+    IL_1ffb: ldloc.1        
+    IL_1ffc: ldloc.s        local(0x000D)
+    IL_1ffe: callvirt       TypeSpecRow::get_Item
+    IL_2003: callvirt       TypeSpecRow::get_Count
+    IL_2008: ldloc.1        
+    IL_2009: ldloc.s        local(0x0005)
+    IL_200b: callvirt       TypeSpecRow::get_Item
+    IL_2010: callvirt       TypeSpecRow::get_Count
+    IL_2015: cgt            
+    IL_2017: stloc.s        local(0x000E)
+    IL_2019: ldloc.s        local(0x000E)
+    IL_201b: brfalse.s      8225
+    IL_201d: ldloc.s        local(0x000D)
+    IL_201f: stloc.s        local(0x0005)
+    IL_2021: nop            
+    IL_2022: ldloc.s        local(0x000D)
+    IL_2024: ldc.i4.1       
+    IL_2025: add            
+    IL_2026: stloc.s        local(0x000D)
+    IL_2028: ldloc.s        local(0x000D)
+    IL_202a: ldloc.1        
+    IL_202b: callvirt       TypeSpecRow::get_Count
+    IL_2030: clt            
+    IL_2032: stloc.s        local(0x000F)
+    IL_2034: ldloc.s        local(0x000F)
+    IL_2036: brtrue.s       8186
+    IL_2038: ldc.i4.0       
+    IL_2039: stloc.s        local(0x0010)
+    IL_203b: br.s           8364
+    IL_203d: nop            
+    IL_203e: ldloc.s        local(0x0010)
+    IL_2040: ldloc.s        local(0x0005)
+    IL_2042: ceq            
+    IL_2044: stloc.s        local(0x0013)
+    IL_2046: ldloc.s        local(0x0013)
+    IL_2048: brtrue.s       8268
+    IL_204a: br.s           8271
+    IL_204c: nop            
+    IL_204d: br.s           8358
+    IL_204f: ldarg.0        
+    IL_2050: call           ObfType_19::obfM_111
+    IL_2055: stloc.s        local(0x0011)
+    IL_2057: ldloc.1        
+    IL_2058: ldloc.s        local(0x0010)
+    IL_205a: callvirt       TypeSpecRow::get_Item
+    IL_205f: stloc.s        local(0x0012)
+    IL_2061: ldc.i4.0       
+    IL_2062: stloc.s        local(0x0014)
+    IL_2064: br.s           8337
+    IL_2066: nop            
+    IL_2067: ldloc.s        local(0x0012)
+    IL_2069: ldloc.s        local(0x0014)
+    IL_206b: callvirt       TypeSpecRow::get_Item
+    IL_2070: stloc.s        local(0x0015)
+    IL_2072: ldloc.s        local(0x0015)
+    IL_2074: ldnull         
+    IL_2075: call           ObfType_19::obfM_097
+    IL_207a: stloc.s        local(0x0016)
+    IL_207c: ldloc.s        local(0x0016)
+    IL_207e: brfalse.s      8330
+    IL_2080: ldloc.s        local(0x0015)
+    IL_2082: ldloc.s        local(0x0011)
+    IL_2084: call           ObfType_19::obfM_112
+    IL_2089: nop            
+    IL_208a: nop            
+    IL_208b: ldloc.s        local(0x0014)
+    IL_208d: ldc.i4.1       
+    IL_208e: add            
+    IL_208f: stloc.s        local(0x0014)
+    IL_2091: ldloc.s        local(0x0014)
+    IL_2093: ldloc.s        local(0x0012)
+    IL_2095: callvirt       TypeSpecRow::get_Count
+    IL_209a: clt            
+    IL_209c: stloc.s        local(0x0017)
+    IL_209e: ldloc.s        local(0x0017)
+    IL_20a0: brfalse.s      8356
+    IL_20a2: br.s           8294
+    IL_20a4: nop            
+    IL_20a5: nop            
+    IL_20a6: ldloc.s        local(0x0010)
+    IL_20a8: ldc.i4.1       
+    IL_20a9: add            
+    IL_20aa: stloc.s        local(0x0010)
+    IL_20ac: ldloc.s        local(0x0010)
+    IL_20ae: ldloc.1        
+    IL_20af: callvirt       TypeSpecRow::get_Count
+    IL_20b4: clt            
+    IL_20b6: stloc.s        local(0x0018)
+    IL_20b8: ldloc.s        local(0x0018)
+    IL_20ba: brfalse.s      8385
+    IL_20bc: br             8253
+    IL_20c1: nop            
+    IL_20c2: nop            
+    IL_20c3: leave.s        8462
+    IL_20c5: nop            
+    IL_20c6: ldc.i4.0       
+    IL_20c7: stloc.s        local(0x0019)
+    IL_20c9: br.s           8421
+    IL_20cb: nop            
+    IL_20cc: ldloc.1        
+    IL_20cd: ldloc.s        local(0x0019)
+    IL_20cf: callvirt       TypeSpecRow::get_Item
+    IL_20d4: stloc.s        local(0x001A)
+    IL_20d6: ldloca.s       local(0x001A)
+    IL_20d8: call           spec:FreeUnmanaged<..>
+    IL_20dd: nop            
+    IL_20de: nop            
+    IL_20df: ldloc.s        local(0x0019)
+    IL_20e1: ldc.i4.1       
+    IL_20e2: add            
+    IL_20e3: stloc.s        local(0x0019)
+    IL_20e5: ldloc.s        local(0x0019)
+    IL_20e7: ldloc.1        
+    IL_20e8: callvirt       TypeSpecRow::get_Count
+    IL_20ed: clt            
+    IL_20ef: stloc.s        local(0x001B)
+    IL_20f1: ldloc.s        local(0x001B)
+    IL_20f3: brfalse.s      8439
+    IL_20f5: br.s           8395
+    IL_20f7: nop            
+    IL_20f8: ldloca.s       local(0x0001)
+    IL_20fa: call           spec:FreeUnmanaged<..>
+    IL_20ff: nop            
+    IL_2100: ldloc.0        
+    IL_2101: ldflda         fld:obfF_018
+    IL_2106: call           spec:FreeUnmanaged<..>
+    IL_210b: nop            
+    IL_210c: nop            
+    IL_210d: endfinally     
+    IL_210e: call           spec:Get<..>
+    IL_2113: stloc.2        
+    IL_2114: nop            
+    IL_2115: nop            
+    IL_2116: ldarg.1        
+    IL_2117: ldfld          Building::decayEntities
+    IL_211c: callvirt       TypeSpecRow::GetEnumerator
+    IL_2121: stloc.s        local(0x001C)
+    IL_2123: br.s           8542
+    IL_2125: ldloca.s       local(0x001C)
+    IL_2127: call           TypeSpecRow::get_Current
+    IL_212c: stloc.s        local(0x001D)
+    IL_212e: nop            
+    IL_212f: ldloc.s        local(0x001D)
+    IL_2131: ldnull         
+    IL_2132: call           ObfType_19::obfM_105
+    IL_2137: stloc.s        local(0x001E)
+    IL_2139: ldloc.s        local(0x001E)
+    IL_213b: brfalse.s      8511
+    IL_213d: br.s           8542
+    IL_213f: ldloc.s        local(0x001D)
+    IL_2141: isinst         BuildingBlock
+    IL_2146: ldnull         
+    IL_2147: cgt.un         
+    IL_2149: stloc.s        local(0x001F)
+    IL_214b: ldloc.s        local(0x001F)
+    IL_214d: brtrue.s       8529
+    IL_214f: br.s           8532
+    IL_2151: nop            
+    IL_2152: br.s           8542
+    IL_2154: ldloc.2        
+    IL_2155: ldloc.s        local(0x001D)
+    IL_2157: callvirt       TypeSpecRow::Add
+    IL_215c: nop            
+    IL_215d: nop            
+    IL_215e: ldloca.s       local(0x001C)
+    IL_2160: call           TypeSpecRow::MoveNext
+    IL_2165: brtrue.s       8485
+    IL_2167: leave.s        8568
+    IL_2169: ldloca.s       local(0x001C)
+    IL_216b: constrained.   typespec#12
+    IL_2171: callvirt       System.IDisposable::Dispose
+    IL_2176: nop            
+    IL_2177: endfinally     
+    IL_2178: ldc.i4.0       
+    IL_2179: stloc.s        local(0x0020)
+    IL_217b: br.s           8699
+    IL_217d: nop            
+    IL_217e: ldloc.2        
+    IL_217f: ldloc.s        local(0x0020)
+    IL_2181: callvirt       TypeSpecRow::get_Item
+    IL_2186: stloc.s        local(0x0021)
+    IL_2188: ldloc.s        local(0x0021)
+    IL_218a: call           ObfType_19::obfM_113
+    IL_218f: stloc.s        local(0x0022)
+    IL_2191: ldloc.s        local(0x0022)
+    IL_2193: isinst         BuildingBlock
+    IL_2198: stloc.s        local(0x0023)
+    IL_219a: ldloc.s        local(0x0023)
+    IL_219c: ldnull         
+    IL_219d: call           ObfType_19::obfM_105
+    IL_21a2: stloc.s        local(0x0025)
+    IL_21a4: ldloc.s        local(0x0025)
+    IL_21a6: brtrue.s       8618
+    IL_21a8: br.s           8628
+    IL_21aa: nop            
+    IL_21ab: ldloc.s        local(0x0021)
+    IL_21ad: call           ObfType_19::obfM_114
+    IL_21b2: stloc.s        local(0x0023)
+    IL_21b4: ldloc.s        local(0x0021)
+    IL_21b6: isinst         ContainerCorpse
+    IL_21bb: brtrue.s       8652
+    IL_21bd: ldloc.s        local(0x0022)
+    IL_21bf: isinst         ContainerCorpse
+    IL_21c4: brfalse.s      8648
+    IL_21c6: br.s           8652
+    IL_21c8: nop            
+    IL_21c9: ldc.i4.0       
+    IL_21ca: br.s           8658
+    IL_21cc: ldarg.1        
+    IL_21cd: ldfld          Building::ID
+    IL_21d2: stloc.s        local(0x0024)
+    IL_21d4: ldloc.s        local(0x0021)
+    IL_21d6: ldloc.s        local(0x0023)
+    IL_21d8: ldnull         
+    IL_21d9: call           ObfType_19::obfM_097
+    IL_21de: brfalse.s      8674
+    IL_21e0: br.s           8679
+    IL_21e2: nop            
+    IL_21e3: ldloc.s        local(0x0024)
+    IL_21e5: br.s           8686
+    IL_21e7: ldloc.s        local(0x0023)
+    IL_21e9: ldfld          DecayEntity::buildingID
+    IL_21ee: call           ObfType_19::obfM_112
+    IL_21f3: nop            
+    IL_21f4: nop            
+    IL_21f5: ldloc.s        local(0x0020)
+    IL_21f7: ldc.i4.1       
+    IL_21f8: add            
+    IL_21f9: stloc.s        local(0x0020)
+    IL_21fb: ldloc.s        local(0x0020)
+    IL_21fd: ldloc.2        
+    IL_21fe: callvirt       TypeSpecRow::get_Count
+    IL_2203: clt            
+    IL_2205: stloc.s        local(0x0026)
+    IL_2207: ldloc.s        local(0x0026)
+    IL_2209: brtrue         8573
+    IL_220e: nop            
+    IL_220f: leave.s        8732
+    IL_2211: nop            
+    IL_2212: ldloca.s       local(0x0002)
+    IL_2214: call           spec:FreeUnmanaged<..>
+    IL_2219: nop            
+    IL_221a: nop            
+    IL_221b: endfinally     
+    IL_221c: ldsfld         ConVar.AI::nav_carve_use_building_optimization
+    IL_2221: stloc.s        local(0x0027)
+    IL_2223: ldloc.s        local(0x0027)
+    IL_2225: brtrue.s       8745
+    IL_2227: br.s           8769
+    IL_2229: nop            
+    IL_222a: nop            
+    IL_222b: ldarg.1        
+    IL_222c: ldc.i4.1       
+    IL_222d: stfld          Building::isNavMeshCarvingDirty
+    IL_2232: ldc.i4.2       
+    IL_2233: stloc.s        local(0x0028)
+    IL_2235: ldarg.0        
+    IL_2236: ldarg.1        
+    IL_2237: ldloca.s       local(0x0028)
+    IL_2239: ldc.i4.0       
+    IL_223a: call           ObfType_19::obfM_115
+    IL_223f: nop            
+    IL_2240: nop            
+    IL_2241: ret            
+
+  --- method obfM_033  (rva=0x4090) ---
+    IL_229c: nop            
+    IL_229d: ldarg.0        
+    IL_229e: ldnull         
+    IL_229f: call           ObfType_19::obfM_105
+    IL_22a4: brfalse.s      8872
+    IL_22a6: br.s           8884
+    IL_22a8: nop            
+    IL_22a9: ldarg.0        
+    IL_22aa: ldfld          DecayEntity::buildingID
+    IL_22af: ldc.i4.0       
+    IL_22b0: ceq            
+    IL_22b2: br.s           8885
+    IL_22b4: ldc.i4.1       
+    IL_22b5: stloc.2        
+    IL_22b6: ldloc.2        
+    IL_22b7: brtrue.s       8891
+    IL_22b9: br.s           8897
+    IL_22bb: nop            
+    IL_22bc: br             9236
+    IL_22c1: ldarg.0        
+    IL_22c2: call           ObfType_19::obfM_116
+    IL_22c7: stloc.0        
+    IL_22c8: ldloc.0        
+    IL_22c9: ldnull         
+    IL_22ca: ceq            
+    IL_22cc: stloc.3        
+    IL_22cd: ldloc.3        
+    IL_22ce: brtrue.s       8914
+    IL_22d0: br.s           8920
+    IL_22d2: nop            
+    IL_22d3: br             9236
+    IL_22d8: call           spec:Get<..>
+    IL_22dd: stloc.1        
+    IL_22de: nop            
+    IL_22df: ldloc.1        
+    IL_22e0: ldloc.0        
+    IL_22e1: callvirt       TypeSpecRow::Add
+    IL_22e6: nop            
+    IL_22e7: ldarg.0        
+    IL_22e8: ldsfld         fld:obfF_016
+    IL_22ed: ldloc.1        
+    IL_22ee: ldnull         
+    IL_22ef: callvirt       spec:EntityLinkMessage<..>
+    IL_22f4: nop            
+    IL_22f5: ldloc.1        
+    IL_22f6: callvirt       TypeSpecRow::get_Count
+    IL_22fb: ldc.i4.1       
+    IL_22fc: cgt            
+    IL_22fe: ldc.i4.0       
+    IL_22ff: ceq            
+    IL_2301: stloc.s        local(0x0006)
+    IL_2303: ldloc.s        local(0x0006)
+    IL_2305: brtrue.s       8969
+    IL_2307: br.s           8975
+    IL_2309: nop            
+    IL_230a: leave          9236
+    IL_230f: ldc.i4.0       
+    IL_2310: stloc.s        local(0x0004)
+    IL_2312: ldc.i4.1       
+    IL_2313: stloc.s        local(0x0007)
+    IL_2315: br.s           9042
+    IL_2317: nop            
+    IL_2318: ldloc.1        
+    IL_2319: ldloc.s        local(0x0007)
+    IL_231b: callvirt       TypeSpecRow::get_Item
+    IL_2320: ldfld          Building::decayEntities
+    IL_2325: callvirt       TypeSpecRow::get_Count
+    IL_232a: ldloc.1        
+    IL_232b: ldloc.s        local(0x0004)
+    IL_232d: callvirt       TypeSpecRow::get_Item
+    IL_2332: ldfld          Building::decayEntities
+    IL_2337: callvirt       TypeSpecRow::get_Count
+    IL_233c: cgt            
+    IL_233e: stloc.s        local(0x0008)
+    IL_2340: ldloc.s        local(0x0008)
+    IL_2342: brtrue.s       9030
+    IL_2344: br.s           9035
+    IL_2346: nop            
+    IL_2347: ldloc.s        local(0x0007)
+    IL_2349: stloc.s        local(0x0004)
+    IL_234b: nop            
+    IL_234c: ldloc.s        local(0x0007)
+    IL_234e: ldc.i4.1       
+    IL_234f: add            
+    IL_2350: stloc.s        local(0x0007)
+    IL_2352: ldloc.s        local(0x0007)
+    IL_2354: ldloc.1        
+    IL_2355: callvirt       TypeSpecRow::get_Count
+    IL_235a: clt            
+    IL_235c: stloc.s        local(0x0009)
+    IL_235e: ldloc.s        local(0x0009)
+    IL_2360: brfalse.s      9060
+    IL_2362: br.s           8983
+    IL_2364: nop            
+    IL_2365: ldloc.1        
+    IL_2366: ldloc.s        local(0x0004)
+    IL_2368: callvirt       TypeSpecRow::get_Item
+    IL_236d: stloc.s        local(0x0005)
+    IL_236f: ldc.i4.0       
+    IL_2370: stloc.s        local(0x000A)
+    IL_2372: br.s           9166
+    IL_2374: nop            
+    IL_2375: ldloc.s        local(0x000A)
+    IL_2377: ldloc.s        local(0x0004)
+    IL_2379: ceq            
+    IL_237b: stloc.s        local(0x000D)
+    IL_237d: ldloc.s        local(0x000D)
+    IL_237f: brtrue.s       9091
+    IL_2381: br.s           9094
+    IL_2383: nop            
+    IL_2384: br.s           9160
+    IL_2386: ldloc.1        
+    IL_2387: ldloc.s        local(0x000A)
+    IL_2389: callvirt       TypeSpecRow::get_Item
+    IL_238e: stloc.s        local(0x000B)
+    IL_2390: ldloc.s        local(0x000B)
+    IL_2392: ldfld          Building::ID
+    IL_2397: stloc.s        local(0x000C)
+    IL_2399: ldloc.s        local(0x000B)
+    IL_239b: ldloc.s        local(0x0005)
+    IL_239d: call           ObfType_19::obfM_034
+    IL_23a2: nop            
+    IL_23a3: ldsfld         fld:obfF_010
+    IL_23a8: ldloc.s        local(0x000C)
+    IL_23aa: callvirt       TypeSpecRow::Remove
+    IL_23af: stloc.s        local(0x000E)
+    IL_23b1: ldloc.s        local(0x000E)
+    IL_23b3: brfalse.s      9159
+    IL_23b5: ldsfld         fld:obfF_010
+    IL_23ba: ldloc.s        local(0x0005)
+    IL_23bc: ldfld          Building::ID
+    IL_23c1: callvirt       TypeSpecRow::Add
+    IL_23c6: pop            
+    IL_23c7: nop            
+    IL_23c8: ldloc.s        local(0x000A)
+    IL_23ca: ldc.i4.1       
+    IL_23cb: add            
+    IL_23cc: stloc.s        local(0x000A)
+    IL_23ce: ldloc.s        local(0x000A)
+    IL_23d0: ldloc.1        
+    IL_23d1: callvirt       TypeSpecRow::get_Count
+    IL_23d6: clt            
+    IL_23d8: stloc.s        local(0x000F)
+    IL_23da: ldloc.s        local(0x000F)
+    IL_23dc: brtrue.s       9076
+    IL_23de: ldsfld         ConVar.AI::nav_carve_use_building_optimization
+    IL_23e3: stloc.s        local(0x0010)
+    IL_23e5: ldloc.s        local(0x0010)
+    IL_23e7: brfalse.s      9222
+    IL_23e9: nop            
+    IL_23ea: ldloc.s        local(0x0005)
+    IL_23ec: ldc.i4.1       
+    IL_23ed: stfld          Building::isNavMeshCarvingDirty
+    IL_23f2: ldc.i4.2       
+    IL_23f3: stloc.s        local(0x0011)
+    IL_23f5: ldsfld         BuildingManager::server
+    IL_23fa: ldloc.s        local(0x0005)
+    IL_23fc: ldloca.s       local(0x0011)
+    IL_23fe: ldc.i4.0       
+    IL_23ff: call           ObfType_19::obfM_115
+    IL_2404: nop            
+    IL_2405: nop            
+    IL_2406: nop            
+    IL_2407: leave.s        9236
+    IL_2409: nop            
+    IL_240a: ldloca.s       local(0x0001)
+    IL_240c: call           spec:FreeUnmanaged<..>
+    IL_2411: nop            
+    IL_2412: nop            
+    IL_2413: endfinally     
+    IL_2414: ret            
+
+  --- method obfM_034  (rva=0x4234) ---
+    IL_2440: nop            
+    IL_2441: ldarg.0        
+    IL_2442: brtrue.s       9286
+    IL_2444: br.s           9299
+    IL_2446: nop            
+    IL_2447: ldarg.1        
+    IL_2448: brtrue.s       9292
+    IL_244a: br.s           9299
+    IL_244c: nop            
+    IL_244d: ldarg.0        
+    IL_244e: ldarg.1        
+    IL_244f: ceq            
+    IL_2451: br.s           9300
+    IL_2453: ldc.i4.1       
+    IL_2454: stloc.1        
+    IL_2455: ldloc.1        
+    IL_2456: brfalse.s      9306
+    IL_2458: br.s           9405
+    IL_245a: call           spec:Get<..>
+    IL_245f: stloc.0        
+    IL_2460: nop            
+    IL_2461: ldloc.0        
+    IL_2462: ldarg.0        
+    IL_2463: ldfld          Building::decayEntities
+    IL_2468: callvirt       TypeSpecRow::AddRange
+    IL_246d: nop            
+    IL_246e: ldc.i4.0       
+    IL_246f: stloc.2        
+    IL_2470: br.s           9373
+    IL_2472: nop            
+    IL_2473: ldloc.0        
+    IL_2474: ldloc.2        
+    IL_2475: callvirt       TypeSpecRow::get_Item
+    IL_247a: stloc.3        
+    IL_247b: ldloc.3        
+    IL_247c: ldnull         
+    IL_247d: call           ObfType_19::obfM_097
+    IL_2482: stloc.s        local(0x0004)
+    IL_2484: ldloc.s        local(0x0004)
+    IL_2486: brtrue.s       9354
+    IL_2488: br.s           9368
+    IL_248a: nop            
+    IL_248b: ldloc.3        
+    IL_248c: ldarg.1        
+    IL_248d: ldfld          Building::ID
+    IL_2492: call           ObfType_19::obfM_112
+    IL_2497: nop            
+    IL_2498: nop            
+    IL_2499: ldloc.2        
+    IL_249a: ldc.i4.1       
+    IL_249b: add            
+    IL_249c: stloc.2        
+    IL_249d: ldloc.2        
+    IL_249e: ldloc.0        
+    IL_249f: callvirt       TypeSpecRow::get_Count
+    IL_24a4: clt            
+    IL_24a6: stloc.s        local(0x0005)
+    IL_24a8: ldloc.s        local(0x0005)
+    IL_24aa: brfalse.s      9390
+    IL_24ac: br.s           9330
+    IL_24ae: nop            
+    IL_24af: nop            
+    IL_24b0: leave.s        9405
+    IL_24b2: nop            
+    IL_24b3: ldloca.s       local(0x0000)
+    IL_24b5: call           spec:FreeUnmanaged<..>
+    IL_24ba: nop            
+    IL_24bb: nop            
+    IL_24bc: endfinally     
+    IL_24bd: ret            
+
+  --- method .cctor  (rva=0x42d0) ---
+    IL_24dc: ldc.i4.1       
+    IL_24dd: stsfld         fld:obfF_007
+    IL_24e2: newobj         TypeSpecRow::.ctor
+    IL_24e7: stsfld         fld:obfF_010
+    IL_24ec: newobj         TypeSpecRow::.ctor
+    IL_24f1: stsfld         fld:obfF_011
+    IL_24f6: ldsfld         fld:obfF_017
+    IL_24fb: ldftn          ObfType_19::obfM_038
+    IL_2501: newobj         TypeSpecRow::.ctor
+    IL_2506: stsfld         fld:obfF_016
+    IL_250b: ret            
+
+  --- method .cctor  (rva=0x430c) ---
+    IL_2518: newobj         ObfType_19::.ctor
+    IL_251d: stsfld         fld:obfF_017
+    IL_2522: ret            
+
+  --- method .ctor  (rva=0x4324) ---
+    IL_2530: ldarg.0        
+    IL_2531: call           ObfType_19::obfM_117
+    IL_2536: nop            
+    IL_2537: ret            
+
+  --- method obfM_038  (rva=0x4338) ---
+    IL_2544: nop            
+    IL_2545: ldarg.1        
+    IL_2546: ldnull         
+    IL_2547: call           ObfType_19::obfM_105
+    IL_254c: stloc.2        
+    IL_254d: ldloc.2        
+    IL_254e: brtrue.s       9554
+    IL_2550: br.s           9557
+    IL_2552: nop            
+    IL_2553: br.s           9661
+    IL_2555: ldarg.1        
+    IL_2556: ldfld          DecayEntity::buildingID
+    IL_255b: stloc.0        
+    IL_255c: ldloc.0        
+    IL_255d: ldc.i4.0       
+    IL_255e: ceq            
+    IL_2560: stloc.3        
+    IL_2561: ldloc.3        
+    IL_2562: brfalse.s      9574
+    IL_2564: br.s           9661
+    IL_2566: ldc.i4.0       
+    IL_2567: stloc.s        local(0x0004)
+    IL_2569: br.s           9614
+    IL_256b: nop            
+    IL_256c: ldarg.2        
+    IL_256d: ldloc.s        local(0x0004)
+    IL_256f: callvirt       TypeSpecRow::get_Item
+    IL_2574: ldfld          Building::ID
+    IL_2579: ldloc.0        
+    IL_257a: ceq            
+    IL_257c: stloc.s        local(0x0005)
+    IL_257e: ldloc.s        local(0x0005)
+    IL_2580: brtrue.s       9604
+    IL_2582: br.s           9607
+    IL_2584: nop            
+    IL_2585: br.s           9661
+    IL_2587: nop            
+    IL_2588: ldloc.s        local(0x0004)
+    IL_258a: ldc.i4.1       
+    IL_258b: add            
+    IL_258c: stloc.s        local(0x0004)
+    IL_258e: ldloc.s        local(0x0004)
+    IL_2590: ldarg.2        
+    IL_2591: callvirt       TypeSpecRow::get_Count
+    IL_2596: clt            
+    IL_2598: stloc.s        local(0x0006)
+    IL_259a: ldloc.s        local(0x0006)
+    IL_259c: brfalse.s      9632
+    IL_259e: br.s           9579
+    IL_25a0: nop            
+    IL_25a1: ldarg.1        
+    IL_25a2: call           ObfType_19::obfM_116
+    IL_25a7: stloc.1        
+    IL_25a8: ldloc.1        
+    IL_25a9: ldnull         
+    IL_25aa: cgt.un         
+    IL_25ac: stloc.s        local(0x0007)
+    IL_25ae: ldloc.s        local(0x0007)
+    IL_25b0: brtrue.s       9652
+    IL_25b2: br.s           9661
+    IL_25b4: nop            
+    IL_25b5: ldarg.2        
+    IL_25b6: ldloc.1        
+    IL_25b7: callvirt       TypeSpecRow::Add
+    IL_25bc: nop            
+    IL_25bd: ret            
+
+  --- method .ctor  (rva=0x4324) ---
+    IL_2530: ldarg.0        
+    IL_2531: call           ObfType_19::obfM_117
+    IL_2536: nop            
+    IL_2537: ret            
+
+  --- method .ctor  (rva=0x4324) ---
+    IL_2530: ldarg.0        
+    IL_2531: call           ObfType_19::obfM_117
+    IL_2536: nop            
+    IL_2537: ret            
+
+  --- method obfM_041  (rva=0x43c0) ---
+    IL_25cc: ldc.i4         -1328599366
+    IL_25d1: stloc.1        
+    IL_25d2: nop            
+    IL_25d3: ldloc.1        
+    IL_25d4: ldc.i4         1784273735
+    IL_25d9: add            
+    IL_25da: ldc.i4         455676497
+    IL_25df: xor            
+    IL_25e0: dup            
+    IL_25e1: ldc.i4.0       
+    IL_25e2: bge.s          9718
+    IL_25e4: ldc.i4         1117007494
+    IL_25e9: ldc.i4         207497647
+    IL_25ee: mul            
+    IL_25ef: ldc.i4         1627531041
+    IL_25f4: xor            
+    IL_25f5: pop            
+    IL_25f6: nop            
+    IL_25f7: ldc.i4.8       
+    IL_25f8: rem.un         
+    IL_25f9: switch         switch[8]
+    IL_261e: br             9952
+    IL_2623: nop            
+    IL_2624: nop            
+    IL_2625: ldarg.1        
+    IL_2626: ldnull         
+    IL_2627: call           ObfType_19::obfM_097
+    IL_262c: brfalse.s      9802
+    IL_262e: ldc.i4         -1328596279
+    IL_2633: stloc.1        
+    IL_2634: br.s           9682
+    IL_2636: nop            
+    IL_2637: ldarg.0        
+    IL_2638: ldfld          fld:obfF_020
+    IL_263d: ldfld          fld:obfF_018
+    IL_2642: ldarg.1        
+    IL_2643: callvirt       TypeSpecRow::Add
+    IL_2648: br.s           9803
+    IL_264a: ldc.i4.0       
+    IL_264b: stloc.0        
+    IL_264c: ldc.i4         -1328601812
+    IL_2651: stloc.1        
+    IL_2652: br             9682
+    IL_2657: nop            
+    IL_2658: ldloc.0        
+    IL_2659: brtrue.s       9821
+    IL_265b: br.s           9861
+    IL_265d: nop            
+    IL_265e: nop            
+    IL_265f: ldc.i4         -1328596629
+    IL_2664: stloc.1        
+    IL_2665: br             9682
+    IL_266a: nop            
+    IL_266b: ldarg.0        
+    IL_266c: ldfld          fld:obfF_019
+    IL_2671: ldarg.1        
+    IL_2672: callvirt       TypeSpecRow::Add
+    IL_2677: ldc.i4         -1328595338
+    IL_267c: stloc.1        
+    IL_267d: br             9682
+    IL_2682: nop            
+    IL_2683: nop            
+    IL_2684: nop            
+    IL_2685: ret            
+    IL_2686: nop            
+    IL_2687: ldc.i4         1961915293
+    IL_268c: ldc.i4         2003863703
+    IL_2691: mul            
+    IL_2692: ldc.i4         951967115
+    IL_2697: xor            
+    IL_2698: pop            
+    IL_2699: ldc.i4         -1328599272
+    IL_269e: stloc.1        
+    IL_269f: br             9682
+    IL_26a4: nop            
+    IL_26a5: ldc.i4         887125668
+    IL_26aa: ldc.i4         1216463941
+    IL_26af: mul            
+    IL_26b0: ldc.i4         558578415
+    IL_26b5: xor            
+    IL_26b6: pop            
+    IL_26b7: ldc.i4         -1328601065
+    IL_26bc: stloc.1        
+    IL_26bd: br             9682
+    IL_26c2: nop            
+    IL_26c3: ldc.i4         562960509
+    IL_26c8: ldc.i4         1731424635
+    IL_26cd: mul            
+    IL_26ce: ldc.i4         608684872
+    IL_26d3: xor            
+    IL_26d4: pop            
+    IL_26d5: ldc.i4         -1328598875
+    IL_26da: stloc.1        
+    IL_26db: br             9682
+    IL_26e0: nop            
+    IL_26e1: ldc.i4         -1328599366
+    IL_26e6: stloc.1        
+    IL_26e7: br             9682
+
+  --- method M1  (rva=0x44ec) ---
+    IL_26f8: ldarg.0        
+    IL_26f9: castclass      DecayEntity
+    IL_26fe: call           ObfType_19::obfM_019
+    IL_2703: ret            
+
+  --- method M2  (rva=0x4504) ---
+    IL_2710: ldarg.0        
+    IL_2711: castclass      ServerBuildingManager
+    IL_2716: ldarg.1        
+    IL_2717: castclass      Building
+    IL_271c: call           ObfType_19::obfM_021
+    IL_2721: ret            
+
+  --- method M3  (rva=0x4524) ---
+    IL_2730: ldarg.0        
+    IL_2731: castclass      DecayEntity
+    IL_2736: ldarg.1        
+    IL_2737: call           ObfType_19::obfM_022
+    IL_273c: ret            
+
+  --- method M4  (rva=0x4540) ---
+    IL_274c: ldarg.0        
+    IL_274d: castclass      DecayEntity
+    IL_2752: call           ObfType_19::obfM_020
+    IL_2757: ret            
+
+  --- method get_Name  (rva=0x4558) ---
+    IL_2764: ldc.i4         992
+    IL_2769: call           ObfType_19::obfM_004
+    IL_276e: ret            
+
+  --- method get_Author  (rva=0x4558) ---
+    IL_2764: ldc.i4         992
+    IL_2769: call           ObfType_19::obfM_004
+    IL_276e: ret            
+
+  --- method get_Version  (rva=0x4570) ---
+    IL_277c: ldc.i4.1       
+    IL_277d: ldc.i4.1       
+    IL_277e: ldc.i4.0       
+    IL_277f: newobj         Oxide.Core.VersionNumber::.ctor
+    IL_2784: ret            
+
+  --- method get_SupportsReloading  (rva=0x4588) ---
+    IL_2794: ldc.i4.1       
+    IL_2795: ret            
+
+  --- method .ctor  (rva=0x4598) ---
+    IL_27a4: ldarg.0        
+    IL_27a5: ldarg.1        
+    IL_27a6: call           ObfType_19::obfM_118
+    IL_27ab: nop            
+    IL_27ac: nop            
+    IL_27ad: ret            
+
+  --- method Load  (rva=0x45b0) ---
+    IL_27bc: ldc.i4         1915949539
+    IL_27c1: stloc.0        
+    IL_27c2: nop            
+    IL_27c3: ldloc.0        
+    IL_27c4: ldc.i4.s       16
+    IL_27c6: shr.un         
+    IL_27c7: ldloc.0        
+    IL_27c8: ldc.i4.s       16
+    IL_27ca: shl            
+    IL_27cb: or             
+    IL_27cc: ldc.i4         300114371
+    IL_27d1: xor            
+    IL_27d2: dup            
+    IL_27d3: ldc.i4.0       
+    IL_27d4: bge.s          10216
+    IL_27d6: ldc.i4         38223269
+    IL_27db: ldc.i4         725614595
+    IL_27e0: mul            
+    IL_27e1: ldc.i4         433609294
+    IL_27e6: xor            
+    IL_27e7: pop            
+    IL_27e8: nop            
+    IL_27e9: ldc.i4.8       
+    IL_27ea: rem.un         
+    IL_27eb: switch         switch[8]
+    IL_2810: br             10411
+    IL_2815: nop            
+    IL_2816: nop            
+    IL_2817: call           ObfType_19::obfM_012
+    IL_281c: ldc.i4         1844580835
+    IL_2821: stloc.0        
+    IL_2822: br.s           10178
+    IL_2824: nop            
+    IL_2825: nop            
+    IL_2826: ldc.i4         2076250595
+    IL_282b: stloc.0        
+    IL_282c: br.s           10178
+    IL_282e: nop            
+    IL_282f: call           ObfType_19::obfM_014
+    IL_2834: ldc.i4         2035814883
+    IL_2839: stloc.0        
+    IL_283a: br.s           10178
+    IL_283c: nop            
+    IL_283d: nop            
+    IL_283e: ldc.i4         1682903523
+    IL_2843: stloc.0        
+    IL_2844: br             10178
+    IL_2849: nop            
+    IL_284a: call           ObfType_19::obfM_025
+    IL_284f: nop            
+    IL_2850: ret            
+    IL_2851: nop            
+    IL_2852: ldc.i4         374495103
+    IL_2857: ldc.i4         108378855
+    IL_285c: mul            
+    IL_285d: ldc.i4         1004567754
+    IL_2862: xor            
+    IL_2863: pop            
+    IL_2864: ldc.i4         2066026979
+    IL_2869: stloc.0        
+    IL_286a: br             10178
+    IL_286f: nop            
+    IL_2870: ldc.i4         1798916465
+    IL_2875: ldc.i4         1126851701
+    IL_287a: mul            
+    IL_287b: ldc.i4         185644922
+    IL_2880: xor            
+    IL_2881: pop            
+    IL_2882: ldc.i4         1946423779
+    IL_2887: stloc.0        
+    IL_2888: br             10178
+    IL_288d: nop            
+    IL_288e: ldc.i4         2089046749
+    IL_2893: ldc.i4         1849295557
+    IL_2898: mul            
+    IL_2899: ldc.i4         27966340
+    IL_289e: xor            
+    IL_289f: pop            
+    IL_28a0: ldc.i4         1624117731
+    IL_28a5: stloc.0        
+    IL_28a6: br             10178
+    IL_28ab: nop            
+    IL_28ac: ldc.i4         1915949539
+    IL_28b1: stloc.0        
+    IL_28b2: br             10178
+
+  --- method OnModLoad  (rva=0x46b8) ---
+    IL_28c4: ldc.i4         2131463045
+    IL_28c9: stloc.0        
+    IL_28ca: nop            
+    IL_28cb: ldloc.0        
+    IL_28cc: ldc.i4         2131465725
+    IL_28d1: xor            
+    IL_28d2: dup            
+    IL_28d3: ldc.i4.0       
+    IL_28d4: bge.s          10472
+    IL_28d6: ldc.i4         535605641
+    IL_28db: ldc.i4         1371900053
+    IL_28e0: mul            
+    IL_28e1: ldc.i4         1966929933
+    IL_28e6: xor            
+    IL_28e7: pop            
+    IL_28e8: nop            
+    IL_28e9: ldc.i4.8       
+    IL_28ea: rem.un         
+    IL_28eb: switch         switch[8]
+    IL_2910: br             10664
+    IL_2915: nop            
+    IL_2916: nop            
+    IL_2917: call           ObfType_19::obfM_012
+    IL_291c: ldc.i4         2131466516
+    IL_2921: stloc.0        
+    IL_2922: br.s           10442
+    IL_2924: nop            
+    IL_2925: nop            
+    IL_2926: ldc.i4         2131460351
+    IL_292b: stloc.0        
+    IL_292c: br.s           10442
+    IL_292e: nop            
+    IL_292f: call           ObfType_19::obfM_014
+    IL_2934: ldc.i4         2131460646
+    IL_2939: stloc.0        
+    IL_293a: br.s           10442
+    IL_293c: nop            
+    IL_293d: nop            
+    IL_293e: ldc.i4         2131461969
+    IL_2943: stloc.0        
+    IL_2944: br.s           10442
+    IL_2946: nop            
+    IL_2947: call           ObfType_19::obfM_025
+    IL_294c: nop            
+    IL_294d: ret            
+    IL_294e: nop            
+    IL_294f: ldc.i4         2021989168
+    IL_2954: ldc.i4         1782289265
+    IL_2959: mul            
+    IL_295a: ldc.i4         1178927948
+    IL_295f: xor            
+    IL_2960: pop            
+    IL_2961: ldc.i4         2131461955
+    IL_2966: stloc.0        
+    IL_2967: br             10442
+    IL_296c: nop            
+    IL_296d: ldc.i4         77090077
+    IL_2972: ldc.i4         1273756041
+    IL_2977: mul            
+    IL_2978: ldc.i4         1100323229
+    IL_297d: xor            
+    IL_297e: pop            
+    IL_297f: ldc.i4         2131461346
+    IL_2984: stloc.0        
+    IL_2985: br             10442
+    IL_298a: nop            
+    IL_298b: ldc.i4         1416611301
+    IL_2990: ldc.i4         859348779
+    IL_2995: mul            
+    IL_2996: ldc.i4         1589307772
+    IL_299b: xor            
+    IL_299c: pop            
+    IL_299d: ldc.i4         2131461152
+    IL_29a2: stloc.0        
+    IL_29a3: br             10442
+    IL_29a8: nop            
+    IL_29a9: ldc.i4         2131463045
+    IL_29ae: stloc.0        
+    IL_29af: br             10442
+
+  --- method OnShutdown  (rva=0x47b4) ---
+    IL_29c0: ldc.i4         -2147173476
+    IL_29c5: stloc.0        
+    IL_29c6: nop            
+    IL_29c7: ldloc.0        
+    IL_29c8: ldc.i4         1570319944
+    IL_29cd: sub            
+    IL_29ce: ldc.i4         577472012
+    IL_29d3: xor            
+    IL_29d4: dup            
+    IL_29d5: ldc.i4.0       
+    IL_29d6: bge.s          10730
+    IL_29d8: ldc.i4         144467064
+    IL_29dd: ldc.i4         1387470005
+    IL_29e2: mul            
+    IL_29e3: ldc.i4         1938715598
+    IL_29e8: xor            
+    IL_29e9: pop            
+    IL_29ea: nop            
+    IL_29eb: ldc.i4.8       
+    IL_29ec: rem.un         
+    IL_29ed: switch         switch[8]
+    IL_2a12: br             10919
+    IL_2a17: nop            
+    IL_2a18: nop            
+    IL_2a19: ldc.i4         -2147175587
+    IL_2a1e: stloc.0        
+    IL_2a1f: br.s           10694
+    IL_2a21: nop            
+    IL_2a22: call           ObfType_19::obfM_026
+    IL_2a27: ldc.i4         -2147174018
+    IL_2a2c: stloc.0        
+    IL_2a2d: br.s           10694
+    IL_2a2f: nop            
+    IL_2a30: nop            
+    IL_2a31: ldc.i4         -2147172529
+    IL_2a36: stloc.0        
+    IL_2a37: br.s           10694
+    IL_2a39: nop            
+    IL_2a3a: call           ObfType_19::obfM_015
+    IL_2a3f: ldc.i4         -2147172656
+    IL_2a44: stloc.0        
+    IL_2a45: br             10694
+    IL_2a4a: nop            
+    IL_2a4b: nop            
+    IL_2a4c: ret            
+    IL_2a4d: nop            
+    IL_2a4e: ldc.i4         1839317974
+    IL_2a53: ldc.i4         803493855
+    IL_2a58: mul            
+    IL_2a59: ldc.i4         1083685439
+    IL_2a5e: xor            
+    IL_2a5f: pop            
+    IL_2a60: ldc.i4         -2147175550
+    IL_2a65: stloc.0        
+    IL_2a66: br             10694
+    IL_2a6b: nop            
+    IL_2a6c: ldc.i4         579934662
+    IL_2a71: ldc.i4         565478741
+    IL_2a76: mul            
+    IL_2a77: ldc.i4         270068345
+    IL_2a7c: xor            
+    IL_2a7d: pop            
+    IL_2a7e: ldc.i4         -2147175365
+    IL_2a83: stloc.0        
+    IL_2a84: br             10694
+    IL_2a89: nop            
+    IL_2a8a: ldc.i4         899203776
+    IL_2a8f: ldc.i4         1697509379
+    IL_2a94: mul            
+    IL_2a95: ldc.i4         2045487300
+    IL_2a9a: xor            
+    IL_2a9b: pop            
+    IL_2a9c: ldc.i4         -2147172871
+    IL_2aa1: stloc.0        
+    IL_2aa2: br             10694
+    IL_2aa7: nop            
+    IL_2aa8: ldc.i4         -2147173476
+    IL_2aad: stloc.0        
+    IL_2aae: br             10694
+
+  --- method Unload  (rva=0x48b4) ---
+    IL_2ac0: ldc.i4         1419060402
+    IL_2ac5: stloc.0        
+    IL_2ac6: nop            
+    IL_2ac7: ldloc.0        
+    IL_2ac8: ldc.i4         288998105
+    IL_2acd: sub            
+    IL_2ace: ldc.i4         1130062233
+    IL_2ad3: xor            
+    IL_2ad4: dup            
+    IL_2ad5: ldc.i4.0       
+    IL_2ad6: bge.s          10986
+    IL_2ad8: ldc.i4         1956578293
+    IL_2add: ldc.i4         525219651
+    IL_2ae2: mul            
+    IL_2ae3: ldc.i4         309787320
+    IL_2ae8: xor            
+    IL_2ae9: pop            
+    IL_2aea: nop            
+    IL_2aeb: ldc.i4.8       
+    IL_2aec: rem.un         
+    IL_2aed: switch         switch[8]
+    IL_2b12: br             11175
+    IL_2b17: nop            
+    IL_2b18: nop            
+    IL_2b19: ldc.i4         1419068089
+    IL_2b1e: stloc.0        
+    IL_2b1f: br.s           10950
+    IL_2b21: nop            
+    IL_2b22: call           ObfType_19::obfM_026
+    IL_2b27: ldc.i4         1419059932
+    IL_2b2c: stloc.0        
+    IL_2b2d: br.s           10950
+    IL_2b2f: nop            
+    IL_2b30: nop            
+    IL_2b31: ldc.i4         1419062611
+    IL_2b36: stloc.0        
+    IL_2b37: br.s           10950
+    IL_2b39: nop            
+    IL_2b3a: call           ObfType_19::obfM_015
+    IL_2b3f: ldc.i4         1419062862
+    IL_2b44: stloc.0        
+    IL_2b45: br             10950
+    IL_2b4a: nop            
+    IL_2b4b: nop            
+    IL_2b4c: ret            
+    IL_2b4d: nop            
+    IL_2b4e: ldc.i4         663846030
+    IL_2b53: ldc.i4         1426288567
+    IL_2b58: mul            
+    IL_2b59: ldc.i4         375255503
+    IL_2b5e: xor            
+    IL_2b5f: pop            
+    IL_2b60: ldc.i4         1419065592
+    IL_2b65: stloc.0        
+    IL_2b66: br             10950
+    IL_2b6b: nop            
+    IL_2b6c: ldc.i4         1789455361
+    IL_2b71: ldc.i4         1888207075
+    IL_2b76: mul            
+    IL_2b77: ldc.i4         508467093
+    IL_2b7c: xor            
+    IL_2b7d: pop            
+    IL_2b7e: ldc.i4         1419061583
+    IL_2b83: stloc.0        
+    IL_2b84: br             10950
+    IL_2b89: nop            
+    IL_2b8a: ldc.i4         317346695
+    IL_2b8f: ldc.i4         1099752023
+    IL_2b94: mul            
+    IL_2b95: ldc.i4         1822462869
+    IL_2b9a: xor            
+    IL_2b9b: pop            
+    IL_2b9c: ldc.i4         1419062629
+    IL_2ba1: stloc.0        
+    IL_2ba2: br             10950
+    IL_2ba7: nop            
+    IL_2ba8: ldc.i4         1419060402
+    IL_2bad: stloc.0        
+    IL_2bae: br             10950
+
+  --- method StartTicking  (rva=0x49b4) ---
+    IL_2bc0: ldc.i4         -503968732
+    IL_2bc5: stloc.0        
+    IL_2bc6: nop            
+    IL_2bc7: ldloc.0        
+    IL_2bc8: ldc.i4         1991057313
+    IL_2bcd: add            
+    IL_2bce: ldc.i4         1487093621
+    IL_2bd3: xor            
+    IL_2bd4: dup            
+    IL_2bd5: ldc.i4.0       
+    IL_2bd6: bge.s          11242
+    IL_2bd8: ldc.i4         1574876962
+    IL_2bdd: ldc.i4         489814245
+    IL_2be2: mul            
+    IL_2be3: ldc.i4         1229317601
+    IL_2be8: xor            
+    IL_2be9: pop            
+    IL_2bea: nop            
+    IL_2beb: ldc.i4.8       
+    IL_2bec: rem.un         
+    IL_2bed: switch         switch[8]
+    IL_2c12: br             11445
+    IL_2c17: nop            
+    IL_2c18: nop            
+    IL_2c19: ldc.i4         -503964133
+    IL_2c1e: stloc.0        
+    IL_2c1f: br.s           11206
+    IL_2c21: nop            
+    IL_2c22: ldarg.0        
+    IL_2c23: call           ObfType_19::obfM_119
+    IL_2c28: ldc.i4         -503965362
+    IL_2c2d: stloc.0        
+    IL_2c2e: br.s           11206
+    IL_2c30: nop            
+    IL_2c31: nop            
+    IL_2c32: ldc.i4         -503966859
+    IL_2c37: stloc.0        
+    IL_2c38: br.s           11206
+    IL_2c3a: nop            
+    IL_2c3b: ldarg.0        
+    IL_2c3c: ldc.i4         1006
+    IL_2c41: call           ObfType_19::obfM_004
+    IL_2c46: ldarg.1        
+    IL_2c47: ldarg.1        
+    IL_2c48: call           ObfType_19::obfM_120
+    IL_2c4d: ldc.i4         -503965624
+    IL_2c52: stloc.0        
+    IL_2c53: br             11206
+    IL_2c58: nop            
+    IL_2c59: nop            
+    IL_2c5a: ret            
+    IL_2c5b: nop            
+    IL_2c5c: ldc.i4         890518396
+    IL_2c61: ldc.i4         1635668705
+    IL_2c66: mul            
+    IL_2c67: ldc.i4         1437224867
+    IL_2c6c: xor            
+    IL_2c6d: pop            
+    IL_2c6e: ldc.i4         -503969702
+    IL_2c73: stloc.0        
+    IL_2c74: br             11206
+    IL_2c79: nop            
+    IL_2c7a: ldc.i4         1999314709
+    IL_2c7f: ldc.i4         1616770265
+    IL_2c84: mul            
+    IL_2c85: ldc.i4         1660792992
+    IL_2c8a: xor            
+    IL_2c8b: pop            
+    IL_2c8c: ldc.i4         -503969919
+    IL_2c91: stloc.0        
+    IL_2c92: br             11206
+    IL_2c97: nop            
+    IL_2c98: ldc.i4         676122231
+    IL_2c9d: ldc.i4         845312053
+    IL_2ca2: mul            
+    IL_2ca3: ldc.i4         2129620952
+    IL_2ca8: xor            
+    IL_2ca9: pop            
+    IL_2caa: ldc.i4         -503966273
+    IL_2caf: stloc.0        
+    IL_2cb0: br             11206
+    IL_2cb5: nop            
+    IL_2cb6: ldc.i4         -503968732
+    IL_2cbb: stloc.0        
+    IL_2cbc: br             11206
+
+  --- method StopTicking  (rva=0x4ac4) ---
+    IL_2cd0: ldarg.0        
+    IL_2cd1: call           ObfType_19::obfM_119
+    IL_2cd6: nop            
+    IL_2cd7: ret            
+
+  --- method Tick  (rva=0x4ad8) ---
+    IL_2ce4: nop            
+    IL_2ce5: nop            
+    IL_2ce6: ldarg.0        
+    IL_2ce7: ldfld          fld:TickCallback
+    IL_2cec: dup            
+    IL_2ced: brtrue.s       11506
+    IL_2cef: pop            
+    IL_2cf0: br.s           11512
+    IL_2cf2: call           ObfType_19::obfM_121
+    IL_2cf7: nop            
+    IL_2cf8: nop            
+    IL_2cf9: leave.s        11542
+    IL_2cfb: stloc.0        
+    IL_2cfc: nop            
+    IL_2cfd: ldc.i4         1014
+    IL_2d02: call           ObfType_19::obfM_004
+    IL_2d07: ldloc.0        
+    IL_2d08: call           ObfType_19::obfM_122
+    IL_2d0d: call           ObfType_19::obfM_104
+    IL_2d12: nop            
+    IL_2d13: nop            
+    IL_2d14: leave.s        11542
+    IL_2d16: ret            
+
+  --- method .ctor  (rva=0x4b28) ---
+    IL_2d34: ldarg.0        
+    IL_2d35: call           ObfType_19::obfM_123
+    IL_2d3a: nop            
+    IL_2d3b: ret            
+
+  --- method obfM_059  (rva=0x4b3c) ---
+    IL_2d48: call           System.Reflection.Assembly::GetExecutingAssembly
+    IL_2d4d: ret            
+
+  --- method obfM_060  (rva=0x4b50) ---
+    IL_2d5c: ldarg.0        
+    IL_2d5d: callvirt       System.Reflection.Assembly::get_Location
+    IL_2d62: ret            
+
+  --- method obfM_061  (rva=0x4b64) ---
+    IL_2d70: ldarg.0        
+    IL_2d71: call           System.String::IsNullOrEmpty
+    IL_2d76: ret            
+
+  --- method obfM_062  (rva=0x4b78) ---
+    IL_2d84: ldarg.0        
+    IL_2d85: call           System.IO.File::ReadAllBytes
+    IL_2d8a: ret            
+
+  --- method obfM_063  (rva=0x4b8c) ---
+    IL_2d98: ldarg.0        
+    IL_2d99: callvirt       System.IO.Stream::get_Length
+    IL_2d9e: ret            
+
+  --- method obfM_064  (rva=0x4ba0) ---
+    IL_2dac: ldarg.0        
+    IL_2dad: ldarg.1        
+    IL_2dae: ldarg.2        
+    IL_2daf: ldarg.3        
+    IL_2db0: callvirt       System.IO.Stream::Read
+    IL_2db5: ret            
+
+  --- method obfM_065  (rva=0x4bb8) ---
+    IL_2dc4: ldarg.0        
+    IL_2dc5: ldarg.1        
+    IL_2dc6: callvirt       System.Reflection.Assembly::GetManifestResourceStream
+    IL_2dcb: ret            
+
+  --- method obfM_066  (rva=0x4bcc) ---
+    IL_2dd8: ldarg.0        
+    IL_2dd9: callvirt       System.IO.Stream::Dispose
+    IL_2dde: ret            
+
+  --- method obfM_067  (rva=0x4be0) ---
+    IL_2dec: call           System.Text.Encoding::get_UTF8
+    IL_2df1: ret            
+
+  --- method obfM_068  (rva=0x4bf4) ---
+    IL_2e00: ldarg.0        
+    IL_2e01: ldarg.1        
+    IL_2e02: ldarg.2        
+    IL_2e03: ldarg.3        
+    IL_2e04: callvirt       System.Text.Encoding::GetString
+    IL_2e09: ret            
+
+  --- method obfM_069  (rva=0x4c0c) ---
+    IL_2e18: ldarg.0        
+    IL_2e19: ldarg.1        
+    IL_2e1a: call           System.BitConverter::ToInt32
+    IL_2e1f: ret            
+
+  --- method obfM_070  (rva=0x4c20) ---
+    IL_2e2c: ldarg.0        
+    IL_2e2d: ldarg.1        
+    IL_2e2e: call           System.BitConverter::ToInt64
+    IL_2e33: ret            
+
+  --- method obfM_071  (rva=0x4c34) ---
+    IL_2e40: ldarg.0        
+    IL_2e41: ldarg.1        
+    IL_2e42: call           System.BitConverter::ToSingle
+    IL_2e47: ret            
+
+  --- method obfM_072  (rva=0x4c48) ---
+    IL_2e54: ldarg.0        
+    IL_2e55: ldarg.1        
+    IL_2e56: call           System.BitConverter::ToDouble
+    IL_2e5b: ret            
+
+  --- method obfM_073  (rva=0x4c5c) ---
+    IL_2e68: call           System.Diagnostics.Debugger::get_IsAttached
+    IL_2e6d: ret            
+
+  --- method obfM_074  (rva=0x4c70) ---
+    IL_2e7c: ldarg.0        
+    IL_2e7d: call           System.Environment::GetEnvironmentVariable
+    IL_2e82: ret            
+
+  --- method obfM_075  (rva=0x4c84) ---
+    IL_2e90: ldarg.0        
+    IL_2e91: call           System.Environment::FailFast
+    IL_2e96: ret            
+
+  --- method obfM_076  (rva=0x4c98) ---
+    IL_2ea4: call           System.DateTime::get_UtcNow
+    IL_2ea9: ret            
+
+  --- method obfM_077  (rva=0x4cac) ---
+    IL_2eb8: ldarg.0        
+    IL_2eb9: ldarg.1        
+    IL_2eba: call           System.Type::op_Inequality
+    IL_2ebf: ret            
+
+  --- method obfM_078  (rva=0x4cc0) ---
+    IL_2ecc: ldarg.0        
+    IL_2ecd: ldarg.1        
+    IL_2ece: call           System.Reflection.MethodInfo::op_Equality
+    IL_2ed3: ret            
+
+  --- method obfM_079  (rva=0x4cd4) ---
+    IL_2ee0: ldarg.0        
+    IL_2ee1: ldarg.1        
+    IL_2ee2: call           System.Reflection.MethodInfo::op_Inequality
+    IL_2ee7: ret            
+
+  --- method obfM_080  (rva=0x4ce8) ---
+    IL_2ef4: ldarg.0        
+    IL_2ef5: ldarg.1        
+    IL_2ef6: call           System.String::Format
+    IL_2efb: ret            
+
+  --- method obfM_081  (rva=0x4cfc) ---
+    IL_2f08: ldarg.0        
+    IL_2f09: call           System.Type::GetTypeFromHandle
+    IL_2f0e: ret            
+
+  --- method obfM_082  (rva=0x4d10) ---
+    IL_2f1c: ldarg.0        
+    IL_2f1d: callvirt       System.Exception::GetType
+    IL_2f22: ret            
+
+  --- method obfM_083  (rva=0x4d24) ---
+    IL_2f30: ldarg.0        
+    IL_2f31: callvirt       System.Type::get_FullName
+    IL_2f36: ret            
+
+  --- method obfM_084  (rva=0x4d38) ---
+    IL_2f44: ldarg.0        
+    IL_2f45: callvirt       System.Exception::get_Message
+    IL_2f4a: ret            
+
+  --- method obfM_085  (rva=0x4d4c) ---
+    IL_2f58: ldarg.0        
+    IL_2f59: ldarg.1        
+    IL_2f5a: ldarg.2        
+    IL_2f5b: ldarg.3        
+    IL_2f5c: call           System.String::Concat
+    IL_2f61: ret            
+
+  --- method obfM_086  (rva=0x4d64) ---
+    IL_2f70: ldarg.0        
+    IL_2f71: callvirt       System.Exception::get_InnerException
+    IL_2f76: ret            
+
+  --- method obfM_087  (rva=0x4d78) ---
+    IL_2f84: ldarg.0        
+    IL_2f85: ldarg.1        
+    IL_2f86: ldarg.2        
+    IL_2f87: ldarg.3        
+    IL_2f88: call           System.String::Format
+    IL_2f8d: ret            
+
+  --- method obfM_088  (rva=0x4d90) ---
+    IL_2f9c: ldarg.0        
+    IL_2f9d: callvirt       System.Reflection.ReflectionTypeLoadException::get_LoaderExceptions
+    IL_2fa2: ret            
+
+  --- method obfM_089  (rva=0x4da4) ---
+    IL_2fb0: ldarg.0        
+    IL_2fb1: call           System.Exception::GetType
+    IL_2fb6: ret            
+
+  --- method obfM_090  (rva=0x4db8) ---
+    IL_2fc4: ldarg.0        
+    IL_2fc5: ldarg.1        
+    IL_2fc6: call           System.Type::op_Equality
+    IL_2fcb: ret            
+
+  --- method obfM_091  (rva=0x4dcc) ---
+    IL_2fd8: ldarg.0        
+    IL_2fd9: ldarg.1        
+    IL_2fda: callvirt       System.Type::GetMethods
+    IL_2fdf: ret            
+
+  --- method obfM_092  (rva=0x4de0) ---
+    IL_2fec: ldarg.0        
+    IL_2fed: callvirt       System.Reflection.MemberInfo::get_Name
+    IL_2ff2: ret            
+
+  --- method obfM_093  (rva=0x4df4) ---
+    IL_3000: ldarg.0        
+    IL_3001: ldarg.1        
+    IL_3002: call           System.String::op_Inequality
+    IL_3007: ret            
+
+  --- method obfM_094  (rva=0x4e08) ---
+    IL_3014: ldarg.0        
+    IL_3015: callvirt       System.Reflection.MethodBase::GetParameters
+    IL_301a: ret            
+
+  --- method obfM_095  (rva=0x4e1c) ---
+    IL_3028: ldarg.0        
+    IL_3029: callvirt       System.Reflection.ParameterInfo::get_ParameterType
+    IL_302e: ret            
+
+  --- method obfM_096  (rva=0x4e30) ---
+    IL_303c: ldarg.0        
+    IL_303d: ldarg.1        
+    IL_303e: call           System.String::op_Equality
+    IL_3043: ret            
+
+  --- method obfM_097  (rva=0x4e44) ---
+    IL_3050: ldarg.0        
+    IL_3051: ldarg.1        
+    IL_3052: call           UnityEngine.Object::op_Inequality
+    IL_3057: ret            
+
+  --- method obfM_098  (rva=0x4e58) ---
+    IL_3064: ldarg.0        
+    IL_3065: call           UnityEngine.Object::DontDestroyOnLoad
+    IL_306a: ret            
+
+  --- method obfM_099  (rva=0x4e6c) ---
+    IL_3078: ldarg.0        
+    IL_3079: ldarg.1        
+    IL_307a: call           UnityEngine.Mathf::Max
+    IL_307f: ret            
+
+  --- method obfM_100  (rva=0x4e80) ---
+    IL_308c: ldarg.0        
+    IL_308d: ldarg.1        
+    IL_308e: call           System.String::Concat
+    IL_3093: ret            
+
+  --- method obfM_101  (rva=0x4e94) ---
+    IL_30a0: ldarg.0        
+    IL_30a1: call           UnityEngine.Object::Destroy
+    IL_30a6: ret            
+
+  --- method obfM_102  (rva=0x4ea8) ---
+    IL_30b4: ldarg.0        
+    IL_30b5: call           UnityEngine.Debug::Log
+    IL_30ba: ret            
+
+  --- method obfM_103  (rva=0x4ebc) ---
+    IL_30c8: ldarg.0        
+    IL_30c9: call           UnityEngine.Debug::LogWarning
+    IL_30ce: ret            
+
+  --- method obfM_104  (rva=0x4ed0) ---
+    IL_30dc: ldarg.0        
+    IL_30dd: call           UnityEngine.Debug::LogError
+    IL_30e2: ret            
+
+  --- method obfM_105  (rva=0x4ee4) ---
+    IL_30f0: ldarg.0        
+    IL_30f1: ldarg.1        
+    IL_30f2: call           UnityEngine.Object::op_Equality
+    IL_30f7: ret            
+
+  --- method obfM_106  (rva=0x4ef8) ---
+    IL_3104: ldarg.0        
+    IL_3105: ldarg.1        
+    IL_3106: callvirt       BuildingManager::GetBuilding
+    IL_310b: ret            
+
+  --- method obfM_107  (rva=0x4f0c) ---
+    IL_3118: ldarg.0        
+    IL_3119: call           Facepunch.StringView::op_Implicit
+    IL_311e: ret            
+
+  --- method obfM_108  (rva=0x4f20) ---
+    IL_312c: ldarg.0        
+    IL_312d: callvirt       Arg::get_Connection
+    IL_3132: ret            
+
+  --- method obfM_109  (rva=0x4f34) ---
+    IL_3140: ldarg.0        
+    IL_3141: ldarg.1        
+    IL_3142: callvirt       Arg::ReplyWith
+    IL_3147: ret            
+
+  --- method obfM_110  (rva=0x4f48) ---
+    IL_3154: ldarg.0        
+    IL_3155: callvirt       Building::HasBuildingBlocks
+    IL_315a: ret            
+
+  --- method obfM_111  (rva=0x4f5c) ---
+    IL_3168: ldarg.0        
+    IL_3169: callvirt       ServerBuildingManager::NewBuildingID
+    IL_316e: ret            
+
+  --- method obfM_112  (rva=0x4f70) ---
+    IL_317c: ldarg.0        
+    IL_317d: ldarg.1        
+    IL_317e: callvirt       DecayEntity::AttachToBuilding
+    IL_3183: ret            
+
+  --- method obfM_113  (rva=0x4f84) ---
+    IL_3190: ldarg.0        
+    IL_3191: callvirt       BaseNetworkable::GetParentEntity
+    IL_3196: ret            
+
+  --- method obfM_114  (rva=0x4f98) ---
+    IL_31a4: ldarg.0        
+    IL_31a5: callvirt       DecayEntity::GetNearbyBuildingBlock
+    IL_31aa: ret            
+
+  --- method obfM_115  (rva=0x4fac) ---
+    IL_31b8: ldarg.0        
+    IL_31b9: ldarg.1        
+    IL_31ba: ldarg.2        
+    IL_31bb: ldarg.3        
+    IL_31bc: callvirt       ServerBuildingManager::UpdateNavMeshCarver
+    IL_31c1: ret            
+
+  --- method obfM_116  (rva=0x4fc4) ---
+    IL_31d0: ldarg.0        
+    IL_31d1: callvirt       DecayEntity::GetBuilding
+    IL_31d6: ret            
+
+  --- method obfM_117  (rva=0x4fd8) ---
+    IL_31e4: ldarg.0        
+    IL_31e5: call           System.Object::.ctor
+    IL_31ea: ret            
+
+  --- method obfM_118  (rva=0x4fec) ---
+    IL_31f8: ldarg.0        
+    IL_31f9: ldarg.1        
+    IL_31fa: call           Oxide.Core.Extensions.Extension::.ctor
+    IL_31ff: ret            
+
+  --- method obfM_119  (rva=0x5000) ---
+    IL_320c: ldarg.0        
+    IL_320d: call           UnityEngine.MonoBehaviour::CancelInvoke
+    IL_3212: ret            
+
+  --- method obfM_120  (rva=0x5014) ---
+    IL_3220: ldarg.0        
+    IL_3221: ldarg.1        
+    IL_3222: ldarg.2        
+    IL_3223: ldarg.3        
+    IL_3224: call           UnityEngine.MonoBehaviour::InvokeRepeating
+    IL_3229: ret            
+
+  --- method obfM_121  (rva=0x502c) ---
+    IL_3238: ldarg.0        
+    IL_3239: callvirt       System.Action::Invoke
+    IL_323e: ret            
+
+  --- method obfM_122  (rva=0x5040) ---
+    IL_324c: ldarg.0        
+    IL_324d: ldarg.1        
+    IL_324e: call           System.String::Format
+    IL_3253: ret            
+
+  --- method obfM_123  (rva=0x5054) ---
+    IL_3260: ldarg.0        
+    IL_3261: call           UnityEngine.MonoBehaviour::.ctor
+    IL_3266: ret            
