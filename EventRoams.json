@@ -16,7 +16,7 @@
   "Event_CommandBlocked_Arena": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>This command cannot be used inside the arena</color>",
   "Event_Winner_Player_WithDeaths": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>Player</color> <color=#F44350>{1}</color> <color=#E3E3E3>wins the Roams event</color>\n<color=#E3E3E3>Kills:</color> <color=#F44350>{2}</color> <color=#E3E3E3>Deaths:</color> <color=#F44350>{3}</color>",
   "Event_Ended": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>The Roams event is over!</color>",
-  "Event_TimeLeft": "<size=20>{0}</size>\nRoams Event ends in | <color=#27F5EE>{1}</color>",
+  "Event_TimeLeft": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>Roams ends in</color> <color=#F44350>{1}</color>",
   "Event_TopPlayers": "<size=20>{0}</size>\nRoams Event ends in | <color=#27F5EE>{1}</color>",
   "Event_TopPlayer": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#F44350>{1}</color> <color=#E3E3E3>—</color> <color=#F44350>{2}</color> <color=#E3E3E3>pts</color>",
   "Event_TopClan": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#F44350>{1}</color> <color=#E3E3E3>—</color> <color=#F44350>{2}</color> <color=#E3E3E3>pts</color>",
