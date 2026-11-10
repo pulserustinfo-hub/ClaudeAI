@@ -4,7 +4,7 @@
   "Announcements": [
     {
       "Enabled": true,
-      "Message": "<color=#F44350><size=18>PULSE 10X</size></color>\n<color=#E3E3E3><size=14>Enjoying the server? Enhance your experience with</size></color> <color=#F44350>/kits</color>\n<color=#E3E3E3><size=14>(https://pulserust.net/store)</size></color>"
+      "Message": "<color=#F44350><size=18>WELCOME</size></color>\n<color=#E3E3E3><size=14>New to Pulse 10X? We're glad you're here, make yourself at home!</size></color>\n<color=#E3E3E3><size=14>Get started with</size></color> <color=#F44350>/kits</color> <color=#E3E3E3><size=14>or ask for help @</size></color> <color=#F44350>discord.gg/pulse10x</color>"
     },
     {
       "Enabled": true,
