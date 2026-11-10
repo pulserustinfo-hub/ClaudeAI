@@ -33,7 +33,7 @@
   "ClanAllyFFOn": "<color=#E3E3E3>You have turned allied friendly fire</color> <color=#80EF80>On</color><color=#E3E3E3>.</color>",
   "ClanAutoCreated": "<color=#E3E3E3>By creating a team, a clan with a random name has been automatically created for you! You can rename your clan with /clan rename.</color>",
   "ClanAutoCreateFailed": "<color=#E3E3E3>A clan could not be created because every generated tag was blocked.</color>",
-  "ClanChatFormat": "<color=#80EF80>- {0}</color><color=#E3E3E3>: {1}</color>",
+  "ClanChatFormat": "<color=#80EF80>{0}</color><color=#E3E3E3>: {1}</color>",
   "ClanChatLogFormat": "[CLAN: {0}] {1}/{2}: {3}",
   "ClanChatSenderFormat": "<color=#E3E3E3>[CLAN:</color> <color=#80EF80>{0}</color><color=#E3E3E3>]</color> <color=#80EF80>{1}</color><color=#E3E3E3>: {2}</color>",
   "ClanCreated": "<color=#E3E3E3>You have successfully created a clan with the tag</color> <color=#80EF80>{0}</color><color=#E3E3E3>!</color>",
