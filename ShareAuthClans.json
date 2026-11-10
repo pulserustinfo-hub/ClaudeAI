@@ -1,5 +1,5 @@
 {
-  "SamSitesPlaced": "<color=#E3E3E3>You have placed</color> <color=#80EF80>{0}/{1}</color> <color=#E3E3E3>of your allowed SAM sites!</color>",
+  "SamSitesPlaced": "<color=#E3E3E3>You have placed</color> <color=#80EF80>{0}</color><color=#E3E3E3>/</color><color=#80EF80>{1}</color> <color=#E3E3E3>of your allowed SAM sites!</color>",
   "ShareClansDisable": "<color=#E3E3E3>You have</color> <color=#F44350>Disabled</color> <color=#E3E3E3>clan sharing settings.</color>",
   "ShareClansEnable": "<color=#E3E3E3>You have</color> <color=#80EF80>Enabled</color> <color=#E3E3E3>clan sharing settings.</color>",
   "ShareCodesDisable": "<color=#E3E3E3>You have</color> <color=#F44350>Disabled</color> <color=#E3E3E3>codes sharing.</color>",
@@ -18,5 +18,5 @@
   "RefreshUnknown": "<color=#E3E3E3>Clan</color> <color=#80EF80>{0}</color> <color=#E3E3E3>was not found.</color>",
   "ShareCommandUsage": "<color=#E3E3E3>Share command usages:\n\n/share - Show current share settings\n/share refresh - Clear and reapply your clan's authorization\n/share refresh <id or tag> - Refresh one clan (admin)\n/share refresh all - Refresh every clan (admin)\n/share clans - Toggle clan sharing\n/share clans codes - Toggle sharing clan codes\n/share clans cupboards - Toggle sharing clan tool cupboards\n/share clans sam - Toggle sharing clan SAM turrets\n/share clans turrets - Toggle sharing clan auto turrets</color>",
   "ShareSettings": "<color=#E3E3E3>YOUR CURRENT SHARE SETTINGS:</color>\n\n<color=#E3E3E3>CLANS:</color> <color=#80EF80>{0}</color>\n<color=#E3E3E3>  - CODES:</color> <color=#80EF80>{1}</color>\n<color=#E3E3E3>  - CUPBOARDS:</color> <color=#80EF80>{2}</color>\n<color=#E3E3E3>  - SAM:</color> <color=#80EF80>{3}</color>\n<color=#E3E3E3>  - TURRETS:</color> <color=#80EF80>{4}</color>\n\n<color=#E3E3E3>Use /share help to see command usages.</color>",
-  "TurretsPlaced": "<color=#E3E3E3>You have placed</color> <color=#80EF80>{0}/{1}</color> <color=#E3E3E3>of your allowed turrets!</color>"
+  "TurretsPlaced": "<color=#E3E3E3>You have placed</color> <color=#80EF80>{0}</color><color=#E3E3E3>/</color><color=#80EF80>{1}</color> <color=#E3E3E3>of your allowed turrets!</color>"
 }
