@@ -1,0 +1,13 @@
+{
+  "ActiveGracePeriod": "<color=#E3E3E3>There is an active grace period here for</color> <color=#65FF3B>{0}'s</color>",
+  "ActiveGracePeriod_UI": "ACTIVE GRACE",
+  "CanBeKilledInGrace": "<color=#E3E3E3>There is an active grace period here, you can be </color> <color=#F44350>Killed</color>",
+  "ExplosivesThrown": "Your grace zone will automatically be removed if clan mates use {0} more explosives!",
+  "GraceCancelled": "<color=#ff3c26>GRACE PERIOD:</color> The grace period for {0} has been cancelled as they are raiding!",
+  "GraceCommandFormat": "Active grace zones:\n{0}",
+  "GraceCommandLine": "  - {clantag} // {coordinate} // {time}",
+  "GraceEnded": "<color=#ff3c26>GRACE PERIOD:</color> The grace period for {0} has now ended!",
+  "GraceStarted": "<color=#ff3c26>GRACE PERIOD:</color> A grace period has started for {0}, it will last for {1}!",
+  "NoGraces": "There are no active grace zones!"
+}
+

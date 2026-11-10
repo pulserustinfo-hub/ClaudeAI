@@ -1,0 +1,12 @@
+{
+  "ActiveGracePeriod": "<color=#80EF80>{0}</color><color=#E3E3E3>'s grace period is active</color>",
+  "ActiveGracePeriod_UI": "ACTIVE GRACE",
+  "CanBeKilledInGrace": "<color=#E3E3E3>Grace period active here (You can be</color> <color=#F44350>Killed</color><color=#E3E3E3>)</color>",
+  "ExplosivesThrown": "<color=#E3E3E3>Grace zone removed if clan mates use</color> <color=#80EF80>{0}</color> <color=#E3E3E3>more explosives</color>",
+  "GraceCancelled": "<color=#F44350>GRACE PERIOD:</color> <color=#E3E3E3>Grace period for</color> <color=#80EF80>{0}</color> <color=#E3E3E3>cancelled (Raiding)</color>",
+  "GraceCommandFormat": "<color=#E3E3E3>Active grace zones:</color>\n{0}",
+  "GraceCommandLine": "<color=#E3E3E3>  -</color> <color=#80EF80>{clantag}</color> <color=#E3E3E3>//</color> <color=#80EF80>{coordinate}</color> <color=#E3E3E3>//</color> <color=#80EF80>{time}</color>",
+  "GraceEnded": "<color=#F44350>GRACE PERIOD:</color> <color=#E3E3E3>Grace period for</color> <color=#80EF80>{0}</color> <color=#E3E3E3>ended</color>",
+  "GraceStarted": "<color=#F44350>GRACE PERIOD:</color> <color=#E3E3E3>Grace period started for</color> <color=#80EF80>{0}</color> <color=#E3E3E3>(Lasts</color> <color=#80EF80>{1}</color><color=#E3E3E3>)</color>",
+  "NoGraces": "<color=#E3E3E3>No active grace zones</color>"
+}
