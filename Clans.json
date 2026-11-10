@@ -61,7 +61,7 @@
   "CodeChangeSuccess": "<color=#E3E3E3>Clan code changed to</color> <color=#80EF80>{0}</color>",
   "CommandCooldown": "<color=#E3E3E3>Command on cooldown (</color><color=#80EF80>{0}</color><color=#E3E3E3>)</color>",
   "CommandHookError": "<color=#E3E3E3>Command blocked (External Source)</color>",
-  "DamagingAlly": "<color=#E3E3E3>Shooting an ally</color>",
+  "DamagingAlly": "<color=#E3E3E3>You cannot damage allies</color>",
   "DemoteSuccess": "<color=#80EF80>{0}</color> <color=#E3E3E3>demoted to</color> <color=#80EF80>{1}</color>",
   "HomeLocationInBlock": "<color=#E3E3E3>Clan home cannot be set (Inside Block)</color>",
   "HomeLocationInvalid": "<color=#E3E3E3>Clan home cannot be set (Invalid Position)</color>",
