@@ -1,0 +1,22 @@
+{
+  "SamSitesPlaced": "You have placed {0}/{1} of your allowed SAM sites!",
+  "ShareClansDisable": "You have DISABLED clan sharing settings.",
+  "ShareClansEnable": "You have ENABLED clan sharing settings.",
+  "ShareCodesDisable": "You have DISABLED codes sharing.",
+  "ShareCodesEnable": "You have ENABLED codes sharing.",
+  "ShareCupDisable": "You have DISABLED tool cupboard sharing.",
+  "ShareCupEnable": "You have ENABLED tool cupboard sharing.",
+  "ShareSamDisable": "You have DISABLED SAM turret sharing.",
+  "ShareSamEnable": "You have ENABLED SAM turret sharing.",
+  "ShareTurretsDisable": "You have DISABLED auto turret sharing.",
+  "ShareTurretsEnable": "You have ENABLED auto turret sharing.",
+  "RefreshBusy": "An authorization refresh is already running.",
+  "RefreshDenied": "You do not have permission to refresh another clan.",
+  "RefreshFinished": "Finished refreshing authorization for {0} clan(s).",
+  "RefreshNoClan": "You are not in a clan.",
+  "RefreshStarted": "Refreshing authorization for {0} clan(s). Existing auth will be cleared and current clan members will be added back.",
+  "RefreshUnknown": "Clan {0} was not found.",
+  "ShareCommandUsage": "Share command usages:\n\n/share - Show current share settings\n/share refresh - Clear and reapply your clan's authorization\n/share refresh <id or tag> - Refresh one clan (admin)\n/share refresh all - Refresh every clan (admin)\n/share clans - Toggle clan sharing\n/share clans codes - Toggle sharing clan codes\n/share clans cupboards - Toggle sharing clan tool cupboards\n/share clans sam - Toggle sharing clan SAM turrets\n/share clans turrets - Toggle sharing clan auto turrets",
+  "ShareSettings": "YOUR CURRENT SHARE SETTINGS:\n\nCLANS: {0}\n  - CODES: {1}\n  - CUPBOARDS: {2}\n  - SAM: {3}\n  - TURRETS: {4}\n\nUse /share help to see command usages.",
+  "TurretsPlaced": "You have placed {0}/{1} of your allowed turrets!"
+}
