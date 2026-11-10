@@ -1,0 +1,16 @@
+{
+  "Delay": 3.0,
+  "Messages": [
+    "<size=18><color=#F44350>WELCOME TO PULSE AU 10X</color></size>",
+    "<color=#ffffff>JOIN US @ DISCORD.GG/PULSE10X</color>",
+    "<color=#ffffff>GET SUPPORT @ DISCORD.GG/PULSE10X</color>",
+    "",
+    "<color=#ffffff>VISIT STORE @ PULSERUST.NET</color>",
+    "<color=#ffffff>LINK YOUR ACCOUNT @ PULSERUST.NET/LINK</color>"
+  ],
+  "Version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 0
+  }
+}
