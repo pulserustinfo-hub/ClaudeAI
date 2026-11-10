@@ -31,7 +31,7 @@
   "MazeEvent_Winner_Player_WithDeaths": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>Player</color> <color=#27F5F2>{1}</color> <color=#E3E3E3>won Maze!</color>\n<color=#E3E3E3>K/</color> <color=#27F5F2>{2}</color> <color=#E3E3E3>D/</color> <color=#27F5F2>{3}</color>",
   "MazeEvent_Building_Blocked": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>You cannot</color> <color=#27F5F2>Build</color> <color=#E3E3E3>in this area</color>",
   "Event_Winner_Clan_Details_Title": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>Winning team is</color> <color=#27F5F2>{0}</color>",
-  "Event_Winner_Clan_Details_Row": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#27F5F2>{1}</color> <color=#E3E3E3>K/</color> <color=#27F5F2>{2}</color> <color=#E3E3E3>D/</color> <color=#27F5F2>{3}</color>",
+  "Event_Winner_Clan_Details_Row": "<color=#27F5F2>{1}</color> <color=#E3E3E3>K/</color> <color=#27F5F2>{2}</color> <color=#E3E3E3>D/</color> <color=#27F5F2>{3}</color>",
   "Event_Player_Stats": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>Your statistics - K/</color> <color=#27F5F2>{0}</color> <color=#E3E3E3>D/</color> <color=#27F5F2>{1}</color>",
   "EnteredEventSafeZone": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>You have entered the safe zone</color>",
   "LeftEventSafeZone": "<color=#27F5F2><size=20>MAZE EVENT</size></color>\n<color=#E3E3E3>You have left the safe zone</color>",

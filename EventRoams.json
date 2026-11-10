@@ -21,7 +21,7 @@
   "Event_TopPlayer": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#F44350>{1}</color> <color=#E3E3E3>—</color> <color=#F44350>{2}</color> <color=#E3E3E3>pts</color>",
   "Event_TopClan": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#F44350>{1}</color> <color=#E3E3E3>—</color> <color=#F44350>{2}</color> <color=#E3E3E3>pts</color>",
   "Event_Winner_Clan_Details_Title": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>Winning team is</color> <color=#F44350>{0}</color>",
-  "Event_Winner_Clan_Details_Row": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#F44350>{1}</color> <color=#E3E3E3>K/</color> <color=#F44350>{2}</color> <color=#E3E3E3>D/</color> <color=#F44350>{3}</color>",
+  "Event_Winner_Clan_Details_Row": "<color=#F44350>{1}</color> <color=#E3E3E3>K/</color> <color=#F44350>{2}</color> <color=#E3E3E3>D/</color> <color=#F44350>{3}</color>",
   "Event_Player_Stats": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>Your statistics - K/</color> <color=#F44350>{0}</color> <color=#E3E3E3>D/</color> <color=#F44350>{1}</color>",
   "Event_Crafting_NotAllowed": "<color=#F44350><size=20>ROAMS EVENT</size></color>\n<color=#E3E3E3>You cannot craft during the event</color>",
   "Hours": "h",
