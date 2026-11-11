@@ -6,7 +6,7 @@
   "NodeEvent_First_Player": "<color=#91F527><size=20>NODE EVENT</size></color>\n{1} <color=#E3E3E3>arrived first to the node event</color>",
   "NodeEvent_First_Clan": "<color=#91F527><size=20>NODE EVENT</size></color>\n{1} <color=#E3E3E3>arrived first to the node event</color>",
   "NodeEvent_TimeLeft": "<color=#91F527><size=20>NODE EVENT</size></color>\n<color=#E3E3E3>Node ends in</color> <color=#91F527>{1}</color>",
-  "NodeEvent_TopPlayers": "<size=20>{0}</size>\nNode Event ends in | <color=#27F5EE>{1}</color>",
+  "NodeEvent_TopPlayers": "<size=20>{0}</size>\n<color=#E3E3E3>Node Event ends in</color> <color=#91F527>{1}</color>",
   "NodeEvent_TopPlayer": "<color=#91F527><size=20>NODE EVENT</size></color>\n<color=#91F527>{1}</color> <color=#E3E3E3>—</color> <color=#91F527>{2}</color> <color=#E3E3E3>pts</color>",
   "NodeEvent_TopClan": "<color=#91F527><size=20>NODE EVENT</size></color>\n<color=#91F527>{1}</color> <color=#E3E3E3>—</color> <color=#91F527>{2}</color> <color=#E3E3E3>pts</color>",
   "NodeEvent_Building_Blocked": "<color=#91F527><size=20>NODE EVENT</size></color>\n<color=#E3E3E3>You cannot</color> <color=#91F527>Build</color> <color=#E3E3E3>in this area</color>",
