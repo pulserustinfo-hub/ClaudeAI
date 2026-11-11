@@ -1,0 +1,5 @@
+{
+  "Disabled": "<color=#E3E3E3>Automatic Door closing is now</color> <color=#F44350>Disabled</color>",
+  "Enabled": "<color=#E3E3E3>Automatic Door closing is now</color> <color=#91F527>Enabled</color> <color=#E3E3E3>({0}s)</color>",
+  "UsageMessage": "Usage:\n/{0} - Enable/Disable auto door closing\n/{0} [seconds] - Set your auto door closing to [seconds]"
+}

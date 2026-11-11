@@ -1,0 +1,6 @@
+{
+  "PlayTimeGemsMessage": "<color=#E3E3E3>Rewarded</color> <color=#7627F5>+{0}GEMS</color> <color=#E3E3E3>for playtime ({1}m)</color>",
+  "PlayTimeRpMessage": "<color=#E3E3E3>Rewarded</color> <color=#F44350>+{0}RP</color> <color=#E3E3E3>for playtime ({1}m)</color>",
+  "PvpRpMessage": "<color=#E3E3E3>You have recieved</color> <color=#F44350>+{0}RP</color> <color=#E3E3E3>for killing<color=#E3E3E3> <color=#F44350>{1}</color>",
+  "PlayerBalanceMessage": "<color=#F44350><size=16>BALANCE</size></color>\n\n<color=#F44350>RP -</color> <color=#E3E3E3>{0}</color>\n<color=#7627F5>GEMS -</color> <color=#E3E3E3>{1}</color>"
+}

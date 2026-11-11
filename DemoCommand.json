@@ -1,0 +1,17 @@
+{
+  "NoPermission": "You do not have permission to use this command.",
+  "StartedDemoRecording": "<color=#E3E3E3>Demo recording has been</color> <color=#91F527>Enabled</color>",
+  "StoppedDemoRecording": "<color=#E3E3E3>Demo recording has been</color> <color=#F44350>Disabled</color>",
+  "StartedDemoRecordingTarget": "<color=#E3E3E3>Demo recording has been</color> <color=#91F527>Enabled</color> <color=#E3E3E3>{0} [{1}]</color>",
+  "StoppedDemoRecordingTarget": "<color=#E3E3E3>Demo recording has been</color> <color=#F44350>Disabled</color> <color=#E3E3E3>{0} [{1}]</color>",
+  "MaxRecordings": "<color=#E3E3E3>Maximum amount of demo recording has been reached</color> <color=#91F527>{0}</color>",
+  "AlreadyRecordingElsewhere": "<color=#E3E3E3>That player is already being demo recorded</color>",
+  "PlayerNotFound": "No connected player found matching '{0}'.",
+  "UsageSelf": "Usage: /{0}",
+  "UsageAdmin": "Usage: /{0} [player]",
+  "AutoStopWarning": "Your demo recording will automatically stop in approximately {0} seconds.",
+  "AutoStopped": "Your demo recording was automatically stopped (maximum duration reached).",
+  "NoActiveDemos": "There are no active demo recordings tracked by this plugin.",
+  "ActiveDemosHeader": "Active demo recordings ({0}):",
+  "StartCooldown": "Please wait {0} seconds before starting another demo recording for this player."
+}

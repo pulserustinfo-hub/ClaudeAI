@@ -1,0 +1,10 @@
+{
+  "ActiveLootPeriod_UI": "RAIDERS MUST LEAVE",
+  "BubblePopped": "<color=#F44350>{0}</color> <color=#E3E3E3>has popped bubble on</color> <color=#F44350>{1}'s'</color> <color=#E3E3E3>base!</color>",
+  "ExtraTimeFormat": "<color=#F44350>+{0} mins</color>",
+  "FirstEntityDestroyed": "<color=#F44350>{0}</color> <color=#E3E3E3>has started raiding</color> <color=#F44350>{1}'s'</color> <color=#E3E3E3>base!</color>",
+  "OvertimeText": "OVERTIME",
+  "RaidDefended": "<color=#F44350>{0}</color> <color=#E3E3E3>has successfully defended against</color> <color=#F44350>{1}</color>",
+  "RaidWon": "<color=#F44350>{0}</color> <color=#E3E3E3>has successfully raided</color> <color=#F44350>{1}</color>",
+  "ToolCupboardDestroyed": "<color=#F44350>{0}</color> <color=#E3E3E3>has destroyed</color> <color=#F44350>{1}'s</color> <color=#E3E3E3>tool cupboard</color>"
+}

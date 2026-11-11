@@ -1,0 +1,11 @@
+{
+  "SetAdded": "<color=#E3E3E3>You have set</color> <color=#91F527>{0}'s'</color><color=#E3E3E3> tool cupboard</color>",
+  "SetRemoved": "<color=#E3E3E3>You have removed</color> <color=#91F527>{0}'s'</color><color=#E3E3E3> tool cupboard</color>",
+  "SetTc": "<color=#E3E3E3>You have set your clans</color> <color=#91F527>Tool Cupboard</color>",
+  "SetTcAlreadySet": "<color=#E3E3E3>You have already set your clans</color> <color=#91F527>Tool Cupboard</color>",
+  "SetTcHasRaidBubble": "<color=#E3E3E3>You cannot set your</color> <color=#91F527>Tool Cupboard</color> <color=#E3E3E3>while being raided</color>",
+  "SetTcIsRaidBlocked": "<color=#E3E3E3>You cannot set your</color> <color=#91F527>Tool Cupboard</color> <color=#E3E3E3>while being raid blocked</color>",
+  "SetTcNotOwner": "<color=#E3E3E3>You cannot set your clans</color> <color=#91F527>Tool Cupboard</color> <color=#E3E3E3>here</color>",
+  "UI_SetTc": "SET TC    ",
+  "SetTcTooClose": "<color=#E3E3E3>You cannot set your</color> <color=#91F527>Tool Cupboard</color> <color=#E3E3E3> (to close {0}'s TC)</color>"
+}

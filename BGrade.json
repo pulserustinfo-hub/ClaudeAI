@@ -1,0 +1,14 @@
+{
+  "AvailableGrades": "<color=#91F527><size=16>BGRADE</size></color>\n\n<color=#91F527>Wood Tier -</color> <color=#E3E3E3>1</color>\n<color=#91F527>Stone Tier -</color> <color=#E3E3E3>2</color>\n<color=#91F527>Metal Tier -</color> <color=#E3E3E3>3</color>\n<color=#91F527>Armored Tier -</color> <color=#E3E3E3>4</color>",
+  "Bypassing": "<color=#f00>You do not own this skin! If you have access to use BGrade with this skin outside of a testing environment, please notify the owner of this server as it is against the game terms of service.</color>",
+  "Cancelled": "<color=#E3E3E3>BGrade is now</color> <color=#F44350>Disabled</color>",
+  "CannotAfford": "<color=#E3E3E3>Cannot afford to place this building to</color> <color=#91F527>{0}</color>",
+  "Extended": "<color=#E3E3E3>Bgrade to</color> <color=#91F527>{0}</color> <color=#E3E3E3>has been extended for</color> <color=#91F527>{1}s</color>",
+  "NoPermission": "<color=#E3E3E3>No permission to use /BGrade</color>",
+  "NoPermissionGrade": "<color=#E3E3E3>No permission to use this grade</color>",
+  "Started": "<color=#E3E3E3>Bgrade to</color> <color=#91F527>{0}</color> <color=#E3E3E3>has been enabled for</color> <color=#91F527>{1}s</color>",
+  "StartedPermanent": "<color=#E3E3E3>Bgrade has been</color> <color=#91F527>Enabled</color> <color=#E3E3E3>({0}s)</color>",
+  "Usage": "Usages:\n\n/bgrade - Cancel current building upgrade\n/bgrade <grade> [seconds (max: {0})] - Enable automatic building upgrades.\n/bgrades - View available building grades",
+  "UsagePermanent": "<color=#91F527><size=16>BGRADE</size></color>\n\n<color=#91F527>/BGrade -</color> <color=#E3E3E3>Enable & Disables BGrade</color>\n<color=#91F527>/BGrade <Grade> -</color> <color=#E3E3E3>Automatically places construction at that grade</color>\n<color=#91F527>/BGrades -</color> <color=#E3E3E3>Shows all avaliable grades</color>\n<color=#91F527>/BGrade t -</color> <color=#E3E3E3>Extends BGrade by the amount of seconds provided.</color>",
+  "UsageTime": "Usage: /bgrade t <seconds (max: {0})> - Extends your automatic building upgrades by the amount of seconds provided."
+}

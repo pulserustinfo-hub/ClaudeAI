@@ -1,0 +1,6 @@
+{
+  "Format": "<color=#F44350><size=16>Bradley -</size></color> <color=#E3E3E3>{0}</color>\n\n<color=#91F527><size=16>Patrol -</size></color> <color=#E3E3E3>{1}</color>",
+  "ImminentText": "Imminently",
+  "TimeLeftFormat": "{0}",
+  "SpawnedText": "Spawned"
+}

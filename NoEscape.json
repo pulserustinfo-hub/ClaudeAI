@@ -1,0 +1,10 @@
+{
+  "CombatBlockCheck": "<color=#E3E3E3>You are currently</color> <color=#FFFF4F>Combat Blocked</color> <color=#E3E3E3>({0}s)</color>",
+  "CombatBlockCheckNotBlocked": "<color=#E3E3E3>You are not</color> <color=#FFFF4F>Combat Blocked</color>",
+  "CombatBlocked": "<color=#E3E3E3>You are now </color> <color=#FFFF4F>Combat Blocked</color> <color=#E3E3E3>({0}s)</color>",
+  "CombatBlockedFinished": "<color=#E3E3E3>You are no longer </color> <color=#FFFF4F>Combat Blocked</color>",
+  "RaidBlockCheck": "<color=#E3E3E3>You are currently</color> <color=#F44350>Raid Blocked</color> <color=#E3E3E3>({0}s)</color>",
+  "RaidBlockCheckNotBlocked": "<color=#E3E3E3>You are not</color> <color=#F44350>Raid Blocked</color>",
+  "RaidBlocked": "<color=#E3E3E3>You are now </color> <color=#F44350>Raid Blocked</color> <color=#E3E3E3>({0}s)</color>",
+  "RaidBlockedFinished": "<color=#E3E3E3>You are no longer </color> <color=#F44350>Raid Blocked</color>"
+}
