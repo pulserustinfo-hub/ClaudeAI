@@ -1,0 +1,9 @@
+{
+  "NoPermission": "<color=#E3E3E3>Cannot use AutoLoot (No Permission)</color>",
+  "Enabled": "<color=#E3E3E3>AutoLoot</color> <color=#91F527>Enabled</color>",
+  "Disabled": "<color=#E3E3E3>AutoLoot</color> <color=#F44350>Disabled</color>",
+  "MessagesEnabled": "<color=#E3E3E3>AutoLoot messages</color> <color=#91F527>Enabled</color>",
+  "MessagesDisabled": "<color=#E3E3E3>AutoLoot messages</color> <color=#F44350>Disabled</color>",
+  "Looted": "<color=#E3E3E3>Auto-looted</color> <color=#91F527>{0}</color> <color=#E3E3E3>items</color>",
+  "InventoryFull": "<color=#F44350>{0}</color> <color=#E3E3E3>items not picked up (Inventory Full)</color>"
+}

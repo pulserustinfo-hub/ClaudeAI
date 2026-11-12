@@ -1,0 +1,9 @@
+{
+  "NoPermission": "You don't have permission to use this feature.",
+  "Enabled": "AutoLoot has been <color=#6abd43>enabled</color>.",
+  "Disabled": "AutoLoot has been <color=#e6731a>disabled</color>.",
+  "MessagesEnabled": "AutoLoot messages have been <color=#6abd43>enabled</color>.",
+  "MessagesDisabled": "AutoLoot messages have been <color=#e6731a>disabled</color>.",
+  "Looted": "Auto-looted <color=#4CAF50>{0}</color> items.",
+  "InventoryFull": "<color=#e6731a>{0}</color> items could not be picked up — inventory full."
+}
