@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("Mini Scrap", "Whispers88", "1.1.0")]
+    [Info("Mini Scrap", "Whispers88", "1.2.0")]
     [Description("Spawns a minicopter next to a player if they have enough scrap.")]
     class MiniScrap : RustPlugin
     {
@@ -42,6 +42,9 @@ namespace Oxide.Plugins
             [JsonProperty("Mini cooldown time")]
             public float MiniCooldown = 60;
 
+            [JsonProperty("Maximum minis per player at once (0 = unlimited)")]
+            public int MaxMinis = 1;
+
             [JsonProperty("Chat ID")]
             public ulong ChatID = 76561198152495837;
 
@@ -66,6 +69,7 @@ namespace Oxide.Plugins
                 public string NotNearBuildingBlock = "You cannot spawn a minicopter near a building block.";
                 public string NotEnoughScrap = "You need {0} scrap to buy a minicopter";
                 public string CooldownMsg = "You must wait {0} before spawning another mini.";
+                public string LimitReached = "You already have the maximum number of minicopters ({0}).";
                 public string SpawnSuccess = "A minicopter has been spawned next to you!";
                 public string NoPerms = "You do not have permission to use this command.";
                 public string BuildingBlocked = "You're in a building blocked zone";
@@ -157,11 +161,13 @@ namespace Oxide.Plugins
 
         private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        // Steam ID -> UTC unix time (seconds) at which the player may buy again. Saved to the data file.
-        private Dictionary<ulong, double> _cooldowns = new Dictionary<ulong, double>();
-        private bool _cooldownsDirty;
+        private StoredData _data = new StoredData();
+        private bool _dataDirty;
 
-        private string PermUse => $"{Name}.use";
+        // Entities can only be looked up once the save has been loaded.
+        private bool _serverReady;
+
+        private string _permUse;
 
         #endregion Fields
 
@@ -169,13 +175,38 @@ namespace Oxide.Plugins
 
         private void Init()
         {
-            permission.RegisterPermission(PermUse, this);
-            LoadCooldowns();
+            _permUse = $"{Name}.use";
+            permission.RegisterPermission(_permUse, this);
+            LoadData();
         }
 
-        private void OnServerSave() => SaveCooldowns();
+        private void OnServerInitialized(bool initial)
+        {
+            // Net IDs start again with every new save, so minis recorded under another save cannot be matched against this one.
+            string wipeId = SaveRestore.WipeId;
+            if (_data.WipeId != wipeId)
+            {
+                _data.Minis.Clear();
+                _data.WipeId = wipeId;
+                _dataDirty = true;
+            }
 
-        private void Unload() => SaveCooldowns();
+            _serverReady = true;
+            PruneMinis();
+        }
+
+        private void OnServerSave()
+        {
+            PruneCooldowns();
+            PruneMinis();
+            SaveData();
+        }
+
+        private void Unload()
+        {
+            PruneCooldowns();
+            SaveData();
+        }
 
         #endregion Hooks
 
@@ -186,14 +217,31 @@ namespace Oxide.Plugins
         {
             var messages = config.messageSettings;
 
-            if (!CanSpawnMinicopter(player))
+            // Tests run cheapest first. Nothing down to the scrap count queries the world, so a player who
+            // cannot buy right now costs a few dictionary reads however often they ask.
+            if (!permission.UserHasPermission(player.UserIDString, _permUse))
             {
+                Reply(player, messages.NoPerms);
+                return;
+            }
+
+            if (player.IsDead() || player.IsWounded() || player.IsSleeping() || player.isMounted || !player.IsOnGround())
+            {
+                Reply(player, messages.InvalidState);
                 return;
             }
 
             ulong userId = player.userID;
+
+            int maxMinis = config.MaxMinis;
+            if (maxMinis > 0 && CountMinis(userId) >= maxMinis)
+            {
+                Reply(player, string.Format(messages.LimitReached, maxMinis));
+                return;
+            }
+
             double now = UnixNow();
-            if (_cooldowns.TryGetValue(userId, out double endTime) && endTime > now)
+            if (_data.Cooldowns.TryGetValue(userId, out double endTime) && endTime > now)
             {
                 Reply(player, string.Format(messages.CooldownMsg, FormatDuration(endTime - now)));
                 return;
@@ -203,6 +251,25 @@ namespace Oxide.Plugins
             if (scrapPrice > 0 && player.inventory.GetAmount(_scrap) < scrapPrice)
             {
                 Reply(player, string.Format(messages.NotEnoughScrap, scrapPrice));
+                return;
+            }
+
+            // From here on every test is a world query: water, then building privilege, then physics.
+            if (player.IsSwimming())
+            {
+                Reply(player, messages.InvalidState);
+                return;
+            }
+
+            if (!config.AllowSafeZone && player.InSafeZone())
+            {
+                Reply(player, messages.SafeZone);
+                return;
+            }
+
+            if (player.IsBuildingBlocked())
+            {
+                Reply(player, messages.BuildingBlocked);
                 return;
             }
 
@@ -247,13 +314,25 @@ namespace Oxide.Plugins
 
             if (scrapPrice > 0)
             {
-                player.inventory.Take(null, _scrap, scrapPrice);
+                int taken = player.inventory.Take(null, _scrap, scrapPrice);
+                if (taken < scrapPrice)
+                {
+                    // The count was checked above, so this needs another plugin to answer the two calls differently.
+                    // Either way a mini is never handed over for less than its price.
+                    RefundScrap(player, taken);
+                    minicopter.Kill();
+                    PrintWarning($"Took {taken} of {scrapPrice} scrap from {player.UserIDString}; the purchase was cancelled and refunded");
+                    Reply(player, messages.SpawnFailed);
+                    return;
+                }
             }
+
+            TrackMini(userId, minicopter);
 
             if (config.MiniCooldown > 0)
             {
-                _cooldowns[userId] = now + config.MiniCooldown;
-                _cooldownsDirty = true;
+                _data.Cooldowns[userId] = now + config.MiniCooldown;
+                _dataDirty = true;
             }
 
             if (config.Fuel > 0)
@@ -264,35 +343,18 @@ namespace Oxide.Plugins
             Reply(player, messages.SpawnSuccess);
         }
 
-        private bool CanSpawnMinicopter(BasePlayer player)
+        private void RefundScrap(BasePlayer player, int amount)
         {
-            var messages = config.messageSettings;
-
-            if (!permission.UserHasPermission(player.UserIDString, PermUse))
+            if (amount <= 0)
             {
-                Reply(player, messages.NoPerms);
-                return false;
+                return;
             }
 
-            if (player.IsDead() || player.IsWounded() || player.IsSleeping() || player.isMounted || player.IsSwimming() || !player.IsOnGround())
+            Item item = ItemManager.CreateByItemID(_scrap, amount);
+            if (item != null)
             {
-                Reply(player, messages.InvalidState);
-                return false;
+                player.GiveItem(item);
             }
-
-            if (!config.AllowSafeZone && player.InSafeZone())
-            {
-                Reply(player, messages.SafeZone);
-                return false;
-            }
-
-            if (player.IsBuildingBlocked())
-            {
-                Reply(player, messages.BuildingBlocked);
-                return false;
-            }
-
-            return true;
         }
 
         private void Reply(BasePlayer player, string message) => Player.Message(player, message, config.ChatID);
@@ -334,6 +396,14 @@ namespace Oxide.Plugins
                 return false;
             }
 
+            // The probe can land on top of a low or half wall, which is not somewhere to park.
+            BuildingBlock surfaceBlock = ground.collider.ToBaseEntity() as BuildingBlock;
+            if (surfaceBlock != null && surfaceBlock.ShortPrefabName.Contains("wall"))
+            {
+                error = messages.NotNearBuildingBlock;
+                return false;
+            }
+
             spawnPos = ground.point + Vector3.up * config.UpDisplacement;
 
             // From the eyes, so a rock or wall between the player and the spawn point is always crossed from its outside.
@@ -360,6 +430,7 @@ namespace Oxide.Plugins
             }
 
             // The player's own position was checked earlier; this covers the spot the mini will occupy.
+            // It is the most expensive test here, so it runs last.
             float halfWidth = Mathf.Max(config.ClearanceRadius, 1f);
             Bounds miniBounds = new Bounds(new Vector3(0f, MiniHeight * 0.5f, 0f), new Vector3(halfWidth * 2f, MiniHeight, halfWidth * 2f));
             if (player.IsBuildingBlocked(spawnPos, rotation, miniBounds))
@@ -457,45 +528,172 @@ namespace Oxide.Plugins
 
         #endregion Spawn position
 
-        #region Cooldowns
+        #region Mini limit
 
-        private static double UnixNow() => (DateTime.UtcNow - UnixEpoch).TotalSeconds;
+        // A player's minis are remembered by net ID and looked up when needed. Nothing is subscribed to
+        // OnEntitySpawned or OnEntityKill, so the limit costs nothing while nobody is buying.
 
-        private void LoadCooldowns()
+        private void TrackMini(ulong userId, Minicopter minicopter)
         {
-            try
-            {
-                _cooldowns = Interface.Oxide.DataFileSystem.ReadObject<Dictionary<ulong, double>>(Name);
-            }
-            catch
-            {
-                PrintWarning($"Data file {Name}.json is invalid; cooldowns reset");
-                _cooldowns = null;
-            }
-
-            if (_cooldowns == null)
-            {
-                _cooldowns = new Dictionary<ulong, double>();
-            }
-
-            PruneCooldowns();
-        }
-
-        private void SaveCooldowns()
-        {
-            PruneCooldowns();
-            if (!_cooldownsDirty)
+            if (minicopter.net == null)
             {
                 return;
             }
 
-            Interface.Oxide.DataFileSystem.WriteObject(Name, _cooldowns);
-            _cooldownsDirty = false;
+            if (!_data.Minis.TryGetValue(userId, out List<ulong> ids) || ids == null)
+            {
+                ids = new List<ulong>();
+                _data.Minis[userId] = ids;
+            }
+
+            ids.Add(minicopter.net.ID.Value);
+            _dataDirty = true;
+        }
+
+        // Forgets the player's minis that no longer exist and returns how many are left.
+        private int CountMinis(ulong userId)
+        {
+            if (!_data.Minis.TryGetValue(userId, out List<ulong> ids))
+            {
+                return 0;
+            }
+
+            if (ids != null && RemoveMissingMinis(ids))
+            {
+                _dataDirty = true;
+            }
+
+            if (ids == null || ids.Count == 0)
+            {
+                _data.Minis.Remove(userId);
+                _dataDirty = true;
+                return 0;
+            }
+
+            return ids.Count;
+        }
+
+        private static bool RemoveMissingMinis(List<ulong> ids)
+        {
+            bool removed = false;
+            for (int i = ids.Count - 1; i >= 0; i--)
+            {
+                if (!MiniExists(ids[i]))
+                {
+                    ids.RemoveAt(i);
+                    removed = true;
+                }
+            }
+
+            return removed;
+        }
+
+        private static bool MiniExists(ulong netId)
+        {
+            Minicopter minicopter = BaseNetworkable.serverEntities.Find(new NetworkableId(netId)) as Minicopter;
+            return minicopter != null && !minicopter.IsDestroyed;
+        }
+
+        // Keeps the data file to minis that still exist. One dictionary read per remembered mini.
+        private void PruneMinis()
+        {
+            if (!_serverReady || _data.Minis.Count == 0)
+            {
+                return;
+            }
+
+            List<ulong> empty = Pool.Get<List<ulong>>();
+            try
+            {
+                foreach (var entry in _data.Minis)
+                {
+                    if (entry.Value != null && RemoveMissingMinis(entry.Value))
+                    {
+                        _dataDirty = true;
+                    }
+
+                    if (entry.Value == null || entry.Value.Count == 0)
+                    {
+                        empty.Add(entry.Key);
+                    }
+                }
+
+                foreach (var id in empty)
+                {
+                    _data.Minis.Remove(id);
+                }
+
+                if (empty.Count > 0)
+                {
+                    _dataDirty = true;
+                }
+            }
+            finally
+            {
+                Pool.FreeUnmanaged(ref empty);
+            }
+        }
+
+        #endregion Mini limit
+
+        #region Data
+
+        private class StoredData
+        {
+            // The save these records belong to. Net IDs are only unique within one save.
+            public string WipeId;
+
+            // Steam ID -> UTC unix time (seconds) at which the player may buy again.
+            public Dictionary<ulong, double> Cooldowns = new Dictionary<ulong, double>();
+
+            // Steam ID -> net IDs of the minis the player bought.
+            public Dictionary<ulong, List<ulong>> Minis = new Dictionary<ulong, List<ulong>>();
+        }
+
+        private static double UnixNow() => (DateTime.UtcNow - UnixEpoch).TotalSeconds;
+
+        private void LoadData()
+        {
+            try
+            {
+                _data = Interface.Oxide.DataFileSystem.ReadObject<StoredData>(Name);
+            }
+            catch
+            {
+                PrintWarning($"Data file {Name}.json is invalid; cooldowns and mini counts reset");
+                _data = null;
+            }
+
+            if (_data == null)
+            {
+                _data = new StoredData();
+            }
+
+            if (_data.Cooldowns == null)
+            {
+                _data.Cooldowns = new Dictionary<ulong, double>();
+            }
+
+            if (_data.Minis == null)
+            {
+                _data.Minis = new Dictionary<ulong, List<ulong>>();
+            }
+        }
+
+        private void SaveData()
+        {
+            if (!_dataDirty)
+            {
+                return;
+            }
+
+            Interface.Oxide.DataFileSystem.WriteObject(Name, _data);
+            _dataDirty = false;
         }
 
         private void PruneCooldowns()
         {
-            if (_cooldowns.Count == 0)
+            if (_data.Cooldowns.Count == 0)
             {
                 return;
             }
@@ -504,7 +702,7 @@ namespace Oxide.Plugins
             List<ulong> expired = Pool.Get<List<ulong>>();
             try
             {
-                foreach (var entry in _cooldowns)
+                foreach (var entry in _data.Cooldowns)
                 {
                     if (entry.Value <= now)
                     {
@@ -514,12 +712,12 @@ namespace Oxide.Plugins
 
                 foreach (var id in expired)
                 {
-                    _cooldowns.Remove(id);
+                    _data.Cooldowns.Remove(id);
                 }
 
                 if (expired.Count > 0)
                 {
-                    _cooldownsDirty = true;
+                    _dataDirty = true;
                 }
             }
             finally
@@ -528,6 +726,6 @@ namespace Oxide.Plugins
             }
         }
 
-        #endregion Cooldowns
+        #endregion Data
     }
 }
