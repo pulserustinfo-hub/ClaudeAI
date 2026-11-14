@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("Mini Scrap", "Whispers88", "1.2.0")]
+    [Info("Mini Scrap", "Whispers88", "1.3.0")]
     [Description("Spawns a minicopter next to a player if they have enough scrap.")]
     class MiniScrap : RustPlugin
     {
@@ -42,8 +42,12 @@ namespace Oxide.Plugins
             [JsonProperty("Mini cooldown time")]
             public float MiniCooldown = 60;
 
+            // At the limit the player's oldest mini is removed to make room for the new one.
             [JsonProperty("Maximum minis per player at once (0 = unlimited)")]
             public int MaxMinis = 1;
+
+            [JsonProperty("At the limit, remove the oldest mini even while someone is mounted on it")]
+            public bool ReplaceOccupied = false;
 
             [JsonProperty("Chat ID")]
             public ulong ChatID = 76561198152495837;
@@ -69,8 +73,9 @@ namespace Oxide.Plugins
                 public string NotNearBuildingBlock = "You cannot spawn a minicopter near a building block.";
                 public string NotEnoughScrap = "You need {0} scrap to buy a minicopter";
                 public string CooldownMsg = "You must wait {0} before spawning another mini.";
-                public string LimitReached = "You already have the maximum number of minicopters ({0}).";
+                public string OldestInUse = "Your oldest minicopter cannot be replaced while someone is on it.";
                 public string SpawnSuccess = "A minicopter has been spawned next to you!";
+                public string SpawnReplaced = "A minicopter has been spawned next to you! Your oldest one was removed (limit {0}).";
                 public string NoPerms = "You do not have permission to use this command.";
                 public string BuildingBlocked = "You're in a building blocked zone";
                 public string InvalidState = "You cannot spawn a minicopter while mounted, swimming, airborne or wounded.";
@@ -233,10 +238,13 @@ namespace Oxide.Plugins
 
             ulong userId = player.userID;
 
+            // At the limit the oldest mini makes way for the new one. How many have to go is worked out here,
+            // while refusing is still cheap; they are only removed once the new mini is spawned and paid for.
             int maxMinis = config.MaxMinis;
-            if (maxMinis > 0 && CountMinis(userId) >= maxMinis)
+            int toReplace = maxMinis > 0 ? CountMinis(userId) - maxMinis + 1 : 0;
+            if (toReplace > 0 && !config.ReplaceOccupied && OldestMiniInUse(userId, toReplace))
             {
-                Reply(player, string.Format(messages.LimitReached, maxMinis));
+                Reply(player, messages.OldestInUse);
                 return;
             }
 
@@ -277,7 +285,7 @@ namespace Oxide.Plugins
             Quaternion yaw = Quaternion.Euler(0f, player.eyes.rotation.eulerAngles.y, 0f);
             Quaternion rotation = yaw * Quaternion.Euler(0f, config.Rotation, 0f);
 
-            if (!TryGetSpawnPosition(player, yaw * Vector3.forward, rotation, out Vector3 minicopterPos, out string error))
+            if (!TryGetSpawnPosition(player, toReplace, yaw * Vector3.forward, rotation, out Vector3 minicopterPos, out string error))
             {
                 Reply(player, error);
                 return;
@@ -327,6 +335,7 @@ namespace Oxide.Plugins
                 }
             }
 
+            int replaced = toReplace > 0 ? RemoveOldestMinis(userId, toReplace) : 0;
             TrackMini(userId, minicopter);
 
             if (config.MiniCooldown > 0)
@@ -340,7 +349,7 @@ namespace Oxide.Plugins
                 minicopter.GetFuelSystem()?.AddFuel(config.Fuel);
             }
 
-            Reply(player, messages.SpawnSuccess);
+            Reply(player, replaced > 0 ? string.Format(messages.SpawnReplaced, maxMinis) : messages.SpawnSuccess);
         }
 
         private void RefundScrap(BasePlayer player, int amount)
@@ -381,7 +390,7 @@ namespace Oxide.Plugins
 
         #region Spawn position
 
-        private bool TryGetSpawnPosition(BasePlayer player, Vector3 forward, Quaternion rotation, out Vector3 spawnPos, out string error)
+        private bool TryGetSpawnPosition(BasePlayer player, int toReplace, Vector3 forward, Quaternion rotation, out Vector3 spawnPos, out string error)
         {
             var messages = config.messageSettings;
             spawnPos = Vector3.zero;
@@ -418,7 +427,7 @@ namespace Oxide.Plugins
                 return false;
             }
 
-            if (!HasClearance(player, ground.point, rotation))
+            if (!HasClearance(player, toReplace, ground.point, rotation))
             {
                 return false;
             }
@@ -455,7 +464,9 @@ namespace Oxide.Plugins
         }
 
         // True if nothing solid (rocks, walls, deployables, trees, vehicles, other players, animals) overlaps the space the mini needs.
-        private bool HasClearance(BasePlayer player, Vector3 groundPoint, Quaternion rotation)
+        // The buyer does not count, and neither do the minis this purchase is about to replace: they are gone
+        // before the next physics step, so a replacement can be bought on the very spot where the old mini stands.
+        private bool HasClearance(BasePlayer player, int toReplace, Vector3 groundPoint, Quaternion rotation)
         {
             float radius = config.ClearanceRadius;
             if (radius <= 0f)
@@ -477,7 +488,13 @@ namespace Oxide.Plugins
                     continue;
                 }
 
-                if (collider.ToBaseEntity() == player)
+                BaseEntity entity = collider.ToBaseEntity();
+                if (entity == player)
+                {
+                    continue;
+                }
+
+                if (toReplace > 0 && IsOldestMini(entity, player.userID, toReplace))
                 {
                     continue;
                 }
@@ -530,8 +547,9 @@ namespace Oxide.Plugins
 
         #region Mini limit
 
-        // A player's minis are remembered by net ID and looked up when needed. Nothing is subscribed to
-        // OnEntitySpawned or OnEntityKill, so the limit costs nothing while nobody is buying.
+        // A player's minis are remembered by net ID, oldest first, and looked up when needed. Nothing is
+        // subscribed to OnEntitySpawned or OnEntityKill, so the limit costs nothing while nobody is buying.
+        // A mini that is gone for any reason (shot down, decayed, removed by an admin) simply stops being found.
 
         private void TrackMini(ulong userId, Minicopter minicopter)
         {
@@ -558,7 +576,7 @@ namespace Oxide.Plugins
                 return 0;
             }
 
-            if (ids != null && RemoveMissingMinis(ids))
+            if (ids != null && RemoveMissingMinis(userId, ids))
             {
                 _dataDirty = true;
             }
@@ -573,12 +591,97 @@ namespace Oxide.Plugins
             return ids.Count;
         }
 
-        private static bool RemoveMissingMinis(List<ulong> ids)
+        // True if any of the player's oldest minis (as many as given) has someone mounted on it.
+        private bool OldestMiniInUse(ulong userId, int count)
+        {
+            if (!_data.Minis.TryGetValue(userId, out List<ulong> ids) || ids == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < count && i < ids.Count; i++)
+            {
+                Minicopter minicopter = FindMini(userId, ids[i]);
+                if (minicopter != null && minicopter.AnyMounted())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        // True if the entity is, or is attached to, one of the player's oldest minis (as many as given).
+        private bool IsOldestMini(BaseEntity entity, ulong userId, int count)
+        {
+            if (!_data.Minis.TryGetValue(userId, out List<ulong> ids) || ids == null)
+            {
+                return false;
+            }
+
+            // Seats and the fuel tank are entities of their own, parented to the mini.
+            while (entity != null)
+            {
+                Minicopter minicopter = entity as Minicopter;
+                if (minicopter != null)
+                {
+                    if (minicopter.net == null)
+                    {
+                        return false;
+                    }
+
+                    int index = ids.IndexOf(minicopter.net.ID.Value);
+                    return index >= 0 && index < count;
+                }
+
+                entity = entity.GetParentEntity();
+            }
+
+            return false;
+        }
+
+        // Removes the player's oldest minis (as many as given) from the world. Returns how many went.
+        private int RemoveOldestMinis(ulong userId, int count)
+        {
+            if (!_data.Minis.TryGetValue(userId, out List<ulong> ids) || ids == null)
+            {
+                return 0;
+            }
+
+            int removed = 0;
+            int index = 0;
+            while (count > 0 && index < ids.Count)
+            {
+                count--;
+
+                Minicopter minicopter = FindMini(userId, ids[index]);
+                if (minicopter != null)
+                {
+                    minicopter.Kill();
+                    if (!minicopter.IsDestroyed)
+                    {
+                        // Another plugin refused the removal (OnEntityKill). It stays on record and still counts.
+                        PrintWarning($"Could not remove minicopter {ids[index]} of {userId}: another plugin blocked it");
+                        index++;
+                        continue;
+                    }
+
+                    removed++;
+                }
+
+                ids.RemoveAt(index);
+                _dataDirty = true;
+            }
+
+            return removed;
+        }
+
+        private static bool RemoveMissingMinis(ulong userId, List<ulong> ids)
         {
             bool removed = false;
             for (int i = ids.Count - 1; i >= 0; i--)
             {
-                if (!MiniExists(ids[i]))
+                if (FindMini(userId, ids[i]) == null)
                 {
                     ids.RemoveAt(i);
                     removed = true;
@@ -588,10 +691,23 @@ namespace Oxide.Plugins
             return removed;
         }
 
-        private static bool MiniExists(ulong netId)
+        // The player's mini with this net ID, or null if it is gone. Gone covers destroyed, dead (out of health,
+        // by decay or damage, even if something delayed its removal) and handed to another owner.
+        private static Minicopter FindMini(ulong userId, ulong netId)
         {
             Minicopter minicopter = BaseNetworkable.serverEntities.Find(new NetworkableId(netId)) as Minicopter;
-            return minicopter != null && !minicopter.IsDestroyed;
+            if (minicopter == null || minicopter.IsDestroyed || minicopter.IsDead())
+            {
+                return null;
+            }
+
+            // Never touch a mini that now carries somebody else's owner ID, whatever the record says.
+            if (minicopter.OwnerID != 0 && minicopter.OwnerID != userId)
+            {
+                return null;
+            }
+
+            return minicopter;
         }
 
         // Keeps the data file to minis that still exist. One dictionary read per remembered mini.
@@ -607,7 +723,7 @@ namespace Oxide.Plugins
             {
                 foreach (var entry in _data.Minis)
                 {
-                    if (entry.Value != null && RemoveMissingMinis(entry.Value))
+                    if (entry.Value != null && RemoveMissingMinis(entry.Key, entry.Value))
                     {
                         _dataDirty = true;
                     }
@@ -646,7 +762,7 @@ namespace Oxide.Plugins
             // Steam ID -> UTC unix time (seconds) at which the player may buy again.
             public Dictionary<ulong, double> Cooldowns = new Dictionary<ulong, double>();
 
-            // Steam ID -> net IDs of the minis the player bought.
+            // Steam ID -> net IDs of the minis the player bought, oldest first.
             public Dictionary<ulong, List<ulong>> Minis = new Dictionary<ulong, List<ulong>>();
         }
 
