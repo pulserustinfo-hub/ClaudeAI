@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("PulseRecycler", "Nathan", "1.3.0")]
+    [Info("PulseRecycler", "Nathan", "1.4.0")]
     internal class PulseRecycler : RustPlugin
     {
         #region Fields
@@ -16,9 +16,18 @@ namespace Oxide.Plugins
         private Configuration _config;
         private readonly List<RecyclerTypeConfigSnapshot> _typeConfigSnapshots = new List<RecyclerTypeConfigSnapshot>();
 
+        // Share of an item's full stack to recycle per tick, by recycler type. 0 = leave the game's amount.
+        private readonly float[] _stackShareByType = new float[3];
+
         #endregion
 
         #region Hooks
+
+        private void Init()
+        {
+            // Only listened to while at least one recycler type has its own stack share.
+            Unsubscribe(nameof(OnItemRecycleAmount));
+        }
 
         private void OnServerInitialized()
         {
@@ -28,6 +37,25 @@ namespace Oxide.Plugins
         private void Unload()
         {
             RestoreRecyclerTypeConfigs();
+        }
+
+        // Called once per recycler tick, after the game has picked its own amount (10% of the item's full stack).
+        // A tick costs about the same however much it recycles, so a bigger share clears a stack in fewer ticks.
+        private object OnItemRecycleAmount(Item item, int amount, Recycler recycler)
+        {
+            if (item == null || recycler == null)
+                return null;
+
+            var type = (int)recycler.GetRecyclerType();
+            if (type < 0 || type >= _stackShareByType.Length)
+                return null;
+
+            var share = _stackShareByType[type];
+            if (share <= 0f || item.amount <= 1)
+                return null;
+
+            // Never more than the slot holds: the game produces output for whatever number is returned here.
+            return Mathf.Clamp(Mathf.CeilToInt(item.MaxStackable() * share), 1, item.amount);
         }
 
         #endregion
@@ -72,11 +100,33 @@ namespace Oxide.Plugins
                     requiredStageChanged = true;
                 }
 
-                Puts(DescribeTypeConfig(typeConfig));
+                var stackShare = settings.StackPercentPerTick > 0f ? Mathf.Min(settings.StackPercentPerTick, 100f) * 0.01f : 0f;
+                var type = (int)typeConfig.recyclerType;
+                if (type >= 0 && type < _stackShareByType.Length)
+                    _stackShareByType[type] = stackShare;
+
+                Puts(DescribeTypeConfig(typeConfig)
+                    + (stackShare > 0f ? $", {stackShare * 100f:0.##}% of a full stack per tick" : ", the game's 10% of a full stack per tick"));
             }
+
+            UpdateStackShareSubscription();
 
             if (requiredStageChanged)
                 RefreshRecyclerPowerState();
+        }
+
+        private void UpdateStackShareSubscription()
+        {
+            foreach (var share in _stackShareByType)
+            {
+                if (share > 0f)
+                {
+                    Subscribe(nameof(OnItemRecycleAmount));
+                    return;
+                }
+            }
+
+            Unsubscribe(nameof(OnItemRecycleAmount));
         }
 
         private void RestoreRecyclerTypeConfigs()
@@ -90,6 +140,9 @@ namespace Oxide.Plugins
             }
 
             _typeConfigSnapshots.Clear();
+
+            Array.Clear(_stackShareByType, 0, _stackShareByType.Length);
+            UpdateStackShareSubscription();
 
             if (requiredStageChanged)
                 RefreshRecyclerPowerState();
@@ -250,6 +303,9 @@ namespace Oxide.Plugins
 
             [JsonProperty("Power grid stage required to use (-1 = leave as the game has it, 0 = usable without power)")]
             public int RequiredPowergridStage = -1;
+
+            [JsonProperty("Stack recycled per tick (percent of the item's full stack, -1 = leave as the game has it, which is 10)")]
+            public float StackPercentPerTick = -1f;
         }
 
         [JsonObject(MemberSerialization.OptIn)]
