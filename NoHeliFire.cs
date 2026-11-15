@@ -1,4 +1,4 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Oxide.Core;
@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("No Heli Fire", "Tryhard", "1.3.0")]
+    [Info("No Heli Fire", "Tryhard", "1.3.1")]
     [Description("Optionally removes the explosion sound, gibs and fire effect from mini- and scrap helicopters")]
     public class NoHeliFire : RustPlugin
     {
@@ -78,8 +78,10 @@ namespace Oxide.Plugins
         // settings, and every helicopter gets that copy when the server clones it from the prefab template
         // (GameManager.CreateEntity -> Object.Instantiate). Changing the template once therefore covers every
         // helicopter created afterwards, so the plugin no longer listens to OnEntitySpawned, which the game
-        // calls for every entity spawned on the server. Helicopters that already exist when the plugin loads
-        // (restored from the save, or spawned before a reload) are changed once, in the same pass.
+        // calls for every entity spawned on the server. At boot the templates are changed in OnServerInitialize,
+        // which the game calls just before it restores the save, so restored helicopters are cloned already
+        // changed. OnServerInitialized (after the save, or straight after a reload) repeats the template step if
+        // it was missed and changes any helicopter that already exists, once.
 
         // The vanilla prefabs for the three helicopter types.
         private static readonly string[] KnownPrefabs =
@@ -113,28 +115,27 @@ namespace Oxide.Plugins
 
         private readonly Dictionary<string, TemplateRecord> _templates = new Dictionary<string, TemplateRecord>(StringComparer.OrdinalIgnoreCase);
 
+        private bool AnyOptionOn =>
+            configData.mExplo || configData.mFire || configData.mGibs
+            || configData.sExplo || configData.sFire || configData.sGibs
+            || configData.aExplo || configData.aFire || configData.aGibs;
+
+        // Called by the game once at boot, before the save is restored. Not called after a reload.
+        private void OnServerInitialize()
+        {
+            if (AnyOptionOn)
+                ChangeTemplates();
+        }
+
         private void OnServerInitialized()
         {
-            if (!configData.mExplo && !configData.mFire && !configData.mGibs
-                && !configData.sExplo && !configData.sFire && !configData.sGibs
-                && !configData.aExplo && !configData.aFire && !configData.aGibs)
+            if (!AnyOptionOn)
             {
                 Puts("All options are off; nothing changed");
                 return;
             }
 
-            foreach (string path in KnownPrefabs)
-                TryChangeTemplate(path);
-
-            string[] entityPrefabs = GameManifest.Current?.entities;
-            if (entityPrefabs != null)
-            {
-                foreach (string path in entityPrefabs)
-                {
-                    if (!string.IsNullOrEmpty(path) && !_templates.ContainsKey(path) && ContainsAny(path, PrefabNameParts))
-                        TryChangeTemplate(path);
-                }
-            }
+            ChangeTemplates();
 
             // Helicopters that exist already. Their own prefab is recorded too, in case it is not one of the above.
             int changed = 0;
@@ -149,17 +150,20 @@ namespace Oxide.Plugins
                     continue;
 
                 if (!string.IsNullOrEmpty(helicopter.PrefabName) && !_templates.ContainsKey(helicopter.PrefabName))
-                    TryChangeTemplate(helicopter.PrefabName);
+                    TryChangeTemplate(helicopter.PrefabName, null);
 
                 ClearEffects(helicopter, settings);
                 changed++;
             }
 
-            changed += ForEachPooledHelicopter(helicopter =>
+            ForEachPooledHelicopter(helicopter =>
             {
                 EffectSettings settings = GetSettings(helicopter);
-                if (settings != null && settings.Any)
-                    ClearEffects(helicopter, settings);
+                if (settings == null || !settings.Any)
+                    return;
+
+                ClearEffects(helicopter, settings);
+                changed++;
             });
 
             Puts($"Effects disabled on {_templates.Count} helicopter prefab(s) and {changed} existing helicopter(s)");
@@ -189,12 +193,52 @@ namespace Oxide.Plugins
             _templates.Clear();
         }
 
-        private void TryChangeTemplate(string path)
+        // Safe to run more than once: a template already recorded is skipped.
+        private void ChangeTemplates()
+        {
+            foreach (string path in KnownPrefabs)
+                TryChangeTemplate(path, null);
+
+            string[] entityPrefabs = GameManifest.Current?.entities;
+            if (entityPrefabs != null)
+            {
+                foreach (string path in entityPrefabs)
+                {
+                    if (!string.IsNullOrEmpty(path) && !_templates.ContainsKey(path) && ContainsAny(path, PrefabNameParts))
+                        TryChangeTemplate(path, null);
+                }
+            }
+
+            // Prefabs the server has already loaded, whatever their name. Copied first, because looking a prefab
+            // up can remove a dead entry from this dictionary.
+            Dictionary<string, GameObject> loaded = GameManager.server?.preProcessed?.prefabList;
+            if (loaded != null)
+            {
+                foreach (KeyValuePair<string, GameObject> entry in new List<KeyValuePair<string, GameObject>>(loaded))
+                {
+                    if (!string.IsNullOrEmpty(entry.Key) && entry.Value != null && !_templates.ContainsKey(entry.Key))
+                        TryChangeTemplate(entry.Key, entry.Value);
+                }
+            }
+        }
+
+        private void TryChangeTemplate(string path, GameObject prefab)
         {
             if (_templates.ContainsKey(path))
                 return;
 
-            GameObject prefab = GameManager.server.FindPrefab(path);
+            try
+            {
+                if (prefab == null)
+                    prefab = GameManager.server.FindPrefab(path);
+            }
+            catch (Exception ex)
+            {
+                // Loading or preprocessing a prefab can throw; one bad prefab must not stop the others.
+                PrintWarning($"Could not load prefab {path}: {ex.Message}");
+                return;
+            }
+
             if (prefab == null)
                 return;
 
