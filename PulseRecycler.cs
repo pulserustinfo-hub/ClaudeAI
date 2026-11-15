@@ -3,11 +3,12 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("PulseRecycler", "Nathan", "1.2.0")]
+    [Info("PulseRecycler", "Nathan", "1.3.0")]
     internal class PulseRecycler : RustPlugin
     {
         #region Fields
@@ -44,6 +45,8 @@ namespace Oxide.Plugins
                 return;
             }
 
+            var requiredStageChanged = false;
+
             foreach (var typeConfig in recyclerConfig.recyclerTypeConfigs)
             {
                 if (typeConfig == null)
@@ -60,15 +63,59 @@ namespace Oxide.Plugins
                 typeConfig.efficiency = Mathf.Max(0f, settings.Efficiency);
                 typeConfig.powergridDuration = Mathf.Max(0f, settings.PowergridDuration);
                 typeConfig.powergridEfficiency = Mathf.Max(0f, settings.PowergridEfficiency);
+
+                // A recycler whose type needs a power grid stage cannot be switched on below that stage,
+                // so none of the values above matter for it until this allows it to run.
+                if (settings.RequiredPowergridStage >= 0 && typeConfig.requiredPowergridStageToUse != settings.RequiredPowergridStage)
+                {
+                    typeConfig.requiredPowergridStageToUse = settings.RequiredPowergridStage;
+                    requiredStageChanged = true;
+                }
+
+                Puts(DescribeTypeConfig(typeConfig));
             }
+
+            if (requiredStageChanged)
+                RefreshRecyclerPowerState();
         }
 
         private void RestoreRecyclerTypeConfigs()
         {
+            var requiredStageChanged = false;
+
             foreach (var snapshot in _typeConfigSnapshots)
-                snapshot.Restore();
+            {
+                if (snapshot.Restore())
+                    requiredStageChanged = true;
+            }
 
             _typeConfigSnapshots.Clear();
+
+            if (requiredStageChanged)
+                RefreshRecyclerPowerState();
+        }
+
+        // Each recycler carries a "receiving power" flag worked out from the stage its type requires. The server
+        // and the players' clients both read it, so it is recomputed whenever this plugin changes that stage.
+        // One pass over the entity list, and only when the required stage actually changed.
+        private void RefreshRecyclerPowerState()
+        {
+            foreach (var networkable in BaseNetworkable.serverEntities)
+            {
+                var recycler = networkable as Recycler;
+                if (recycler != null && !recycler.IsDestroyed)
+                    recycler.Server_RefreshPowergridState();
+            }
+        }
+
+        private static string DescribeTypeConfig(RecyclerConfig.RecyclerTypeConfig typeConfig)
+        {
+            var usable = typeConfig.requiredPowergridStageToUse > 0
+                ? $"needs power grid stage {typeConfig.requiredPowergridStageToUse} to be switched on"
+                : "usable without power";
+
+            return $"{typeConfig.recyclerType}: every {typeConfig.duration:0.##}s at {typeConfig.efficiency:0.##}"
+                + $" (with grid power: every {typeConfig.powergridDuration:0.##}s at {typeConfig.powergridEfficiency:0.##}), {usable}";
         }
 
         private bool TryGetSettings(RecyclerConfig.RecyclerType recyclerType, out RecyclerTypeSettings settings)
@@ -97,6 +144,7 @@ namespace Oxide.Plugins
             private readonly float _duration;
             private readonly float _powergridEfficiency;
             private readonly float _powergridDuration;
+            private readonly int _requiredPowergridStageToUse;
 
             public RecyclerTypeConfigSnapshot(RecyclerConfig.RecyclerTypeConfig typeConfig)
             {
@@ -105,18 +153,80 @@ namespace Oxide.Plugins
                 _duration = typeConfig.duration;
                 _powergridEfficiency = typeConfig.powergridEfficiency;
                 _powergridDuration = typeConfig.powergridDuration;
+                _requiredPowergridStageToUse = typeConfig.requiredPowergridStageToUse;
             }
 
-            public void Restore()
+            // Returns true if the stage required to use this type was put back to a different value.
+            public bool Restore()
             {
                 if (_typeConfig == null)
-                    return;
+                    return false;
 
                 _typeConfig.efficiency = _efficiency;
                 _typeConfig.duration = _duration;
                 _typeConfig.powergridEfficiency = _powergridEfficiency;
                 _typeConfig.powergridDuration = _powergridDuration;
+
+                if (_typeConfig.requiredPowergridStageToUse == _requiredPowergridStageToUse)
+                    return false;
+
+                _typeConfig.requiredPowergridStageToUse = _requiredPowergridStageToUse;
+                return true;
             }
+        }
+
+        #endregion
+
+        #region Status
+
+        [ConsoleCommand("pulserecycler.status")]
+        private void StatusCommand(ConsoleSystem.Arg arg)
+        {
+            if (!arg.IsAdmin)
+                return;
+
+            var recyclerConfig = RecyclerConfig.instance;
+            if (recyclerConfig == null || recyclerConfig.recyclerTypeConfigs == null)
+            {
+                arg.ReplyWith("RecyclerConfig.instance is unavailable");
+                return;
+            }
+
+            var text = new StringBuilder();
+            text.AppendLine($"{Name} {Version}: values the game is using right now");
+            text.AppendLine($"Power grid: enabled {Powergrid.enabled}, stage {PowergridManager.GetCurrentStage(true)} of {PowergridStageConfig.instance.GetNumberOfStages()}, greenRecyclerFullEfficiencyStage {Powergrid.greenRecyclerFullEfficiencyStage}");
+
+            foreach (var typeConfig in recyclerConfig.recyclerTypeConfigs)
+            {
+                if (typeConfig == null)
+                    continue;
+
+                text.AppendLine(DescribeTypeConfig(typeConfig)
+                    + $"; grid values apply from stage {typeConfig.efficiencyBuffPowergridStage} (efficiency) / {typeConfig.durationBuffPowergridStage} (duration), 0 = never");
+            }
+
+            // By the type each recycler counts as right now (a yellow one outside a safe zone counts as green).
+            var total = new int[3];
+            var unpowered = new int[3];
+            foreach (var networkable in BaseNetworkable.serverEntities)
+            {
+                var recycler = networkable as Recycler;
+                if (recycler == null || recycler.IsDestroyed)
+                    continue;
+
+                var type = (int)recycler.GetRecyclerType();
+                if (type < 0 || type >= total.Length)
+                    continue;
+
+                total[type]++;
+                if (recycler.GetRecyclerState() == Recycler.RecyclerState.Unpowered)
+                    unpowered[type]++;
+            }
+
+            for (var type = 0; type < total.Length; type++)
+                text.AppendLine($"{(RecyclerConfig.RecyclerType)type} recyclers on the map: {total[type]}, of which {unpowered[type]} cannot be switched on at the current grid stage");
+
+            arg.ReplyWith(text.ToString());
         }
 
         #endregion
@@ -137,6 +247,9 @@ namespace Oxide.Plugins
 
             [JsonProperty("Powergrid efficiency")]
             public float PowergridEfficiency = 0.6f;
+
+            [JsonProperty("Power grid stage required to use (-1 = leave as the game has it, 0 = usable without power)")]
+            public int RequiredPowergridStage = -1;
         }
 
         [JsonObject(MemberSerialization.OptIn)]
