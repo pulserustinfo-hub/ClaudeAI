@@ -2,7 +2,7 @@
 
 namespace Oxide.Plugins
 {
-    [Info("No Heli Fire", "Tryhard", "1.4.0")]
+    [Info("No Heli Fire", "Tryhard", "1.5.0")]
     [Description("Optionally removes the explosion sound, gibs and fire effect from mini- and scrap helicopters")]
     public class NoHeliFire : RustPlugin
     {
@@ -67,26 +67,44 @@ namespace Oxide.Plugins
 
         protected override void SaveConfig() => Config.WriteObject(configData);
 
-
-        // The three effects are only used in BaseHelicopter.OnDied, which runs from BaseCombatEntity.Die right
-        // after Die has called OnEntityDeath. Clearing them here, on the one helicopter that is dying, gives the
-        // same result as clearing them when it spawned. Each entity spawns once and dies at most once (Die
-        // returns early if it is already dead), and many never die at all (dropped items, projectiles and
-        // anything removed with Kill), so this hook runs far less often than OnEntitySpawned did. It is also
-        // not called for every entity restored from the save at boot.
+        // OnEntitySpawned is the only spawn hook Oxide has, so the per-spawn work stays as in 1.2.6. What changes:
+        // while the server restores the save it spawns every saved entity, and 1.2.6 was called for each one.
+        // Here the hook is off until OnServerInitialized; the helicopters restored from the save are then changed
+        // in one pass and the hook is switched on. The game calls OnServerInitialized in the same call that opens
+        // the server to connections (ServerMgr.OpenConnection), so no player can reach a helicopter first.
+        // After a reload the same pass also covers helicopters that already exist, which 1.2.6 did not.
 
         private void Init()
+        {
+            Unsubscribe(nameof(OnEntitySpawned));
+        }
+
+        private void OnServerInitialized()
         {
             if (!configData.mExplo && !configData.mFire && !configData.mGibs
                 && !configData.sExplo && !configData.sFire && !configData.sGibs
                 && !configData.aExplo && !configData.aFire && !configData.aGibs)
             {
-                Unsubscribe(nameof(OnEntityDeath));
+                return;
             }
+
+            foreach (BaseNetworkable entity in BaseNetworkable.serverEntities)
+            {
+                if (entity is ScrapTransportHelicopter scrap)
+                    OnEntitySpawned(scrap);
+                else if (entity is Minicopter mini)
+                    OnEntitySpawned(mini);
+                else if (entity is AttackHelicopter attack)
+                    OnEntitySpawned(attack);
+            }
+
+            Subscribe(nameof(OnEntitySpawned));
         }
 
-        private void OnEntityDeath(ScrapTransportHelicopter entity, HitInfo info)
+
+        private void OnEntitySpawned(ScrapTransportHelicopter entity)
         {
+
             if (configData.sExplo) entity.explosionEffect.guid = null;
 
             if (configData.sFire) entity.fireBall.guid = null;
@@ -94,7 +112,7 @@ namespace Oxide.Plugins
             if (configData.sGibs) entity.serverGibs.guid = null;
         }
 
-        private void OnEntityDeath(Minicopter entity, HitInfo info)
+        private void OnEntitySpawned(Minicopter entity)
         {
             if (configData.mExplo) entity.explosionEffect.guid = null;
 
@@ -103,7 +121,7 @@ namespace Oxide.Plugins
             if (configData.mGibs) entity.serverGibs.guid = null;
         }
 
-        private void OnEntityDeath(AttackHelicopter entity, HitInfo info)
+        private void OnEntitySpawned(AttackHelicopter entity)
         {
             if (configData.aExplo) entity.explosionEffect.guid = null;
 
