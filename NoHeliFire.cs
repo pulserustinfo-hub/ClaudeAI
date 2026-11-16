@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
-using Oxide.Core;
-using UnityEngine;
+﻿using Newtonsoft.Json;
 
 namespace Oxide.Plugins
 {
-    [Info("No Heli Fire", "Tryhard", "1.3.1")]
+    [Info("No Heli Fire", "Tryhard", "1.4.0")]
     [Description("Optionally removes the explosion sound, gibs and fire effect from mini- and scrap helicopters")]
     public class NoHeliFire : RustPlugin
     {
@@ -71,282 +67,49 @@ namespace Oxide.Plugins
 
         protected override void SaveConfig() => Config.WriteObject(configData);
 
-        #region Prefab changes
 
-        // How this works, and why it costs nothing while the server runs:
-        // A helicopter only reads these three effects in BaseHelicopter.OnDied, from its own copy of the
-        // settings, and every helicopter gets that copy when the server clones it from the prefab template
-        // (GameManager.CreateEntity -> Object.Instantiate). Changing the template once therefore covers every
-        // helicopter created afterwards, so the plugin no longer listens to OnEntitySpawned, which the game
-        // calls for every entity spawned on the server. At boot the templates are changed in OnServerInitialize,
-        // which the game calls just before it restores the save, so restored helicopters are cloned already
-        // changed. OnServerInitialized (after the save, or straight after a reload) repeats the template step if
-        // it was missed and changes any helicopter that already exists, once.
+        // The three effects are only used in BaseHelicopter.OnDied, which runs from BaseCombatEntity.Die right
+        // after Die has called OnEntityDeath. Clearing them here, on the one helicopter that is dying, gives the
+        // same result as clearing them when it spawned. Each entity spawns once and dies at most once (Die
+        // returns early if it is already dead), and many never die at all (dropped items, projectiles and
+        // anything removed with Kill), so this hook runs far less often than OnEntitySpawned did. It is also
+        // not called for every entity restored from the save at boot.
 
-        // The vanilla prefabs for the three helicopter types.
-        private static readonly string[] KnownPrefabs =
+        private void Init()
         {
-            "assets/content/vehicles/minicopter/minicopter.entity.prefab",
-            "assets/content/vehicles/scrap heli carrier/scraptransporthelicopter.prefab",
-            "assets/content/vehicles/attackhelicopter/attackhelicopter.entity.prefab"
-        };
-
-        // Any other entity prefab whose path contains one of these is checked as well.
-        private static readonly string[] PrefabNameParts = { "minicopter", "scraptransporthelicopter", "attackhelicopter" };
-
-        private class EffectSettings
-        {
-            public bool Explosion;
-            public bool Fire;
-            public bool Gibs;
-
-            public bool Any => Explosion || Fire || Gibs;
-        }
-
-        // The game's own values on a template, kept so they can be put back on unload.
-        private class TemplateRecord
-        {
-            public BaseHelicopter Template;
-            public EffectSettings Disabled;
-            public string ExplosionGuid;
-            public string FireGuid;
-            public string GibsGuid;
-        }
-
-        private readonly Dictionary<string, TemplateRecord> _templates = new Dictionary<string, TemplateRecord>(StringComparer.OrdinalIgnoreCase);
-
-        private bool AnyOptionOn =>
-            configData.mExplo || configData.mFire || configData.mGibs
-            || configData.sExplo || configData.sFire || configData.sGibs
-            || configData.aExplo || configData.aFire || configData.aGibs;
-
-        // Called by the game once at boot, before the save is restored. Not called after a reload.
-        private void OnServerInitialize()
-        {
-            if (AnyOptionOn)
-                ChangeTemplates();
-        }
-
-        private void OnServerInitialized()
-        {
-            if (!AnyOptionOn)
+            if (!configData.mExplo && !configData.mFire && !configData.mGibs
+                && !configData.sExplo && !configData.sFire && !configData.sGibs
+                && !configData.aExplo && !configData.aFire && !configData.aGibs)
             {
-                Puts("All options are off; nothing changed");
-                return;
-            }
-
-            ChangeTemplates();
-
-            // Helicopters that exist already. Their own prefab is recorded too, in case it is not one of the above.
-            int changed = 0;
-            foreach (BaseNetworkable networkable in BaseNetworkable.serverEntities)
-            {
-                BaseHelicopter helicopter = networkable as BaseHelicopter;
-                if (helicopter == null || helicopter.IsDestroyed)
-                    continue;
-
-                EffectSettings settings = GetSettings(helicopter);
-                if (settings == null || !settings.Any)
-                    continue;
-
-                if (!string.IsNullOrEmpty(helicopter.PrefabName) && !_templates.ContainsKey(helicopter.PrefabName))
-                    TryChangeTemplate(helicopter.PrefabName, null);
-
-                ClearEffects(helicopter, settings);
-                changed++;
-            }
-
-            ForEachPooledHelicopter(helicopter =>
-            {
-                EffectSettings settings = GetSettings(helicopter);
-                if (settings == null || !settings.Any)
-                    return;
-
-                ClearEffects(helicopter, settings);
-                changed++;
-            });
-
-            Puts($"Effects disabled on {_templates.Count} helicopter prefab(s) and {changed} existing helicopter(s)");
-        }
-
-        private void Unload()
-        {
-            foreach (TemplateRecord record in _templates.Values)
-            {
-                if (record.Template != null)
-                    RestoreEffects(record.Template, record);
-            }
-
-            // Not worth a pass over every entity when the server is shutting down.
-            if (_templates.Count > 0 && !Interface.Oxide.IsShuttingDown)
-            {
-                foreach (BaseNetworkable networkable in BaseNetworkable.serverEntities)
-                {
-                    BaseHelicopter helicopter = networkable as BaseHelicopter;
-                    if (helicopter != null && !helicopter.IsDestroyed)
-                        RestoreFromTemplate(helicopter);
-                }
-
-                ForEachPooledHelicopter(RestoreFromTemplate);
-            }
-
-            _templates.Clear();
-        }
-
-        // Safe to run more than once: a template already recorded is skipped.
-        private void ChangeTemplates()
-        {
-            foreach (string path in KnownPrefabs)
-                TryChangeTemplate(path, null);
-
-            string[] entityPrefabs = GameManifest.Current?.entities;
-            if (entityPrefabs != null)
-            {
-                foreach (string path in entityPrefabs)
-                {
-                    if (!string.IsNullOrEmpty(path) && !_templates.ContainsKey(path) && ContainsAny(path, PrefabNameParts))
-                        TryChangeTemplate(path, null);
-                }
-            }
-
-            // Prefabs the server has already loaded, whatever their name. Copied first, because looking a prefab
-            // up can remove a dead entry from this dictionary.
-            Dictionary<string, GameObject> loaded = GameManager.server?.preProcessed?.prefabList;
-            if (loaded != null)
-            {
-                foreach (KeyValuePair<string, GameObject> entry in new List<KeyValuePair<string, GameObject>>(loaded))
-                {
-                    if (!string.IsNullOrEmpty(entry.Key) && entry.Value != null && !_templates.ContainsKey(entry.Key))
-                        TryChangeTemplate(entry.Key, entry.Value);
-                }
+                Unsubscribe(nameof(OnEntityDeath));
             }
         }
 
-        private void TryChangeTemplate(string path, GameObject prefab)
+        private void OnEntityDeath(ScrapTransportHelicopter entity, HitInfo info)
         {
-            if (_templates.ContainsKey(path))
-                return;
+            if (configData.sExplo) entity.explosionEffect.guid = null;
 
-            try
-            {
-                if (prefab == null)
-                    prefab = GameManager.server.FindPrefab(path);
-            }
-            catch (Exception ex)
-            {
-                // Loading or preprocessing a prefab can throw; one bad prefab must not stop the others.
-                PrintWarning($"Could not load prefab {path}: {ex.Message}");
-                return;
-            }
+            if (configData.sFire) entity.fireBall.guid = null;
 
-            if (prefab == null)
-                return;
-
-            BaseHelicopter template = prefab.GetComponent<BaseHelicopter>();
-            if (template == null)
-                return;
-
-            EffectSettings settings = GetSettings(template);
-            if (settings == null || !settings.Any)
-                return;
-
-            _templates[path] = new TemplateRecord
-            {
-                Template = template,
-                Disabled = settings,
-                ExplosionGuid = template.explosionEffect?.guid,
-                FireGuid = template.fireBall?.guid,
-                GibsGuid = template.serverGibs?.guid
-            };
-
-            ClearEffects(template, settings);
+            if (configData.sGibs) entity.serverGibs.guid = null;
         }
 
-        // The same type tests the old OnEntitySpawned handlers made. None of these classes derives from another.
-        private EffectSettings GetSettings(BaseHelicopter helicopter)
+        private void OnEntityDeath(Minicopter entity, HitInfo info)
         {
-            if (helicopter is ScrapTransportHelicopter)
-                return new EffectSettings { Explosion = configData.sExplo, Fire = configData.sFire, Gibs = configData.sGibs };
+            if (configData.mExplo) entity.explosionEffect.guid = null;
 
-            if (helicopter is Minicopter)
-                return new EffectSettings { Explosion = configData.mExplo, Fire = configData.mFire, Gibs = configData.mGibs };
+            if (configData.mFire) entity.fireBall.guid = null;
 
-            if (helicopter is AttackHelicopter)
-                return new EffectSettings { Explosion = configData.aExplo, Fire = configData.aFire, Gibs = configData.aGibs };
-
-            return null;
+            if (configData.mGibs) entity.serverGibs.guid = null;
         }
 
-        // Exactly what the old version did on spawn.
-        private static void ClearEffects(BaseHelicopter helicopter, EffectSettings settings)
+        private void OnEntityDeath(AttackHelicopter entity, HitInfo info)
         {
-            if (settings.Explosion && helicopter.explosionEffect != null) helicopter.explosionEffect.guid = null;
+            if (configData.aExplo) entity.explosionEffect.guid = null;
 
-            if (settings.Fire && helicopter.fireBall != null) helicopter.fireBall.guid = null;
+            if (configData.aFire) entity.fireBall.guid = null;
 
-            if (settings.Gibs && helicopter.serverGibs != null) helicopter.serverGibs.guid = null;
+            if (configData.aGibs) entity.serverGibs.guid = null;
         }
-
-        private static void RestoreEffects(BaseHelicopter helicopter, TemplateRecord record)
-        {
-            if (record.Disabled.Explosion && helicopter.explosionEffect != null && string.IsNullOrEmpty(helicopter.explosionEffect.guid))
-                helicopter.explosionEffect.guid = record.ExplosionGuid;
-
-            if (record.Disabled.Fire && helicopter.fireBall != null && string.IsNullOrEmpty(helicopter.fireBall.guid))
-                helicopter.fireBall.guid = record.FireGuid;
-
-            if (record.Disabled.Gibs && helicopter.serverGibs != null && string.IsNullOrEmpty(helicopter.serverGibs.guid))
-                helicopter.serverGibs.guid = record.GibsGuid;
-        }
-
-        private void RestoreFromTemplate(BaseHelicopter helicopter)
-        {
-            if (!string.IsNullOrEmpty(helicopter.PrefabName) && _templates.TryGetValue(helicopter.PrefabName, out TemplateRecord record))
-                RestoreEffects(helicopter, record);
-        }
-
-        // The server strips the pool marker (Poolable is a client-only component), so in practice nothing is
-        // pooled here. Covered anyway: a pooled helicopter would otherwise skip the template.
-        private static int ForEachPooledHelicopter(Action<BaseHelicopter> action)
-        {
-            int count = 0;
-            Dictionary<uint, PrefabPool> storage = GameManager.server?.pool?.storage;
-            if (storage == null)
-                return count;
-
-            foreach (PrefabPool pool in storage.Values)
-            {
-                if (pool?.stack == null)
-                    continue;
-
-                foreach (Poolable poolable in pool.stack)
-                {
-                    if (poolable == null)
-                        continue;
-
-                    BaseHelicopter helicopter = poolable.GetComponent<BaseHelicopter>();
-                    if (helicopter == null)
-                        continue;
-
-                    action(helicopter);
-                    count++;
-                }
-            }
-
-            return count;
-        }
-
-        private static bool ContainsAny(string text, string[] parts)
-        {
-            foreach (string part in parts)
-            {
-                if (text.IndexOf(part, StringComparison.OrdinalIgnoreCase) >= 0)
-                    return true;
-            }
-
-            return false;
-        }
-
-        #endregion
     }
 }
