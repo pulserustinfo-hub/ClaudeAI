@@ -15,7 +15,7 @@ using Oxide.Game.Rust.Libraries;
 
 namespace Oxide.Plugins
 {
-    [Info("KillFeed", "Whispers88", "1.0.1")]
+    [Info("KillFeed", "Whispers88", "1.0.2")]
     [Description("Simple kill feed msgs")]
 
     public class KillFeed : CovalencePlugin
@@ -26,8 +26,11 @@ namespace Oxide.Plugins
         {
             lang.RegisterMessages(new Dictionary<string, string>
             {
+                ["killmessage"] = "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>",
                 ["killtoggle"] = "Kill feed messages are now {0}",
                 ["ckilltoggle"] = "Clan kill feed messages are now {0}",
+                ["enabled"] = "enabled",
+                ["disabled"] = "disabled",
             }, this);
         }
 
@@ -39,15 +42,6 @@ namespace Oxide.Plugins
 
         public class Configuration
         {
-            [JsonProperty("Message format")]
-            public string KillMessageFormat = "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>";
-
-            [JsonProperty("Message title")]
-            public string MessageTitle = "KillFeed";
-
-            [JsonProperty("Message color (hex)")]
-            public string MessageColor = "#F44350";
-
             [JsonProperty("Round distance to nearest whole number")]
             public bool RoundDistance = true;
 
@@ -97,7 +91,12 @@ namespace Oxide.Plugins
         private static readonly string clanHide = "killfeed.clanhide";
 
         [PluginReference] private Plugin ClanChat;
-        private string GetName(ulong player) => ClanChat?.Call<string>("GetName", player) ?? string.Empty;
+
+        private string GetName(BasePlayer player)
+        {
+            string name = ClanChat?.Call<string>("GetName", player.userID.Get());
+            return string.IsNullOrEmpty(name) ? player.displayName : name;
+        }
 
         #region Hooks
 
@@ -127,22 +126,15 @@ namespace Oxide.Plugins
 
         private void NotifyPlayer(BasePlayer killer, BasePlayer killed, string weapon, float distance)
         {
-            double distanceValue = config != null && config.RoundDistance
-                ? Math.Round(distance, 0)
-                : Math.Round(distance, config != null ? config.DistanceDecimalPlaces : 1);
+            double distanceValue = Math.Round(distance, config.RoundDistance ? 0 : Mathf.Clamp(config.DistanceDecimalPlaces, 0, 15));
+            object[] args = { GetName(killer), GetName(killed), distanceValue, weapon };
 
-            string format = (config != null && !string.IsNullOrEmpty(config.KillMessageFormat))
-                ? config.KillMessageFormat
-                : "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>";
-
-            string killMsgFormatted = string.Format(format, GetName(killer.userID.Get()), GetName(killed.userID.Get()), distanceValue, weapon);
-
-            if (!HasPerm(killer.UserIDString, permhide)) Player.Message(killer, killMsgFormatted, config?.ChatID ?? 0);
-            if (!HasPerm(killed.UserIDString, permhide)) Player.Message(killed, killMsgFormatted, config?.ChatID ?? 0);
-            NotifyKillerTeam(killer, killed, killMsgFormatted);
+            if (!HasPerm(killer.UserIDString, permhide)) SendKillMessage(killer, args);
+            if (!HasPerm(killed.UserIDString, permhide)) SendKillMessage(killed, args);
+            NotifyKillerTeam(killer, killed, args);
         }
 
-        void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, string killMsgFormatted)
+        void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, object[] args)
         {
             if (killer.Team == null || killer.Team.teamID == 0 )
                 return;
@@ -157,8 +149,14 @@ namespace Oxide.Plugins
                 if (player == null || killer.userID == player.userID || killed.userID == player.userID || HasPerm(player.UserIDString, clanHide))
                     continue;
 
-                Player.Message(player, killMsgFormatted, config.ChatID);
+                SendKillMessage(player, args);
             }
+        }
+
+        private void SendKillMessage(BasePlayer player, object[] args)
+        {
+            if (player.IsConnected)
+                Player.Message(player, GetLang("killmessage", player.UserIDString, args), config.ChatID);
         }
 
         #endregion
@@ -172,12 +170,12 @@ namespace Oxide.Plugins
             if (!HasPerm(player.UserIDString, permhide))
             {
                 permission.GrantUserPermission(player.UserIDString, permhide, this);
-                ChatMessage(player, "killtoggle", "disabled");
+                ChatMessage(player, "killtoggle", GetLang("disabled", player.UserIDString));
                 return;
             }
 
             permission.RevokeUserPermission(player.UserIDString, permhide);
-            ChatMessage(player, "killtoggle", "enabled");
+            ChatMessage(player, "killtoggle", GetLang("enabled", player.UserIDString));
         }
 
         private void ToggleClanDeathMsgs(IPlayer iplayer, string command, string[] args)
@@ -188,12 +186,12 @@ namespace Oxide.Plugins
             if (!HasPerm(player.UserIDString, clanHide))
             {
                 permission.GrantUserPermission(player.UserIDString, clanHide, this);
-                ChatMessage(player, "ckilltoggle", "disabled");
+                ChatMessage(player, "ckilltoggle", GetLang("disabled", player.UserIDString));
                 return;
             }
 
             permission.RevokeUserPermission(player.UserIDString, clanHide);
-            ChatMessage(player, "ckilltoggle", "enabled");
+            ChatMessage(player, "ckilltoggle", GetLang("enabled", player.UserIDString));
         }
         #endregion
 
