@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("FastAirDrops", "Whispers88", "1.1.3")]
+    [Info("FastAirDrops", "Whispers88", "1.1.2")]
     [Description("FastAirDrops")]
     public class FastAirDrops : CovalencePlugin
     {
@@ -85,8 +85,8 @@ namespace Oxide.Plugins
         {
             lang.RegisterMessages(new Dictionary<string, string>
             {
-                [MsgCooldown] = "Supply signal on cooldown: {0}s left.",
-                [MsgMaxAlive] = "Airdrop limit reached ({0} max). Wait for one to be looted or despawn."
+                [MsgCooldown] = "You must wait {0}s before throwing another supply signal.",
+                [MsgMaxAlive] = "You can't have more than {0} airdrop(s) active at once.\nWait for one to be looted or to despawn before throwing another."
             }, this);
         }
 
