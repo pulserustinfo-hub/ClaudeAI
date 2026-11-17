@@ -20,18 +20,37 @@ namespace Oxide.Plugins
 
     public class KillFeed : CovalencePlugin
     {
+        public static class LangKeys
+        {
+            public static readonly string ClanKillToggle = "ClanKillToggle";
+            public static readonly string Disabled = "Disabled";
+            public static readonly string Enabled = "Enabled";
+            public static readonly string KillMessage = "KillMessage";
+            public static readonly string KillToggle = "KillToggle";
+        }
+
         #region Localization
 
         protected override void LoadDefaultMessages()
         {
             lang.RegisterMessages(new Dictionary<string, string>
             {
-                ["killmessage"] = "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>",
-                ["killtoggle"] = "Kill feed messages are now {0}",
-                ["ckilltoggle"] = "Clan kill feed messages are now {0}",
-                ["enabled"] = "enabled",
-                ["disabled"] = "disabled",
+                { LangKeys.ClanKillToggle, "Clan kill feed messages are now {0}" },
+                { LangKeys.Disabled, "disabled" },
+                { LangKeys.Enabled, "enabled" },
+                { LangKeys.KillMessage, "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>" },
+                { LangKeys.KillToggle, "Kill feed messages are now {0}" },
             }, this);
+        }
+
+        public string Lang(string key, string userId = null, params string[] args)
+        {
+            if (args != null && args.Length > 0)
+            {
+                return string.Format(lang.GetMessage(key, this, userId), args);
+            }
+
+            return lang.GetMessage(key, this, userId);
         }
 
         #endregion Localization
@@ -127,14 +146,14 @@ namespace Oxide.Plugins
         private void NotifyPlayer(BasePlayer killer, BasePlayer killed, string weapon, float distance)
         {
             double distanceValue = Math.Round(distance, config.RoundDistance ? 0 : Mathf.Clamp(config.DistanceDecimalPlaces, 0, 15));
-            object[] args = { GetName(killer), GetName(killed), distanceValue, weapon };
+            string[] args = { GetName(killer), GetName(killed), $"{distanceValue}", weapon };
 
             if (!HasPerm(killer.UserIDString, permhide)) SendKillMessage(killer, args);
             if (!HasPerm(killed.UserIDString, permhide)) SendKillMessage(killed, args);
             NotifyKillerTeam(killer, killed, args);
         }
 
-        void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, object[] args)
+        void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, string[] args)
         {
             if (killer.Team == null || killer.Team.teamID == 0 )
                 return;
@@ -153,10 +172,10 @@ namespace Oxide.Plugins
             }
         }
 
-        private void SendKillMessage(BasePlayer player, object[] args)
+        private void SendKillMessage(BasePlayer player, string[] args)
         {
             if (player.IsConnected)
-                Player.Message(player, GetLang("killmessage", player.UserIDString, args), config.ChatID);
+                Player.Message(player, Lang(LangKeys.KillMessage, player.UserIDString, args), config.ChatID);
         }
 
         #endregion
@@ -170,12 +189,12 @@ namespace Oxide.Plugins
             if (!HasPerm(player.UserIDString, permhide))
             {
                 permission.GrantUserPermission(player.UserIDString, permhide, this);
-                ChatMessage(player, "killtoggle", GetLang("disabled", player.UserIDString));
+                ChatMessage(player, LangKeys.KillToggle, Lang(LangKeys.Disabled, player.UserIDString));
                 return;
             }
 
             permission.RevokeUserPermission(player.UserIDString, permhide);
-            ChatMessage(player, "killtoggle", GetLang("enabled", player.UserIDString));
+            ChatMessage(player, LangKeys.KillToggle, Lang(LangKeys.Enabled, player.UserIDString));
         }
 
         private void ToggleClanDeathMsgs(IPlayer iplayer, string command, string[] args)
@@ -186,27 +205,23 @@ namespace Oxide.Plugins
             if (!HasPerm(player.UserIDString, clanHide))
             {
                 permission.GrantUserPermission(player.UserIDString, clanHide, this);
-                ChatMessage(player, "ckilltoggle", GetLang("disabled", player.UserIDString));
+                ChatMessage(player, LangKeys.ClanKillToggle, Lang(LangKeys.Disabled, player.UserIDString));
                 return;
             }
 
             permission.RevokeUserPermission(player.UserIDString, clanHide);
-            ChatMessage(player, "ckilltoggle", GetLang("enabled", player.UserIDString));
+            ChatMessage(player, LangKeys.ClanKillToggle, Lang(LangKeys.Enabled, player.UserIDString));
         }
         #endregion
 
         #region Helpers
         private bool HasPerm(string id, string perm) => permission.UserHasPermission(id, perm);
 
-        private string GetLang(string langKey, string playerId = null, params object[] args)
-        {
-            return string.Format(lang.GetMessage(langKey, this, playerId), args);
-        }
-        private void ChatMessage(BasePlayer player, string langKey, params object[] args)
+        private void ChatMessage(BasePlayer player, string key, params string[] args)
         {
             if (player.IsConnected)
-                Player.Message(player, GetLang(langKey, player.UserIDString, args), config.ChatID);
-            else Puts(GetLang(langKey, player.UserIDString, args));
+                Player.Message(player, Lang(key, player.UserIDString, args), config.ChatID);
+            else Puts(Lang(key, player.UserIDString, args));
         }
         #endregion Helpers
     }
