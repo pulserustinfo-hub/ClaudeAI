@@ -1,7 +1,7 @@
 {
-  "ClanKillToggle": "<color=#E3E3E3>Clan kill feed</color> <color=#91F527>{0}</color>",
+  "ClanKillToggle": "<color=#E3E3E3>Clan kill feed</color> <color=#F44350>{0}</color>",
   "Disabled": "disabled",
   "Enabled": "enabled",
-  "KillMessage": "<color=#F44350>{0}</color> <color=#E3E3E3>killed</color> <color=#F44350>{1}</color> <color=#E3E3E3>-</color> <color=#91F527>{2}m</color> <color=#E3E3E3>with</color> <color=#91F527>{3}</color>",
-  "KillToggle": "<color=#E3E3E3>Kill feed</color> <color=#91F527>{0}</color>"
+  "KillMessage": "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>",
+  "KillToggle": "<color=#E3E3E3>Kill feed</color> <color=#F44350>{0}</color>"
 }
