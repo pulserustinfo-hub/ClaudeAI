@@ -1,0 +1,4 @@
+{
+  "Cooldown": "Supply signal on cooldown: {0}s left.",
+  "MaxAlive": "Airdrop limit reached ({0} max). Wait for one to be looted or despawn."
+}
