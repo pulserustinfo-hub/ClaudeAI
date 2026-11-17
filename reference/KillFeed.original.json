@@ -1,0 +1,7 @@
+{
+  "ClanKillToggle": "<color=#E3E3E3>Clan kill feed</color> <color=#F44350>{0}</color>",
+  "Disabled": "disabled",
+  "Enabled": "enabled",
+  "KillMessage": "<color=#F44350>{0}</color> killed {1} from <color=#F44350>{2}</color> meters away with a <color=#F44350>{3}</color>",
+  "KillToggle": "<color=#E3E3E3>Kill feed</color> <color=#F44350>{0}</color>"
+}
