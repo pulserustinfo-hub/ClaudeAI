@@ -1,0 +1,4 @@
+{
+  "Cooldown": "You must wait {0}s before throwing another supply signal.",
+  "MaxAlive": "You can't have more than {0} airdrop(s) active at once.\nWait for one to be looted or to despawn before throwing another."
+}

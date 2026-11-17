@@ -1,0 +1,4 @@
+{
+  "Cooldown": "<color=#E3E3E3>Supply signal on cooldown (</color><color=#91F527>{0}</color><color=#E3E3E3>s)</color>",
+  "MaxAlive": "<color=#E3E3E3>Airdrop limit reached (</color><color=#91F527>{0}</color> <color=#E3E3E3>active)</color>\n<color=#E3E3E3>Wait for one to be looted or despawn first</color>"
+}
