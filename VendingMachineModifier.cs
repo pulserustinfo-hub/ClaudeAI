@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("VendingMachineModifier","Khan","1.0.0")]
+    [Info("VendingMachineModifier","Khan","1.0.1")]
     [Description("Exports and applies custom vending machine sell orders with infinite stock & instant buy")]
     public class VendingMachineModifier : RustPlugin
     {
@@ -237,9 +237,9 @@ namespace Oxide.Plugins
             foreach (ProtoBuf.VendingMachine.SellOrder sellOrder in machine.sellOrders.sellOrders) if (sellOrder.inStock != 999000000) sellOrder.inStock = 999000000;
 
             foreach (var item in machine.inventory.itemList)
-                if (item.amount != 999000000)
+                if (item.amount != 1000000)
                 {
-                    item.amount = 999000000;
+                    item.amount = 1000000;
                     item.MarkDirty();
                 }
         }
