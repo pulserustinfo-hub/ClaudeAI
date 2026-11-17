@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using HarmonyLib;
 using Newtonsoft.Json;
+using Oxide.Core;
 using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
@@ -85,7 +86,7 @@ namespace Oxide.Plugins
             player.ApplyWoundedStartTime();
             player.SendWoundedInformation(recoveryTime);
 
-            var userId = player.userID.Get();
+            ulong userId = player.userID;
 
             // Replace any timer left over from an earlier down, so it can't stand the player up early.
             if (_standupTimers.TryGetValue(userId, out var existing)) existing?.Destroy();
