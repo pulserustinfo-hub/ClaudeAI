@@ -193,7 +193,7 @@ namespace Oxide.Plugins
             return string.IsNullOrEmpty(name) ? player.displayName : name;
         }
 
-        private void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, string[] format)
+        private void NotifyKillerTeam(BasePlayer killer, BasePlayer killed, string message)
         {
             if (killer.Team == null || killer.Team.teamID == 0)
                 return;
@@ -210,23 +210,22 @@ namespace Oxide.Plugins
                 if (member == null || killer.userID == member.userID || killed.userID == member.userID || permission.UserHasPermission(member.UserIDString, KILLFEED_CLANHIDE_PERM))
                     continue;
 
-                if (member.IsConnected)
-                    SendLMsg(member, "KillMessage", format);
+                SendMsg(member, message);
             }
         }
 
         private void NotifyPlayer(BasePlayer killer, BasePlayer killed, string weapon, float distance)
         {
             double distanceValue = Math.Round(distance, config.roundDistance ? 0 : Mathf.Clamp(config.distanceDecimalPlaces, 0, 15));
-            string[] format = { GetName(killer), GetName(killed), $"{distanceValue}", weapon };
+            string message = string.Format(lang.GetMessage("KillMessage", this), GetName(killer), GetName(killed), distanceValue, weapon);
 
             if (killer.IsConnected && !permission.UserHasPermission(killer.UserIDString, KILLFEED_HIDE_PERM))
-                SendLMsg(killer, "KillMessage", format);
+                SendMsg(killer, message);
 
             if (killed.IsConnected && !permission.UserHasPermission(killed.UserIDString, KILLFEED_HIDE_PERM))
-                SendLMsg(killed, "KillMessage", format);
+                SendMsg(killed, message);
 
-            NotifyKillerTeam(killer, killed, format);
+            NotifyKillerTeam(killer, killed, message);
         }
 
         private void SendLMsg(BasePlayer player, string key, params string[] format) => SendMsg(player, lang.GetMessage(key, this, player.UserIDString), format);
