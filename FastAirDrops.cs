@@ -79,8 +79,6 @@ namespace Oxide.Plugins
         private const string MsgCooldown = "Cooldown";
         private const string MsgMaxAlive = "MaxAlive";
 
-        // Creates oxide/lang/en/FastAirDrops.json. Edit that file to change the messages.
-        // {0} is replaced with the seconds left (Cooldown) or the airdrop limit (MaxAlive).
         protected override void LoadDefaultMessages()
         {
             lang.RegisterMessages(new Dictionary<string, string>

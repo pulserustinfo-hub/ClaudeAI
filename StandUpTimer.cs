@@ -44,7 +44,6 @@ namespace Oxide.Plugins
             {
                 _config = Config.ReadObject<Configuration>();
                 if (_config == null) LoadDefaultConfig();
-                else SaveConfig(); // writes any new/renamed keys back to the file
             }
             catch (Exception ex)
             {
@@ -64,7 +63,6 @@ namespace Oxide.Plugins
 
         private void Unload()
         {
-            // Oxide destroys this plugin's timers on unload, so no pending standups survive a reload.
             _instance = null;
             _config = null;
         }
@@ -88,7 +86,6 @@ namespace Oxide.Plugins
 
             ulong userId = player.userID;
 
-            // Replace any timer left over from an earlier down, so it can't stand the player up early.
             if (_standupTimers.TryGetValue(userId, out var existing)) existing?.Destroy();
 
             _standupTimers[userId] = timer.Once(recoveryTime, () =>

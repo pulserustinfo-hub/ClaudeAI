@@ -61,8 +61,7 @@ namespace Oxide.Plugins
         {
             if (item.info.itemid != TeaId || !permission.UserHasPermission(player.UserIDString, Use)) return null;
 
-            // consumable.modifiers is the tea's shared item definition, used by every player on the server.
-            // Never edit it - give this player their own copies with the boosted values instead.
+            // consumable.modifiers is shared by every player, so copy it instead of editing it
             var modifiers = new List<ModifierDefintion>(consumable.modifiers.Count);
 
             foreach (var mod in consumable.modifiers)
@@ -86,7 +85,7 @@ namespace Oxide.Plugins
             }
 
             player.modifiers.Add(modifiers);
-            return true; // we've applied the modifiers ourselves, so stop the game adding the defaults as well
+            return true;
         }
     }
 }
