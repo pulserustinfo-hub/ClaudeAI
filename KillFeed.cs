@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("KillFeed", "Whispers88", "1.0.3")]
+    [Info("KillFeed", "Pulse", "1.0.3")]
     [Description("Simple kill feed msgs")]
     public class KillFeed : RustPlugin
     {
