@@ -7,13 +7,13 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("PulseStandupOnDown", "Mevent.Team", "1.1.0")]
+    [Info("StandUpTimer", "Pulse", "1.1.0")]
     [Description("Downed players with permission automatically stand up after a configurable time")]
-    public class PulseStandupOnDown : RustPlugin
+    public class StandUpTimer : RustPlugin
     {
-        private const string Use = "pulsestandupondown.use";
+        private const string Use = "standuptimer.use";
 
-        private static PulseStandupOnDown _instance;
+        private static StandUpTimer _instance;
         private static Configuration _config;
 
         private readonly Dictionary<ulong, Timer> _standupTimers = new();
