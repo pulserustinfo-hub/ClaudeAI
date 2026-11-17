@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("FastAirDrops", "Whispers88", "1.1.1")]
+    [Info("FastAirDrops", "Whispers88", "1.1.2")]
     [Description("FastAirDrops")]
     public class FastAirDrops : CovalencePlugin
     {
@@ -74,6 +74,27 @@ namespace Oxide.Plugins
 
         #endregion Configuration
 
+        #region Localization
+
+        private const string MsgCooldown = "Cooldown";
+        private const string MsgMaxAlive = "MaxAlive";
+
+        // Creates oxide/lang/en/FastAirDrops.json. Edit that file to change the messages.
+        // {0} is replaced with the seconds left (Cooldown) or the airdrop limit (MaxAlive).
+        protected override void LoadDefaultMessages()
+        {
+            lang.RegisterMessages(new Dictionary<string, string>
+            {
+                [MsgCooldown] = "You must wait {0}s before throwing another supply signal.",
+                [MsgMaxAlive] = "You can't have more than {0} airdrop(s) active at once.\nWait for one to be looted or to despawn before throwing another."
+            }, this);
+        }
+
+        private string Msg(string key, BasePlayer player, params object[] args) =>
+            string.Format(lang.GetMessage(key, this, player.UserIDString), args);
+
+        #endregion Localization
+
         private readonly Dictionary<BaseEntity, ulong> airdropOwners = new Dictionary<BaseEntity, ulong>();
 
         private readonly Dictionary<ulong, float> teamCooldownUntil = new Dictionary<ulong, float>();
@@ -139,7 +160,7 @@ namespace Oxide.Plugins
 
             if (config.SupplyCooldownTime > 0f && teamCooldownUntil.TryGetValue(teamid, out float readyAt) && now < readyAt)
             {
-                player.ChatMessage($"You must wait {Mathf.CeilToInt(readyAt - now)}s before throwing another supply signal.");
+                player.ChatMessage(Msg(MsgCooldown, player, Mathf.CeilToInt(readyAt - now)));
                 RejectThrow(player, entity);
                 return;
             }
@@ -149,7 +170,7 @@ namespace Oxide.Plugins
                 int alive = PurgeAndCountAlive(teamid);
                 if (alive >= config.SupplyMaxAlive)
                 {
-                    player.ChatMessage($"You can't have more than {config.SupplyMaxAlive} airdrop(s) active at once.\nWait for one to be looted or to despawn before throwing another.");
+                    player.ChatMessage(Msg(MsgMaxAlive, player, config.SupplyMaxAlive));
                     RejectThrow(player, entity);
                     return;
                 }
