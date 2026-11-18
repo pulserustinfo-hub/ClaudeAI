@@ -1,0 +1,8 @@
+{
+  "VanishCommand": "vanish",
+  "Vanished": "<color=#E3E3E3>Vanish</color> <color=#91F527>Enabled</color>",
+  "Reappear": "<color=#E3E3E3>Vanish</color> <color=#F44350>Disabled</color>",
+  "NoPerms": "<color=#E3E3E3>Cannot use Vanish (No Permission)</color>",
+  "PermanentVanish": "<color=#E3E3E3>Permanent vanish active</color>",
+  "NoPlayers": "<color=#E3E3E3>No player found with ID</color> <color=#91F527>{0}</color>"
+}
