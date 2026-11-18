@@ -1,0 +1,162 @@
+{
+  "Queue Messages": [
+    {
+      "iconID": "61530",
+      "NextMessageTime": 30.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    }
+  ],
+  "Joining Messages": [
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    }
+  ],
+  "Loading Messages": [
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    },
+    {
+      "iconID": "61530",
+      "NextMessageTime": 5.0,
+      "Message": "<color=#E3E3E3>AU COMP @</color> <color=#F44350>PULSERUST.NET/STORE</color> <color=#E3E3E3>AND</color> <color=#F44350>DISCORD.GG/AU10X</color> <color=#E3E3E3>TO STAY UPDATED</color>"
+    }
+  ],
+  "Use Language Support": false,
+  "Lang Messages": {
+    "es-ES": {
+      "Queue Messages": [
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Estás en la cola"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor espera"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Reporta tramposos usando f7"
+        }
+      ],
+      "Joining Messages": [
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Estás uniendo al juego"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor espera"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Reporta tramposos usando f7"
+        }
+      ],
+      "Loading Messages": [
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Estás cargando una etapa"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor espera"
+        },
+        {
+          "iconID": "61530",
+          "NextMessageTime": 5.0,
+          "Message": "Reporta tramposos usando f7"
+        }
+      ]
+    },
+    "pt-BR": {
+      "Queue Messages": [
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Você está na fila"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor, espere"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Denuncie trapaceiros usando f7"
+        }
+      ],
+      "Joining Messages": [
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Você está entrando no jogo"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor, espere"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Denuncie trapaceiros usando f7"
+        }
+      ],
+      "Loading Messages": [
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Você está carregando uma fase"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Por favor, espere"
+        },
+        {
+          "iconID": "0",
+          "NextMessageTime": 5.0,
+          "Message": "Denuncie trapaceiros usando f7"
+        }
+      ]
+    }
+  }
+}
