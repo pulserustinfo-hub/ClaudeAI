@@ -1,0 +1,21 @@
+{
+  "NoPermission": "You don't have permission to use this feature.",
+  "NoWeapons": "You don't have access to any weapons.",
+  "Enabled": "Autofill has been <color=#6abd43>enabled</color>.",
+  "Disabled": "Autofill has been <color=#e6731a>disabled</color>.",
+  "MessagesEnabled": "Autofill messages have been <color=#6abd43>enabled</color>.",
+  "MessagesDisabled": "Autofill messages have been <color=#e6731a>disabled</color>.",
+  "FillDone": "Turret has been auto-filled!",
+  "FillNoWeapon": "<color=#e6731a>Insufficient Weapon</color> to fill the turret.",
+  "FillNoAmmo": "<color=#e6731a>Insufficient Ammo</color> to fill the turret.",
+  "FillNoWeaponNoAmmo": "<color=#e6731a>Insufficient Weapon/Ammo</color> to fill the turret.",
+  "UI_Title": "AUTOFILL",
+  "UI_Subtitle": "SELECT YOUR WEAPON AND AMMO STACKS TO FILL YOUR TURRETS",
+  "UI_Messages": "AUTOFILL MESSAGES",
+  "UI_On": "ON",
+  "UI_Off": "OFF",
+  "UI_Close": "CLOSE MENU",
+  "UI_Stack": "{0} STACK",
+  "UI_Stacks": "{0} STACKS",
+  "UI_AmmoTotal": "x{0}"
+}

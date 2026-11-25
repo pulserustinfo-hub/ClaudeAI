@@ -1,0 +1,21 @@
+{
+  "NoPermission": "<color=#E3E3E3>Cannot use Autofill (No Permission)</color>",
+  "NoWeapons": "<color=#E3E3E3>No weapons available</color>",
+  "Enabled": "<color=#E3E3E3>Autofill</color> <color=#91F527>Enabled</color>",
+  "Disabled": "<color=#E3E3E3>Autofill</color> <color=#F44350>Disabled</color>",
+  "MessagesEnabled": "<color=#E3E3E3>Autofill messages</color> <color=#91F527>Enabled</color>",
+  "MessagesDisabled": "<color=#E3E3E3>Autofill messages</color> <color=#F44350>Disabled</color>",
+  "FillDone": "<color=#E3E3E3>Turret auto-filled</color>",
+  "FillNoWeapon": "<color=#E3E3E3>Cannot fill turret (</color><color=#F44350>Insufficient Weapon</color><color=#E3E3E3>)</color>",
+  "FillNoAmmo": "<color=#E3E3E3>Cannot fill turret (</color><color=#F44350>Insufficient Ammo</color><color=#E3E3E3>)</color>",
+  "FillNoWeaponNoAmmo": "<color=#E3E3E3>Cannot fill turret (</color><color=#F44350>Insufficient Weapon/Ammo</color><color=#E3E3E3>)</color>",
+  "UI_Title": "AUTOFILL",
+  "UI_Subtitle": "SELECT YOUR WEAPON AND AMMO STACKS TO FILL YOUR TURRETS",
+  "UI_Messages": "AUTOFILL MESSAGES",
+  "UI_On": "ON",
+  "UI_Off": "OFF",
+  "UI_Close": "CLOSE MENU",
+  "UI_Stack": "{0} STACK",
+  "UI_Stacks": "{0} STACKS",
+  "UI_AmmoTotal": "x{0}"
+}

@@ -5,5 +5,11 @@
   "MessagesEnabled": "<color=#E3E3E3>AutoLoot messages</color> <color=#91F527>Enabled</color>",
   "MessagesDisabled": "<color=#E3E3E3>AutoLoot messages</color> <color=#F44350>Disabled</color>",
   "Looted": "<color=#E3E3E3>Auto-looted</color> <color=#91F527>{0}</color> <color=#E3E3E3>items</color>",
-  "InventoryFull": "<color=#F44350>{0}</color> <color=#E3E3E3>items not picked up (Inventory Full)</color>"
+  "InventoryFull": "<color=#F44350>{0}</color> <color=#E3E3E3>items not picked up (Inventory Full)</color>",
+  "UI_Title": "AUTO LOOT",
+  "UI_Subtitle": "CONFIGURE YOUR AUTO LOOT SETTINGS",
+  "UI_Messages": "AUTO LOOT MESSAGES",
+  "UI_On": "ON",
+  "UI_Off": "OFF",
+  "UI_Close": "CLOSE"
 }
