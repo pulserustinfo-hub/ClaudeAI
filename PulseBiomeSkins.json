@@ -1,0 +1,15 @@
+{
+  "SkinsRemoved": "<color=#E3E3E3>Biome skins removed</color>",
+  "NoItemsEquipped": "<color=#E3E3E3>No items equipped</color>",
+  "BiomeApplied": "<color=#E3E3E3>{0}</color> <color=#E3E3E3>biome skins applied (</color><color=#E3E3E3>{1}</color> <color=#E3E3E3>items)</color>",
+  "ClanApplied": "<color=#F194FF>{0}</color> <color=#E3E3E3>clan skins applied (</color><color=#F194FF>{1}</color> <color=#E3E3E3>items)</color>",
+  "ClansNotLoaded": "<color=#E3E3E3>Skins unavailable (Clans Plugin Not Loaded)</color>",
+  "NoClan": "<color=#E3E3E3>Cannot apply clan skins (Not In Clan)</color>",
+  "NoClanSkin": "<color=#E3E3E3>Cannot apply clan skins (No Custom Skin Set)</color>",
+  "SkinLocked": "<color=#E3E3E3>Skin set locked</color>",
+  "UI_ClanButton": "SKIN CLAN",
+  "UI_Biome_default": "DEFAULT",
+  "UI_Biome_arctic": "SKIN ARCTIC",
+  "UI_Biome_desert": "SKIN DESERT",
+  "UI_Biome_forest": "SKIN FOREST"
+}

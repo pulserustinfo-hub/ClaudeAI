@@ -1,0 +1,15 @@
+{
+  "SkinsRemoved": "Removed biome skins.",
+  "NoItemsEquipped": "You have no items equipped.",
+  "BiomeApplied": "Applied <color=#5AA3B5>{0}</color> biome skins ({1} items).",
+  "ClanApplied": "Applied <color=#c084fc>{0}</color> clan skins ({1} items).",
+  "ClansNotLoaded": "Clans plugin is not loaded.",
+  "NoClan": "You must be in a clan to use this skin set.",
+  "NoClanSkin": "Your clan does not have a custom skin set.",
+  "SkinLocked": "This skin set is currently locked.",
+  "UI_ClanButton": "SKIN CLAN",
+  "UI_Biome_default": "DEFAULT",
+  "UI_Biome_arctic": "SKIN ARCTIC",
+  "UI_Biome_desert": "SKIN DESERT",
+  "UI_Biome_forest": "SKIN FOREST"
+}
