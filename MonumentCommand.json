@@ -1,6 +1,18 @@
 {
-  "Format": "<color=#F44350><size=16>Bradley -</size></color> <color=#E3E3E3>{0}</color>\n\n<color=#91F527><size=16>Patrol -</size></color> <color=#E3E3E3>{1}</color>",
+  "Format": "<color=#E3E3E3>Bradley -</color> <color=#91F527>{0}</color>\n<color=#E3E3E3>Patrol -</color> <color=#91F527>{1}</color>",
   "ImminentText": "Imminently",
   "TimeLeftFormat": "{0}",
-  "SpawnedText": "Spawned"
+  "SpawnedText": "Spawned",
+  "UnknownText": "Unknown",
+  "UnavailableText": "Not on this map",
+  "UnitDay": "{0} day",
+  "UnitDays": "{0} days",
+  "UnitHour": "{0} hour",
+  "UnitHours": "{0} hours",
+  "UnitMinute": "{0} minute",
+  "UnitMinutes": "{0} minutes",
+  "UnitSecond": "{0} second",
+  "UnitSeconds": "{0} seconds",
+  "UnitSeparator": " ",
+  "ZeroSeconds": "0 seconds"
 }
