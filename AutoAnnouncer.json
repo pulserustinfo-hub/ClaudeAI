@@ -1,10 +1,20 @@
 {
   "Chat Icon: SteamID": 0,
   "Global Interval (Seconds)": 600.0,
+  "Welcome Message timer until sent after connecting (Seconds)": 5.0,
+  "Welcome Message Chat": "<color=#F44350><size=18>WELCOME</size></color>\n<color=#E3E3E3><size=14>We're glad you're here, make yourself at home!</size></color>\n<color=#E3E3E3><size=14>Get started with</size></color> <color=#F44350>/kits</color> <color=#E3E3E3><size=14>or ask for help @</size></color> <color=#F44350>discord.gg/pulse10x</color>",
+  "Welcome Message Console": [
+    "<size=18><color=#F44350>WELCOME TO PULSE AU 10X</color></size>",
+    "<color=#ffffff>JOIN US @ DISCORD.GG/PULSE10X</color>",
+    "<color=#ffffff>GET SUPPORT @ DISCORD.GG/PULSE10X</color>",
+    "",
+    "<color=#ffffff>VISIT STORE @ PULSERUST.NET</color>",
+    "<color=#ffffff>LINK YOUR ACCOUNT @ PULSERUST.NET/LINK</color>"
+  ],
   "Announcements": [
     {
       "Enabled": true,
-      "Message": "<color=#F44350><size=18>WELCOME</size></color>\n<color=#E3E3E3><size=14>New to Pulse 10X? We're glad you're here, make yourself at home!</size></color>\n<color=#E3E3E3><size=14>Get started with</size></color> <color=#F44350>/kits</color> <color=#E3E3E3><size=14>or ask for help @</size></color> <color=#F44350>discord.gg/pulse10x</color>"
+      "Message": "<color=#F44350><size=18>PULSE 10X</size></color>\n<color=#E3E3E3><size=14>Enjoying the server? Enhance your experience with</size></color> <color=#F44350>/kits</color>\n<color=#E3E3E3><size=14>(https://pulserust.net/store)</size></color>"
     },
     {
       "Enabled": true,
