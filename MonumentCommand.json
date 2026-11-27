@@ -1,5 +1,5 @@
 {
-  "Format": "<color=#F44350><size=20>MONUMENTS</size></color>\n<color=#F44350><size=14>Bradley</size></color> <color=#E3E3E3>- ({0})</color>\n<color=#91F527><size=14>Patrol</size></color> <color=#E3E3E3>- ({1})</color>",
+  "Format": "<color=#F44350><size=20>MONUMENTS</size></color>\n<color=#F44350><size=14>Bradley</size></color><color=#E3E3E3>    ({0})</color>\n<color=#91F527><size=14>Patrol</size></color><color=#E3E3E3>      ({1})</color>",
   "ImminentText": "Imminently",
   "TimeLeftFormat": "{0}",
   "SpawnedText": "Spawned",
