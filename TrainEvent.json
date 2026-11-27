@@ -58,5 +58,7 @@
   "TimeFormat_MinSec": "{0}m {1}s",
   "StopChecking": "Checking the track for a loop. The event starts when the check finishes. See the server console.",
   "BreakdownWarning": "<color=#E3E3E3>Train is about to break down</color>",
-  "CrateLootedAtYard": "<color=#E3E3E3>Train crate looted</color>\n<color=#E3E3E3>Train event is ending</color>"
+  "CrateLootedAtYard": "<color=#E3E3E3>Train crate looted</color>\n<color=#E3E3E3>Train event is ending</color>",
+  "BlockedMenuKits": "<color=#E3E3E3>Cannot use kits (On Event Train)</color>",
+  "BlockedMenuShop": "<color=#E3E3E3>Cannot use the shop (On Event Train)</color>"
 }
